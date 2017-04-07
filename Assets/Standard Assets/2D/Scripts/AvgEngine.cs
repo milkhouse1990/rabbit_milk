@@ -28,14 +28,27 @@ namespace UnityStandardAssets._2D {
         //for debug
         private string errmsg = "";
         private bool err = false;
+
+        //for button a
+        private int guialpha=20;
+        private bool al= true;
+        private GUIStyle gs;
         // Use this for initialization
         void Start() {
             System.Text.Encoding.GetEncoding("gb2312");
+            gs = new GUIStyle();
+            gs.normal.textColor = new Color(0, 0, 0);// 255, 255, 255);
+            gs.fontSize = 18;
         }
 
         // Update is called once per frame
         void Update() {
-
+            guialpha--;
+            if (guialpha ==0)
+            {
+                guialpha = 20;
+                al = !al;
+            }
             /*if keyboard_check_pressed(global.my_START)
             {
             file_text_close(file);
@@ -166,6 +179,7 @@ namespace UnityStandardAssets._2D {
 
         void OnGUI()
         {
+            const int xscreen = 1280, yscreen = 720, tile = 64;
             int pos;
             if (err)
             {
@@ -219,10 +233,12 @@ namespace UnityStandardAssets._2D {
                 if (words != "")
                 {
                     if (speaker == "1")
-                        GUI.Label(new Rect(0, 0, 64, 64), icon);
-                    GUI.Label(new Rect(32, 32, 64, 64), frame);
-                    GUI.Label(new Rect(640, 32, 64, 64), np);
-                    GUI.Label(new Rect(15 + pos, 15, 640, 320), words);
+                        GUI.Label(new Rect(0, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), icon);
+                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
+                    if (al)
+                        GUI.Label(new Rect(xscreen-3.5f*tile, yscreen-tile, tile, tile), np);
+
+                    GUI.Label(new Rect(2.5f * tile, yscreen - 1.5f * tile, xscreen - 4 * tile, 2 * tile), words,gs);
                 }
 
             }
