@@ -25,8 +25,6 @@ namespace UnityStandardAssets._2D
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
         private int costume=0;
-        private bool trans_finish=false;
-        private bool change=false;
         private bool double_jump = false;
         private bool m_clothes = false;
 
@@ -86,8 +84,8 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
-            if (!change)
-            {
+            
+            
                 if (costume == 5)
                     crouch = false;
                 // If crouching, check to see if the character can stand up
@@ -143,7 +141,7 @@ namespace UnityStandardAssets._2D
                     m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
                     double_jump = true;
                 }
-            }
+            
         }
 
         private void Flip()
@@ -196,14 +194,11 @@ namespace UnityStandardAssets._2D
         public void Shoot()
         {
             if (costume==0)
-            {
-                if (!change)
-                {
-                    
+            {                   
                     Transform new_bullet = Instantiate(bullet, transform.position, transform.rotation);
                     new_bullet.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
                     new_bullet.gameObject.transform.localScale = transform.localScale;
-                }
+                
             }
         }
     }
