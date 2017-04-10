@@ -214,5 +214,9 @@ namespace UnityStandardAssets._2D
         {
             return costume;
         }
+        public bool GetGround()
+        {
+            return m_Grounded;
+        }
     }
 }

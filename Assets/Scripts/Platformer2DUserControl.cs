@@ -184,7 +184,7 @@ namespace UnityStandardAssets._2D
                     guialarm = 1;
                     //guistatus = !guistatus;
                 }
-
+                
                 GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 32 - guioffset, 128, 128), change_up);
                 GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 32 + guioffset, 128, 128), change_down);
                 GUI.Label(new Rect(screenpos.x - 64 - guioffset, screenpos.y - 32, 128, 128), change_left);
@@ -192,7 +192,8 @@ namespace UnityStandardAssets._2D
 
             }
             else if (m_waitnpc)
-                GUI.Label(new Rect(screenpos.x-32, screenpos.y+256 , 64, 64), waitnpc);
+                if (m_Character.GetGround())
+                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-96 , 64, 64), waitnpc);
             
                 
         }
