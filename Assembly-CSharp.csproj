@@ -46,14 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Enemy1.cs" />
      <Compile Include="Assets\LoadMap.cs" />
      <Compile Include="Assets\NewBehaviourScript.cs" />
-     <Compile Include="Assets\NewBehaviourScript1.cs" />
-     <Compile Include="Assets\NewBehaviourScript2.cs" />
-     <Compile Include="Assets\NewBehaviourScript3.cs" />
-     <Compile Include="Assets\NewBehaviourScript4.cs" />
-     <Compile Include="Assets\NewBehaviourScript5.cs" />
-     <Compile Include="Assets\NewBehaviourScript6.cs" />
      <Compile Include="Assets\OutsideDestory.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngineInput.cs" />

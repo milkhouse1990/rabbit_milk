@@ -27,6 +27,9 @@ namespace UnityStandardAssets._2D
         private bool m_waitnpc=false;
         public Texture2D waitnpc;
 
+        private int d = 0;
+        private string npcname;
+
         //private Vector3 screenpos;
 
         private void Awake()
@@ -55,7 +58,19 @@ namespace UnityStandardAssets._2D
                 else
                 {
                     Time.timeScale = 1;
-                    if (CrossPlatformInputManager.GetButtonDown("X"))
+                    if (CrossPlatformInputManager.GetButtonDown("up"))
+                    {
+                        if (m_waitnpc)
+                        {
+                            GetComponent<AvgEngine>().Open(npcname);
+                            GetComponent<AvgEngine>().enabled = true;
+                            GetComponent<AvgEngineInput>().enabled = true;
+                            enabled = false;
+                            //m_waitnpc = false;
+                        }
+                    }
+                        
+                        if (CrossPlatformInputManager.GetButtonDown("X"))
                     {
                         int cos = m_Character.GetCostume();
                         if (cos>0 && cos<5)
@@ -120,6 +135,7 @@ namespace UnityStandardAssets._2D
             }
             
         }
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             switch (other.tag)
@@ -127,9 +143,13 @@ namespace UnityStandardAssets._2D
                 case "enemy":
                     m_Status.GetDamage(other.GetComponent<Status>());
                     break;
+                case "npc":
+                    m_waitnpc = true;
+                    npcname = other.name;
+                    break;
             }
         }
-
+        
         private void OnTriggerStay2D(Collider2D other)
         {
             switch (other.tag)
@@ -141,36 +161,17 @@ namespace UnityStandardAssets._2D
                         Destroy(other.gameObject);
                     }
                     break;
-                case "npc":
-                    
-                    if (!change)
-                    {
-                        if (CrossPlatformInputManager.GetButtonDown("up"))
-                        {
-                            
-                            GetComponent<AvgEngine>().Open(other.name);
-
-                            GetComponent<AvgEngine>().enabled = true;
-                            GetComponent<AvgEngineInput>().enabled = true;
-                            enabled = false;
-
-                            //m_waitnpc = false;
-                            
-                        }
-                        //else
-                            //m_waitnpc = true;
-                    }
-                    break;
+                
               }
         }
-
+        
         void OnTriggerExit2D(Collider2D other)
         {
             m_waitnpc = false;
         }
 
 
-        private void OnGUI()
+         void OnGUI()
         {
             Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
             if (change)
@@ -184,14 +185,14 @@ namespace UnityStandardAssets._2D
                     //guistatus = !guistatus;
                 }
 
-                GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 64 - guioffset, 128, 128), change_up);
-                GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 64 + guioffset, 128, 128), change_down);
-                GUI.Label(new Rect(screenpos.x - 64 - guioffset, screenpos.y - 64, 128, 128), change_left);
-                GUI.Label(new Rect(screenpos.x - 64 + guioffset, screenpos.y - 64, 128, 128), change_right);
+                GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 32 - guioffset, 128, 128), change_up);
+                GUI.Label(new Rect(screenpos.x - 64, screenpos.y - 32 + guioffset, 128, 128), change_down);
+                GUI.Label(new Rect(screenpos.x - 64 - guioffset, screenpos.y - 32, 128, 128), change_left);
+                GUI.Label(new Rect(screenpos.x - 64 + guioffset, screenpos.y - 32, 128, 128), change_right);
 
             }
             else if (m_waitnpc)
-                GUI.Label(new Rect(screenpos.x-32, screenpos.y -64- 64, 64, 64), waitnpc);
+                GUI.Label(new Rect(screenpos.x-32, screenpos.y+256 , 64, 64), waitnpc);
             
                 
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class NewBehaviourScript4 : MonoBehaviour {
+public class Enemy1 : MonoBehaviour {
     public Transform bullet;
     private int invincible;
     int id=1;
