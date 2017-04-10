@@ -157,45 +157,28 @@ namespace UnityStandardAssets._2D
         
         public void CostumeChange(int cos)
         {
-            if (cos==0)
+            costume = cos;
+            m_Anim.SetInteger("Costume", cos);
+            switch (cos)
             {
-                //if (costume > 0 && costume < 6)
-                {
-                    //if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+                case 0:
+                    m_MaxSpeed = 10f;
+                    break;
+                case 5:
+                    if (m_Crouch)
                     {
+                        m_MaxSpeed = 15f;
+                        //speed = 16;
+                        //motion = 0;
 
+                        Instantiate(clothes, transform.position, transform.rotation);
                     }
-                    //else
+                    else
                     {
                         costume = 0;
                         m_Anim.SetInteger("Costume", 0);
-                        m_MaxSpeed = 10f;
-                        //change("rabbit");
-                        
-
-                        //speed = 8;
-                        //motion = 0;
-                        //mchange("rabbit", 0, 1, 0, tile, 2 * tile);
                     }
-
-                }
-            }
-            else if (cos==1)
-            {
-                costume = 1;
-                m_Anim.SetInteger("Costume", 1);
-            }
-            else if (cos==5)
-            {
-                if (m_Crouch)
-                {
-                    costume = 5;
-                    m_MaxSpeed = 15f;
-                    //speed = 16;
-                    //motion = 0;
-                    m_Anim.SetInteger("Costume", 5);
-                    Instantiate(clothes, transform.position, transform.rotation);                  
-                }
+                    break;
             }
         }
 

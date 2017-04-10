@@ -7,6 +7,9 @@ public class Status : MonoBehaviour {
     private int hp;
     public int atk;
     public int def;
+
+    public bool b_autorecover = false;
+    private int autorecover_timer = 0;
 	// Use this for initialization
 	void Start () {
         hp = hpmax;
@@ -16,10 +19,32 @@ public class Status : MonoBehaviour {
 	void Update () {
 		
 	}
+    void FixedUpdate()
+    {
+        //autorecover
+        if (b_autorecover)
+        {
+            autorecover_timer++;
+            if (autorecover_timer > 60)
+            {
+                autorecover_timer = 0;
+                hp++;
+
+                if (hp > hpmax)
+                    hp = hpmax;
+            }
+        }
+        else
+            autorecover_timer = 0;
+        
+    }
 
     public void GetDamage(Status teki)
     {
-        hp -= teki.atk - def;
+        int damage=teki.atk - def;
+        if (damage < 0)
+            damage = 0;
+        hp -= damage;
         if (hp < 0)
             hp = 0;
         if (hp == 0)

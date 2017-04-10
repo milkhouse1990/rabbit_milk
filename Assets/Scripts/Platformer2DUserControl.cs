@@ -148,6 +148,19 @@ namespace UnityStandardAssets._2D
                     npcname = other.name;
                     break;
             }
+            switch(other.name)
+            {
+                case "onsei":
+                    m_Status.b_autorecover = true;
+                    break;
+                case "ev_bathtowel":
+                    m_Character.CostumeChange(7);
+                    Debug.Log("get");
+                    break;
+                case "ev_majo":
+                    m_Character.CostumeChange(0);
+                    break;
+            }
         }
         
         private void OnTriggerStay2D(Collider2D other)
@@ -168,10 +181,19 @@ namespace UnityStandardAssets._2D
         void OnTriggerExit2D(Collider2D other)
         {
             m_waitnpc = false;
+            m_Status.b_autorecover = false;
+        }
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            switch (other.gameObject.tag)
+            {
+                case "enemy":
+                    m_Status.GetDamage(other.gameObject.GetComponent<Status>());
+                    break;              
+            }
         }
 
-
-         void OnGUI()
+        void OnGUI()
         {
             Vector3 screenpos = Camera.main.WorldToScreenPoint(transform.position);
             if (change)
@@ -193,7 +215,7 @@ namespace UnityStandardAssets._2D
             }
             else if (m_waitnpc)
                 if (m_Character.GetGround())
-                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-96 , 64, 64), waitnpc);
+                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-64 , 64, 64), waitnpc);
             
                 
         }

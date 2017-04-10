@@ -32,14 +32,10 @@ namespace UnityStandardAssets._2D {
         //for button a
         private int guialpha=20;
         private bool al= true;
-        private GUIStyle gs;
+        public GUIStyle gs;
         // Use this for initialization
         void Start() {
             System.Text.Encoding.GetEncoding("gb2312");
-            gs = new GUIStyle();
-            gs.normal.textColor = new Color(0, 0, 0);// 255, 255, 255);
-            gs.font.name = "宋体";
-            gs.fontSize = 21;
         }
 
         // Update is called once per frame
