@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 
-namespace UnityStandardAssets._2D
-{
+//namespace UnityStandardAssets._2D
+//{
     [RequireComponent(typeof(AvgEngine))]
     public class AvgEngineInput : MonoBehaviour {
 
@@ -26,4 +26,4 @@ namespace UnityStandardAssets._2D
 
 	}
 }
-}
+//}

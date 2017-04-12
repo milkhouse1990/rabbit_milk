@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityStandardAssets._2D {
+//namespace UnityStandardAssets._2D {
     public class AvgEngine : MonoBehaviour {
 
         public Texture2D icon;
@@ -142,6 +142,8 @@ namespace UnityStandardAssets._2D {
                         //charamove charaid vx vy
                         else if (para[0] == "charamove")
                         {
+                            GetComponent<PlatformerCharacter2D>().Move(1, false, false);
+                            wait = true;
                             //chaid = real(para[1]);
                             //if instance_exists(chaid2obj[chaid])
                             //{
@@ -262,4 +264,4 @@ namespace UnityStandardAssets._2D {
         }
 
     }
-}
+//}

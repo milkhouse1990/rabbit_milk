@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-namespace UnityStandardAssets._2D
-{
+//namespace UnityStandardAssets._2D
+//{
     public class PlatformerCharacter2D : MonoBehaviour
     {
         public Transform bullet;
@@ -14,9 +14,12 @@ namespace UnityStandardAssets._2D
         [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
-        private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
-        const float k_GroundedRadius = 1f; // Radius of the overlap circle to determine if grounded
+        private Transform m_GroundCheckL;    // A position marking where to check if the player is grounded.
+        private Transform m_GroundCheckR;
+        const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
+        private bool m_GroundedL;
+        private bool m_GroundedR;
         private bool m_Crouch;
         private Transform m_CeilingCheck;   // A position marking where to check for ceilings
         const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
@@ -33,7 +36,8 @@ namespace UnityStandardAssets._2D
         private void Awake()
         {
             // Setting up references.
-            m_GroundCheck = transform.Find("GroundCheck");
+            m_GroundCheckL = transform.Find("GroundCheckL");
+            m_GroundCheckR = transform.Find("GroundCheckR");
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -52,19 +56,28 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             m_Grounded = false;
+            m_GroundedL = false;
+            m_GroundedR = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheckL.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i].gameObject != gameObject)
+                    m_GroundedL = true;       
+            }
+            colliders = Physics2D.OverlapCircleAll(m_GroundCheckR.position, k_GroundedRadius, m_WhatIsGround);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject != gameObject)
+                    m_GroundedR = true;
+             }
+            if (m_GroundedL||m_GroundedR)
                 {
                     m_Grounded = true;
                     double_jump = false;
                 }
-                    
-            }
             m_Anim.SetBool("Ground", m_Grounded);
 
             // Set the vertical animation
@@ -185,8 +198,9 @@ namespace UnityStandardAssets._2D
         public void Shoot()
         {
             if (costume==0)
-            {                   
-                    Transform new_bullet = Instantiate(bullet, transform.position, transform.rotation);
+            {
+                
+                    Transform new_bullet = Instantiate(bullet, new Vector3(transform.position.x+transform.localScale.x,transform.position.y,0), transform.rotation);
                     new_bullet.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
                     new_bullet.gameObject.transform.localScale = transform.localScale;
                 
@@ -202,4 +216,4 @@ namespace UnityStandardAssets._2D
             return m_Grounded;
         }
     }
-}
+//}

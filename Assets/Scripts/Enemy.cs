@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
@@ -13,12 +14,14 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 		
 	}
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        switch (other.tag)
+        //Debug.Log("get");
+        switch (other.gameObject.tag)
         {
             case "weapon":
-                GetComponent<Status>().GetDamage(other.GetComponent<Status>());
+                GetComponent<Status>().GetDamage(other.gameObject.GetComponent<Status>());
+                Destroy(other.gameObject,0.1f);
                 break;
             
         }

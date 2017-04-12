@@ -236,3 +236,5 @@ pip-log.txt
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+.vs/rabbit_milk/v15/.suo
+*.suo
