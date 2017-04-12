@@ -142,7 +142,9 @@ using UnityStandardAssets.CrossPlatformInput;
             {
                 case "enemy":
                     m_Status.GetDamage(other.GetComponent<Status>());
-                    break;
+                    m_Character.Backward(other.transform.position.x-transform.position.x);
+                    Destroy(other.gameObject);
+                break;
                 case "npc":
                     m_waitnpc = true;
                     npcname = other.name;
@@ -189,7 +191,8 @@ using UnityStandardAssets.CrossPlatformInput;
             {
                 case "enemy":
                     m_Status.GetDamage(other.gameObject.GetComponent<Status>());
-                    Destroy(other.gameObject);
+                    m_Character.Backward(other.transform.position.x - transform.position.x);
+                //Destroy(other.gameObject);
                     break;              
             }
         }

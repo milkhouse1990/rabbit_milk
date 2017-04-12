@@ -14,10 +14,10 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 		
 	}
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("get");
-        switch (other.gameObject.tag)
+        Debug.Log("get");
+        switch (other.tag)
         {
             case "weapon":
                 GetComponent<Status>().GetDamage(other.gameObject.GetComponent<Status>());

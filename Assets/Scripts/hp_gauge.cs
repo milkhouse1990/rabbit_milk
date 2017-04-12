@@ -6,6 +6,7 @@ using UnityEngine;
 public class hp_gauge : MonoBehaviour {
     private Status c_status;
     public Texture2D hpg;
+    public Texture2D tank;
     void Awake()
     {
         c_status = GetComponent<Status>();
@@ -23,8 +24,9 @@ public class hp_gauge : MonoBehaviour {
         int hp = c_status.GetHp();
         int mhp = c_status.hpmax;
         float scale = (float)hp / (float)mhp;
-        GUI.DrawTextureWithTexCoords(new Rect(0.5f*64, 260, 32, mhp*8), hpg,new Rect(0,0,0.25f,1));
-        GUI.DrawTextureWithTexCoords(new Rect(0.5f*64, 260+hpg.height*(1-scale), 32, scale*hpg.height), hpg, new Rect(0.25f, 0, 0.25f, scale));
+        //GUI.DrawTextureWithTexCoords(new Rect(0.5f*64, 260, 32, mhp*8), hpg,new Rect(0,0,0.25f,1));
+        GUI.DrawTextureWithTexCoords(new Rect(0, 0, 64, 256), tank, new Rect(0, 0, 1, 1));
+        //GUI.DrawTextureWithTexCoords(new Rect(0.5f*64, 260+hpg.height*(1-scale), 32, scale*hpg.height), hpg, new Rect(0.25f, 0, 0.25f, scale));
 
     }
 }

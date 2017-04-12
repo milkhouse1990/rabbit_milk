@@ -46,16 +46,24 @@ using UnityEngine;
 
         private void Update()
         {
-            //if (act)if (!change)
-            //milk status update
-            if (invincible > 0)
-                invincible--;
-        }
+        if (invincible % 2 == 0)
+            GetComponent<SpriteRenderer>().enabled = true;
+        else
+            GetComponent<SpriteRenderer>().enabled = false;
+
+    }
 
 
         private void FixedUpdate()
         {
-            m_Grounded = false;
+        // status update
+        if (invincible > 0)
+        
+            invincible--;
+        
+            
+
+        m_Grounded = false;
             m_GroundedL = false;
             m_GroundedR = false;
 
@@ -215,5 +223,13 @@ using UnityEngine;
         {
             return m_Grounded;
         }
+    public void Backward(float deltax)
+    {
+        if (deltax > 0)
+            transform.position=new Vector3(transform.position.x - 2,transform.position.y,0);
+        else
+            transform.position = new Vector3(transform.position.x + 2, transform.position.y, 0);
+        invincible = 60;
+    }
     }
 //}
