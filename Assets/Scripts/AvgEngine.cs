@@ -228,8 +228,8 @@ using UnityEngine;
                 }*/
                 if (words != "")
                 {
-                    if (speaker == "1")
-                        GUI.Label(new Rect(0, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), icon);
+                    //if (speaker == "1")
+                        
                     GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
                     if (al)
                         GUI.Label(new Rect(xscreen-3.5f*tile, yscreen-tile, tile, tile), np);

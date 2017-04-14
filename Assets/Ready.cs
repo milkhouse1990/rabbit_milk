@@ -47,6 +47,6 @@ public class Ready : MonoBehaviour {
     void OnGUI()
     {
         if (b_ready)
-            GUI.Label(new Rect(600,300, 1280, 640), "READY",gs);
+            GUI.Label(new Rect(500,250, 1280, 640), "READY",gs);
     }
 }

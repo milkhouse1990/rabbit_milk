@@ -50,6 +50,6 @@ public class Warning : MonoBehaviour {
     void OnGUI()
     {
         if (index==1)
-            GUI.Label(new Rect(600, 300, 1280, 640), "WARNING", gs);
+            GUI.Label(new Rect(500, 250, 1280, 640), "WARNING", gs);
     }
 }
