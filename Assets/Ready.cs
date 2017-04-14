@@ -15,7 +15,7 @@ public class Ready : MonoBehaviour {
         player.name = "milk";
         GameObject camera=GameObject.Find("Main Camera");
         camera.GetComponent<CameraFollow>().target = player;
-        player.gameObject.GetComponent<PlatformerCharacter2D>().Move(1, false, false);
+        player.gameObject.GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
         player.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
 		
 	}
@@ -25,7 +25,7 @@ public class Ready : MonoBehaviour {
 		switch(index)
         {
             case 1:
-                player.gameObject.GetComponent<PlatformerCharacter2D>().Move(0, false, false);
+                player.gameObject.GetComponent<PlatformerCharacter2D>().Move(0, false, false,false);
                 b_ready = true;
                 break;
             case 2:
@@ -38,7 +38,7 @@ public class Ready : MonoBehaviour {
     void FixedUpdate()
     {
         timer++;
-        if (timer==60)
+        if (timer==30)
         {
             timer = 0;
             index++;

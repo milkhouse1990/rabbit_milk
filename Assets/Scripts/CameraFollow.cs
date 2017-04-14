@@ -3,33 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
-    public float left_border;
-    public float right_border;
+    private float left_border;
+    private float right_border;
     public float top_border;
     public float bottom_border;
+    public float[] scroll_door;
+    private int i = 0;
+    private bool b_moving = false;
     public Transform target;
+    public Transform airwall;
+    public Transform warning;
 	// Use this for initialization
 	void Start () {
-		
+        left_border = 10;
+        right_border = scroll_door[i]-10;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (b_moving)
+        {
+            if (transform.position.x >= left_border)
+            {
+                b_moving = false;
+                target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
+            }
 
-        if (target.position.x < left_border)
-            transform.position = new Vector3(left_border, target.position.y, -10);
-        else if (target.position.x>right_border)
-            transform.position = new Vector3(right_border, target.position.y, -10);
+            else
+                transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+        }
         else
-            transform.position = new Vector3(target.position.x, target.position.y, -10);
+        {
+            if (target!=null)
+            {
+                if (target.position.x < left_border)
+                    transform.position = new Vector3(left_border, target.position.y, -10);
+                else if (target.position.x > right_border)
+                    transform.position = new Vector3(right_border, target.position.y, -10);
+                else
+                    transform.position = new Vector3(target.position.x, target.position.y, -10);
 
-        if (target.position.y > top_border)
-            transform.position = new Vector3(transform.position.x, top_border, -10);
-        else if (target.position.y < bottom_border)
-            transform.position = new Vector3(transform.position.x, bottom_border, -10);
-        else
-            transform.position = new Vector3(transform.position.x, target.position.y, -10);
+                if (target.position.y > top_border)
+                    transform.position = new Vector3(transform.position.x, top_border, -10);
+                else if (target.position.y < bottom_border)
+                    transform.position = new Vector3(transform.position.x, bottom_border, -10);
+                else
+                    transform.position = new Vector3(transform.position.x, target.position.y, -10);
+                if (i == scroll_door.Length - 1)
+                {
+                    Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
+                    i++;
+                }
+                else
+                {
+                    if (i < scroll_door.Length - 1)
+                    {
+                        if (target.position.x > scroll_door[i])
+                        {
+                            left_border = scroll_door[i] + 10;
+                            i++;
+                            right_border = scroll_door[i] - 10;
+                            Instantiate(airwall, target.position - new Vector3(1, 0, 0), Quaternion.identity);
+                            b_moving = true;
+                            target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                            target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                        }
+                    }
+
+                }
+            }     
+        }
+        
+     
+        
 
 
+    }
+    public bool GetMoving()
+    {
+        return b_moving;
     }
 }

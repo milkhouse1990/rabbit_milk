@@ -142,7 +142,7 @@ using UnityEngine;
                         //charamove charaid vx vy
                         else if (para[0] == "charamove")
                         {
-                            GetComponent<PlatformerCharacter2D>().Move(1, false, false);
+                            GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
                             wait = true;
                             //chaid = real(para[1]);
                             //if instance_exists(chaid2obj[chaid])

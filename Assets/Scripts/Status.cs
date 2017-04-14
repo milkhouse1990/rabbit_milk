@@ -7,6 +7,7 @@ public class Status : MonoBehaviour {
     private int hp;
     public int atk;
     public int def;
+    public Transform milk_die;
 
     public bool b_autorecover = false;
     private int autorecover_timer = 0;
@@ -22,10 +23,11 @@ public class Status : MonoBehaviour {
     void FixedUpdate()
     {
         //autorecover
+
         if (b_autorecover)
         {
             autorecover_timer++;
-            if (autorecover_timer > 60)
+            if (autorecover_timer > 30)
             {
                 autorecover_timer = 0;
                 hp++;
@@ -48,7 +50,17 @@ public class Status : MonoBehaviour {
         if (hp < 0)
             hp = 0;
         if (hp == 0)
+        {
+            if (tag == "Player")
+            {
+                //GetComponent<SpriteRenderer>().enabled = false;
+                Instantiate(milk_die, transform.position, Quaternion.identity);
+            }
+                
+            
             GameObject.Destroy(gameObject);
+        }
+            
     }
     public int GetHp()
     {

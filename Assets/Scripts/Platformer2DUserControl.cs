@@ -12,6 +12,7 @@ using UnityStandardAssets.CrossPlatformInput;
         private PlatformerCharacter2D m_Character;
         private Status m_Status; 
         private bool m_Jump;
+    private bool b_Jump;
         private bool act=true;
         private bool change = false;
         private bool change_finish = false;
@@ -27,12 +28,17 @@ using UnityStandardAssets.CrossPlatformInput;
         private bool m_waitnpc=false;
         public Texture2D waitnpc;
 
+    public Transform warning;
+
         private int d = 0;
         private string npcname;
 
-        //private Vector3 screenpos;
+    private GameObject teki;
+    private bool b_damage;
 
-        private void Awake()
+    //private Vector3 screenpos;
+
+    private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
             m_Status = GetComponent<Status>();
@@ -41,8 +47,8 @@ using UnityStandardAssets.CrossPlatformInput;
 
         private void Update()
         {
-            if (act)
-            {
+            //if (act)
+            
                 
 
                 if (change)
@@ -92,6 +98,8 @@ using UnityStandardAssets.CrossPlatformInput;
                         // Read the jump input in Update so button presses aren't missed.
                         m_Jump = CrossPlatformInputManager.GetButtonDown("B");
                     }
+            if (!b_Jump)
+                b_Jump = CrossPlatformInputManager.GetButtonUp("B");
                 }
                 //changing check
                 if (CrossPlatformInputManager.GetButtonDown("X"))
@@ -115,7 +123,17 @@ using UnityStandardAssets.CrossPlatformInput;
                     change = false;
                     change_finish = false;
                 }
+
+                //damage
+                if (b_damage)
+            {
+                if (m_Character.GetInvincible() == 0)
+                {
+                    m_Status.GetDamage(teki.GetComponent<Status>());
+                    m_Character.Backward(teki.transform.position.x - transform.position.x);
+                }
             }
+            
             
 
        }
@@ -123,26 +141,29 @@ using UnityStandardAssets.CrossPlatformInput;
 
         private void FixedUpdate()
         {
-            if (act)
-            {
+            //if (act)
+            //{
                 // Read the inputs.
                 bool crouch = CrossPlatformInputManager.GetButton("down");
                 float h = CrossPlatformInputManager.GetAxis("Horizontal");
                 if (!change)
                 // Pass all parameters to the character control script.
-                    m_Character.Move(h, crouch, m_Jump);
+                    m_Character.Move(h, crouch, m_Jump,b_Jump);
                 m_Jump = false;
-            }
+        b_Jump = false;
+           // }
             
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            switch (other.tag)
+        //Debug.Log(other.name);
+        switch (other.tag)
             {
                 case "enemy":
-                    m_Status.GetDamage(other.GetComponent<Status>());
-                    m_Character.Backward(other.transform.position.x-transform.position.x);
+                b_damage = true;
+                teki = other.gameObject;
+                    
                     Destroy(other.gameObject);
                 break;
                 case "npc":
@@ -153,15 +174,20 @@ using UnityStandardAssets.CrossPlatformInput;
             switch(other.name)
             {
                 case "onsei":
-                    m_Status.b_autorecover = true;
-                    break;
+                //Debug.Log(m_Status.b_autorecover);
+                m_Status.b_autorecover = true;
+                //Debug.Log(m_Status.b_autorecover);
+                break;
                 case "ev_bathtowel":
                     m_Character.CostumeChange(7);
-                    Debug.Log("get");
                     break;
                 case "ev_majo":
                     m_Character.CostumeChange(0);
                     break;
+            case "ev_warning":
+                
+                Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
+                break;
             }
         }
         
@@ -182,6 +208,14 @@ using UnityStandardAssets.CrossPlatformInput;
         
         void OnTriggerExit2D(Collider2D other)
         {
+        switch (other.tag)
+        {
+            case "enemy":
+                b_damage = false;
+                teki = null;
+                break;
+        }
+        
             m_waitnpc = false;
             m_Status.b_autorecover = false;
         }
@@ -190,12 +224,24 @@ using UnityStandardAssets.CrossPlatformInput;
             switch (other.gameObject.tag)
             {
                 case "enemy":
-                    m_Status.GetDamage(other.gameObject.GetComponent<Status>());
-                    m_Character.Backward(other.transform.position.x - transform.position.x);
+                b_damage = true;
+                teki = other.gameObject;
+                
+                    
                 //Destroy(other.gameObject);
                     break;              
             }
         }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "enemy":
+                b_damage = false;
+                teki = null;
+                break;
+        }
+    }
 
         void OnGUI()
         {

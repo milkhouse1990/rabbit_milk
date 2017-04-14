@@ -46,7 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BossHPGauge.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
+     <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\NextScene.cs" />
      <Compile Include="Assets\Ready.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
@@ -60,6 +62,7 @@
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\Scripts\hp_gauge.cs" />
      <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
+     <Compile Include="Assets\Warning.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

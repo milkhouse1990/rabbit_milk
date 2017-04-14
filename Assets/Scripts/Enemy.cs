@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("get");
+        //Debug.Log("get");
         switch (other.tag)
         {
             case "weapon":
