@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BossHPGauge.cs" />
+     <Compile Include="Assets\DataBase.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\NextScene.cs" />

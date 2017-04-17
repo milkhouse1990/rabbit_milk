@@ -117,8 +117,7 @@ using UnityEngine;
                     {
                         crouch = true;
                     }
-                }
-                //检测如果趴下前方是否有足够空间
+                }                
 
                 // Set whether or not the character is crouching in the animator
                 m_Anim.SetBool("Crouch", crouch);
