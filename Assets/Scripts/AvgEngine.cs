@@ -11,6 +11,8 @@ using UnityEngine;
         public Texture2D frame;
         public Texture2D np;
 
+        public GameObject[] createid;
+
         private string[] text;
         private string dialogue_next = "";
         //ifstream file;
@@ -33,8 +35,8 @@ using UnityEngine;
         private int guialpha=20;
         private bool al= true;
         public GUIStyle gs;
-        // Use this for initialization
-        void Start() {
+    // Use this for initialization
+    void Start() {
             System.Text.Encoding.GetEncoding("gb2312");
         }
 
@@ -75,17 +77,18 @@ using UnityEngine;
                     //int i = 0;
                     string[] para = commands[i].Split(' ');
                     //command understanding
-                    //pause time
-                    if (para[0] == "pause")
+                    switch(para[0])
                     {
+                    //pause time
+                    case "pause":
                         wait = true;
                         int temp;
                         int.TryParse(para[1], out temp);
                         alarm = temp * FPS;
-                    }
+                            break;
                     //say charaid text
-                    else if (para[0] == "say")
-                    {
+                    case "say":
+                    
                         pause = true;
                         speaker = para[1];
                         words = para[2];
@@ -94,77 +97,88 @@ using UnityEngine;
                             words += " ";
                             words += para[j];
                         }
+                        break;
 
-                        //for (int j = 0; j < words.Length / BYTEPERLINE; j++)
-                        //    text[j] = words.Substring(j * BYTEPERLINE, BYTEPERLINE);
-                    }
                     //charaset charaid x y
-                    else
-                    {
-                        words = "";
-                        if (para[0] == "charaset")
-                        {
+                    //case "charaset":
 
-                            //charaid = real(para[1]);
-                            //charax = real(para[2]);
-                            //charay = real(para[3]);
-                            //time=para[4];
-                            //instance_create(charax, charay, chaid2obj[charaid]);
 
-                        }
-                        //charaunset charaid
-                        else if (para[0] == "charaunset")
-                        {
-                            //wait=true;
-                            //time=para[2];
-                            //with(chaid2obj[real(para[1])])instance_destroy();
-                            //alarm[0]=time*room_speed;
-                            //file_text_readln(file);
-                        }
-                        //charascale charaid xscale yscale
-                        else if (para[0] == "charascale")
-                        {
-                            //charaid = real(para[1]);
-                            //charax = real(para[2]);
-                            //charay = real(para[3]);
-                            //chaid2obj[charaid].image_xscale = charax;
-                            //chaid2obj[charaid].image_yscale = charay;
+                    //charaid = real(para[1]);
+                    //charax = real(para[2]);
+                    //charay = real(para[3]);
+                    //time=para[4];
+                    //instance_create(charax, charay, chaid2obj[charaid]);
 
-                            //file_text_readln(file);
-                        }
-                        //charaanime charaid index
-                        else if (para[0] == "charaanime")
-                        {
-                            //chaid = real(para[1]);
-                            //chaid2obj[chaid].image_index=chaidind2spr[chaid,real(para[2])];
-                            //file_text_readln(file);
-                        }
-                        //charamove charaid vx vy
-                        else if (para[0] == "charamove")
-                        {
+
+                    //charaunset charaid
+                    //case "charaunset")
+
+                    //wait=true;
+                    //time=para[2];
+                    //with(chaid2obj[real(para[1])])instance_destroy();
+                    //alarm[0]=time*room_speed;
+                    //file_text_readln(file);
+
+                    //charascale charaid xscale yscale
+                    //else if (para[0] == "charascale")
+                    //{
+                    //charaid = real(para[1]);
+                    //charax = real(para[2]);
+                    //charay = real(para[3]);
+                    //chaid2obj[charaid].image_xscale = charax;
+                    //chaid2obj[charaid].image_yscale = charay;
+
+                    //file_text_readln(file);
+                    //}
+                    //charaanime charaid index
+                    //else if (para[0] == "charaanime")
+                    //{
+                    //chaid = real(para[1]);
+                    //chaid2obj[chaid].image_index=chaidind2spr[chaid,real(para[2])];
+                    //file_text_readln(file);
+                    //}
+                    //charamove charaid vx vy
+                    case "charamove":
+                        
                             GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
                             wait = true;
-                            //chaid = real(para[1]);
-                            //if instance_exists(chaid2obj[chaid])
-                            //{
-                            //	chaid2obj[chaid].hspeed = real(para[2]);
-                            //	chaid2obj[chaid].vspeed = real(para[3]);
-                            //	file_text_readln(file);
-                            //}
-                            //else
-                            //{
-                            //	err = true;
-                            //	errmsg = "can't find object " + para[1];
-                            //	pause = true;
-                            //}
-                        }
-                        //error
-                        else
-                        {
+                        //chaid = real(para[1]);
+                        //if instance_exists(chaid2obj[chaid])
+                        //{
+                        //	chaid2obj[chaid].hspeed = real(para[2]);
+                        //	chaid2obj[chaid].vspeed = real(para[3]);
+                        //	file_text_readln(file);
+                        //}
+                        //else
+                        //{
+                        //	err = true;
+                        //	errmsg = "can't find object " + para[1];
+                        //	pause = true;
+                        //}
+                        break;
+                    case "EndingFastest":
+                        GameObject ef = GameObject.Find("npc_ending_fastest");
+                        if (ef == null)
+                            Debug.Log("can't find object: npc_ending_fastest.");
+                        ef.GetComponent<EndingFastest>().EndFlagOn();
+                        i++;
+                        break;
+                    //create id x y
+                    case "create":
+                        int id, x, y;
+                        int.TryParse(para[1], out id);
+                        int.TryParse(para[2], out x);
+                        int.TryParse(para[3], out y);
+                        Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
+                        i++;
+                        break;
+                    //error
+                    default:
+                        
                             errmsg = "can't understand command: " + para[0];
                             err = true;
                             wait = true;
-                        }
+                        break;
                     }
                 }
                 else
@@ -234,7 +248,7 @@ using UnityEngine;
                     if (al)
                         GUI.Label(new Rect(xscreen-3.5f*tile, yscreen-tile, tile, tile), np);
 
-                    GUI.Label(new Rect(2.5f * tile, yscreen - 1.5f * tile, xscreen - 4 * tile, 2 * tile), words,gs);
+                    GUI.Label(new Rect(2.5f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
                 }
 
             }
@@ -245,12 +259,11 @@ using UnityEngine;
 
         }
 
-        public void Open(string title)
+        public void Open(string[] plot)
         {
-            string path = "Line\\" + title + ".txt";
-            commands = File.ReadAllLines(path,System.Text.Encoding.Default);
+            commands = plot;
             if (commands == null)
-                Debug.Log("can't open file"+path);
+                Debug.Log("plot load failed.");
             i = 0;
         }
 

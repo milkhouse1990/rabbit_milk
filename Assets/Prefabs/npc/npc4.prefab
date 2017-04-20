@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4857398024662374}
   - component: {fileID: 212793947642802818}
   - component: {fileID: 61834685459713976}
+  - component: {fileID: 114529149308232950}
   m_Layer: 8
   m_Name: npc4
   m_TagString: npc
@@ -66,6 +67,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &114529149308232950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475941683240866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890c125327a04e6438fe88dce6652e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plot:
+  - "say 0 \u8FD9\u91CC\u662F\u6E29\u6CC9\uFF0C\u53EF\u4EE5\u56DE\u590D\u5168\u90E8HP\u3002"
+  - "say 0 \u4F46\u662F\u6CE1\u6E29\u6CC9\u524D\u8BB0\u5F97\u8131\u8863\u670D\u54E6\uFF0C\u4E0D\u7136\u5C31\u6CA1\u6709\u6548\u679C\u4E86\u3002"
+  - "say 0 \u56DE\u590D\uFF28\uFF30\u5012\u662F\u53EF\u4EE5\u7406\u89E3\uFF0C\u53EF\u662F\u4E3A\u4EC0\u4E48\u8FDE\uFF25\u7F50\u4E5F\u80FD\u56DE\u6EE1\u5462\uFF1F\u96BE\u9053\uFF25\u7F50\u91CC\u88C5\u7684\u662F\u6D17\u6FA1\u6C34\uFF1F"
 --- !u!212 &212793947642802818
 SpriteRenderer:
   m_ObjectHideFlags: 1

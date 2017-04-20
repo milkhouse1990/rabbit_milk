@@ -12,7 +12,7 @@ using UnityStandardAssets.CrossPlatformInput;
         private PlatformerCharacter2D m_Character;
         private Status m_Status; 
         private bool m_Jump;
-    private bool b_Jump;
+        private bool b_Jump;
         private bool act=true;
         private bool change = false;
         private bool change_finish = false;
@@ -27,16 +27,15 @@ using UnityStandardAssets.CrossPlatformInput;
 
         private bool m_waitnpc=false;
         public Texture2D waitnpc;
-
+        private string[] npcplot;
+    
     public Transform warning;
 
         private int d = 0;
-        private string npcname;
 
-    private GameObject teki;
-    private bool b_damage;
+        private GameObject teki;
+        private bool b_damage;
 
-    //private Vector3 screenpos;
 
     private void Awake()
         {
@@ -46,12 +45,8 @@ using UnityStandardAssets.CrossPlatformInput;
         
 
         private void Update()
-        {
-            //if (act)
-            
-                
-
-                if (change)
+        {              
+            if (change)
                 {
                     Time.timeScale = 0;
                     
@@ -68,10 +63,13 @@ using UnityStandardAssets.CrossPlatformInput;
                     {
                         if (m_waitnpc)
                         {
-                            GetComponent<AvgEngine>().Open(npcname);
+                            GetComponent<AvgEngine>().Open(npcplot);
                             GetComponent<AvgEngine>().enabled = true;
                             GetComponent<AvgEngineInput>().enabled = true;
                             enabled = false;
+
+                            m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                            m_Character.Move(0, false, false, true);
                             //m_waitnpc = false;
                         }
                     }
@@ -161,14 +159,14 @@ using UnityStandardAssets.CrossPlatformInput;
         switch (other.tag)
             {
                 case "enemy":
-                b_damage = true;
-                teki = other.gameObject;
+                    b_damage = true;
+                    teki = other.gameObject;
                     
                     Destroy(other.gameObject);
                 break;
                 case "npc":
                     m_waitnpc = true;
-                    npcname = other.name;
+                    npcplot = other.GetComponent<Npc>().plot;
                     break;
             }
             switch(other.name)
@@ -224,11 +222,9 @@ using UnityStandardAssets.CrossPlatformInput;
             switch (other.gameObject.tag)
             {
                 case "enemy":
-                b_damage = true;
-                teki = other.gameObject;
-                
-                    
-                //Destroy(other.gameObject);
+                    b_damage = true;
+                    teki = other.gameObject;
+
                     break;              
             }
         }
@@ -265,9 +261,7 @@ using UnityStandardAssets.CrossPlatformInput;
             }
             else if (m_waitnpc)
                 if (m_Character.GetGround())
-                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-64 , 64, 64), waitnpc);
-            
-                
+                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-64 , 64, 64), waitnpc);         
         }
         
     }

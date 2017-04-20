@@ -9,19 +9,22 @@ public class DataBase : MonoBehaviour {
 
     private int itemperscr = 10;
     private int delay = 0;
+    private string[] labelname= {"Characters","Enemies","Endings" };
     private string[][] item;
     private int[] l_item;
     private bool[][] b_item;
+    public Texture2D vector;
     private string[][] info;
     private int pos = 0;
     private int labelpos = 0;
     private int cospos = 0;
     private int dispos = 0;
-    private int labels = 2;
+    private int labels;
     private bool b_info=true;
 
     // Use this for initialization
     void Start () {
+        labels = labelname.Length;
         item = new string[labels][];
         item[0] = new string[]{
             "milk酱",
@@ -36,7 +39,12 @@ public class DataBase : MonoBehaviour {
             "10",
             "11"};
         item[1]=new string[]{ "1","2"};
-
+        item[2] = new string[]
+        {
+            "Happy Ending",
+            "最速Clear",
+            "地狱Ending"
+        };
         l_item = new int[labels];        
         for (int i = 0; i < labels; i++)
         {
@@ -55,13 +63,15 @@ public class DataBase : MonoBehaviour {
                 sw.Write("0");
                 for (int j = 1; j < l_item[i]; j++)
                     sw.Write(" 0");
-                sw.Write("\n");
+                sw.Write("\r\n");
             }
             sw.Flush();
             sw.Close();
             fs.Close();
         }
         string[] commands = File.ReadAllLines(path);
+        if (commands.Length != labels)
+            Debug.Log("savefile wrong");
         for (int i=0;i<labels;i++)
         {
             l_item[i] = item[i].Length;
@@ -78,7 +88,7 @@ public class DataBase : MonoBehaviour {
         info = new string[labels][];
         info[0] = new string[]
         {
-            "主人公1",
+            "种族不明\n本作主人公。",
             "兔耳族\n王国的公主殿下。",
             "3"
         };
@@ -88,6 +98,13 @@ public class DataBase : MonoBehaviour {
             "2",
             "3"
         };
+        info[2] = new string[]
+        {
+            "触发条件：按照正常流程攻略\n牛奶酱救回了公主，打跑了坏人，王国又恢复了和平。",
+            "触发条件：生日Party上在和对话后攻击她\n牛奶酱提前识破了坏人的阴谋，阻止了一切的发生。",
+            "触发条件：Miss100次\n不管怎样都过不了关，于是死后在地狱和???过上了幸福的生活。"
+        };
+        //Debug.Log(info[0][0]);
     }
 	
 	// Update is called once per frame
@@ -156,16 +173,18 @@ public class DataBase : MonoBehaviour {
                     dis = item[labelpos][i];
                 else
                     dis = "???";
-                Debug.Log(dis);
+                //Debug.Log(dis);
                 //GUI.Label(new Rect(0, 0, 640, 20), dis);
                 GUI.Label(new Rect(100, 100+(i - dispos) * 20, 640, 20), dis);
             }
+        GUI.Label(new Rect(80, 100 + (pos - dispos) * 20, 20, 20), vector);
         //help
         GUI.Label(new Rect(1280 - 400, 100, 400, 20), "↑↓项目选择 LR标签选择 A文字表示/非表示 X服装变更");
         //info
         if (b_info)
         {
             if (b_item[labelpos][pos])
+                //Debug.Log(info[0][0]);
                 dis = info[labelpos][pos];
             else
                 dis = "???????";
