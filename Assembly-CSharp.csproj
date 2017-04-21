@@ -53,6 +53,7 @@
      <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\NextScene.cs" />
      <Compile Include="Assets\Npc.cs" />
+     <Compile Include="Assets\Palace.cs" />
      <Compile Include="Assets\Ready.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngineInput.cs" />

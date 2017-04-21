@@ -44,8 +44,10 @@ public class Status : MonoBehaviour {
     public void GetDamage(Status teki)
     {
         int damage=teki.atk - def;
-        if (damage < 0)
-            damage = 0;
+        HPChange(damage);    
+    }
+    public void HPChange(int damage)
+    {
         hp -= damage;
         if (hp < 0)
             hp = 0;
@@ -53,14 +55,10 @@ public class Status : MonoBehaviour {
         {
             if (tag == "Player")
             {
-                //GetComponent<SpriteRenderer>().enabled = false;
                 Instantiate(milk_die, transform.position, Quaternion.identity);
             }
-                
-            
             GameObject.Destroy(gameObject);
         }
-            
     }
     public int GetHp()
     {

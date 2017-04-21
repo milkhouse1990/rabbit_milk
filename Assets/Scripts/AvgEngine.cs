@@ -172,6 +172,11 @@ using UnityEngine;
                         Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
                         i++;
                         break;
+                    //hp-1
+                    case "hp-999":
+                        GetComponent<Status>().HPChange(16);
+                        i++;
+                        break;
                     //error
                     default:
                         

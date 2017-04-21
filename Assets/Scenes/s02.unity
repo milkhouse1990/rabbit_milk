@@ -1201,16 +1201,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 114483713038055578, guid: 403f2a6f8e08d824c8964e8bbcf99738,
-        type: 2}
-      propertyPath: tank
-      value: 
-      objectReference: {fileID: 2800000, guid: 57d8a41e576ec4a4ab3a25cf146f0ea9, type: 3}
-    - target: {fileID: 114483713038055578, guid: 403f2a6f8e08d824c8964e8bbcf99738,
-        type: 2}
-      propertyPath: life
-      value: 
-      objectReference: {fileID: 2800000, guid: 64cc8cf60f24c5f45b14ae02edac6f73, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 403f2a6f8e08d824c8964e8bbcf99738, type: 2}
   m_IsPrefabParent: 0

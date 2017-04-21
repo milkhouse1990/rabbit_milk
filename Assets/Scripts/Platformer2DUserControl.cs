@@ -63,15 +63,9 @@ using UnityStandardAssets.CrossPlatformInput;
                     {
                         if (m_waitnpc)
                         {
-                            GetComponent<AvgEngine>().Open(npcplot);
-                            GetComponent<AvgEngine>().enabled = true;
-                            GetComponent<AvgEngineInput>().enabled = true;
-                            enabled = false;
-
-                            m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                            m_Character.Move(0, false, false, true);
-                            //m_waitnpc = false;
-                        }
+                            EnterAVGMode(npcplot);
+                            
+                         }
                     }
                         
                         if (CrossPlatformInputManager.GetButtonDown("X"))
@@ -263,6 +257,17 @@ using UnityStandardAssets.CrossPlatformInput;
                 if (m_Character.GetGround())
                     GUI.Label(new Rect(screenpos.x-32, screenpos.y-64 , 64, 64), waitnpc);         
         }
+
+        public void EnterAVGMode(string[] plot)
+    {
+        GetComponent<AvgEngine>().Open(plot);
+        GetComponent<AvgEngine>().enabled = true;
+        GetComponent<AvgEngineInput>().enabled = true;
+        enabled = false;
+
+        m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        m_Character.Move(0, false, false, true);
+    }
         
     }
 //}
