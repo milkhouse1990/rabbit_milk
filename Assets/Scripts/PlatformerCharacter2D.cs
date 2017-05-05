@@ -27,7 +27,7 @@ using UnityEngine;
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
-        private int costume=0;
+        public int costume;//0 majo 1 maid 2 idol 3 mermaid 4 hime 5 dress 6 bunny 7 bathtowel
         private bool double_jump = false;
         private bool m_clothes = false;
 
@@ -191,7 +191,7 @@ using UnityEngine;
                 case 0:
                     m_MaxSpeed = 10f;
                     break;
-                case 5:
+                case 6:
                     if (m_Crouch)
                     {
                         m_MaxSpeed = 15f;

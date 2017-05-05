@@ -71,7 +71,7 @@ using UnityStandardAssets.CrossPlatformInput;
                         if (CrossPlatformInputManager.GetButtonDown("X"))
                     {
                         int cos = m_Character.GetCostume();
-                        if (cos>0 && cos<5)
+                        if (cos>0 && cos<6)
                         {
                             m_Character.CostumeChange(0);
                             change_finish = true;
@@ -84,7 +84,7 @@ using UnityStandardAssets.CrossPlatformInput;
                         m_Character.Shoot();
                     }
                     if (CrossPlatformInputManager.GetButtonDown("A"))
-                        m_Character.CostumeChange(5);
+                        m_Character.CostumeChange(6);
                     if (!m_Jump)
                     {
                         // Read the jump input in Update so button presses aren't missed.

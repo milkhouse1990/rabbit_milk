@@ -611,6 +611,11 @@ Prefab:
       propertyPath: gs.m_StretchHeight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114719667588682844, guid: 905a76a0db9ef384580e2b64c4b24c72,
+        type: 2}
+      propertyPath: costume
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 905a76a0db9ef384580e2b64c4b24c72, type: 2}
   m_IsPrefabParent: 0
