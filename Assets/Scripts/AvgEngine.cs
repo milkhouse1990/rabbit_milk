@@ -9,6 +9,7 @@ using UnityEngine;
 
         public Texture2D icon;
         public Texture2D frame;
+    public Texture2D frame1;
         public Texture2D np;
 
         public GameObject[] createid;
@@ -247,13 +248,21 @@ using UnityEngine;
                 }*/
                 if (words != "")
                 {
-                    //if (speaker == "1")
-                        
-                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
+                    //frame
+                    if (speaker == "1")
+                        GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
+                    else
+                        GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
+                    //nextpage
                     if (al)
-                        GUI.Label(new Rect(xscreen-3.5f*tile, yscreen-tile, tile, tile), np);
+                        GUI.Label(new Rect(xscreen-4f*tile, yscreen-tile, tile, tile), np);
+                //words
 
-                    GUI.Label(new Rect(2.5f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
+                if (speaker == "1")
+                    words = "<color=magenta>" + words+"</color>";
+                //else
+                    //GUI.color = Color.black;
+                    GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
                 }
 
             }

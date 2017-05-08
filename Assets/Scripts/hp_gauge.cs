@@ -6,6 +6,8 @@ public class hp_gauge : MonoBehaviour {
     //private Status c_status;
     public Texture2D life;
     public Texture2D tank;
+
+    public Texture2D icon_milk;
     private int mhp;
 
 	// Use this for initialization
@@ -32,6 +34,9 @@ public class hp_gauge : MonoBehaviour {
         GUI.DrawTextureWithTexCoords(new Rect(0, 720 - 128 - 8 * mhp, 128, 8 * mhp), tank, new Rect(0, 0.25f, 1, mhp / 64.0f));
         GUI.DrawTextureWithTexCoords(new Rect(0, 720 - 128 - 8 * mhp - 8 * 2, 128, 8 * 2), tank, new Rect(0, 0.75f, 1, 2 / 64.0f));
         GUI.DrawTextureWithTexCoords(new Rect(8,720-128-8*hp,5*8, 8*hp),life,new Rect(0,0,1,hp/32.0f));
+
+        //icon
+        GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
 
     }
 }

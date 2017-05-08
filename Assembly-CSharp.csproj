@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\hp_gauge.cs" />
      <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
      <Compile Include="Assets\Warning.cs" />
+     <Compile Include="Assets\test.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
