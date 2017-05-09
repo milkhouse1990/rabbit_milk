@@ -98,6 +98,8 @@ using UnityEngine;
                             words += " ";
                             words += para[j];
                         }
+                        if (speaker == "1")
+                            words = "<color=magenta>" + words + "</color>";
                         break;
 
                     //charaset charaid x y
@@ -258,11 +260,9 @@ using UnityEngine;
                         GUI.Label(new Rect(xscreen-4f*tile, yscreen-tile, tile, tile), np);
                 //words
 
-                if (speaker == "1")
-                    words = "<color=magenta>" + words+"</color>";
-                //else
-                    //GUI.color = Color.black;
-                    GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
+                
+
+                GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
                 }
 
             }

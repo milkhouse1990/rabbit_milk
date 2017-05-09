@@ -289,11 +289,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114483713038055578, guid: 403f2a6f8e08d824c8964e8bbcf99738,
-        type: 2}
-      propertyPath: icon_milk
-      value: 
-      objectReference: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 403f2a6f8e08d824c8964e8bbcf99738, type: 2}
   m_IsPrefabParent: 0
@@ -644,7 +639,22 @@ Prefab:
     - target: {fileID: 61115712693845598, guid: 905a76a0db9ef384580e2b64c4b24c72,
         type: 2}
       propertyPath: m_Offset.y
-      value: -0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61115712693845598, guid: 905a76a0db9ef384580e2b64c4b24c72,
+        type: 2}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61115712693845598, guid: 905a76a0db9ef384580e2b64c4b24c72,
+        type: 2}
+      propertyPath: m_UsedByComposite
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61115712693845598, guid: 905a76a0db9ef384580e2b64c4b24c72,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 905a76a0db9ef384580e2b64c4b24c72, type: 2}
