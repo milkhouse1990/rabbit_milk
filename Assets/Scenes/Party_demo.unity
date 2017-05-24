@@ -457,6 +457,21 @@ Prefab:
       propertyPath: scroll_door.Array.data[0]
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 20028145817933392, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20028145817933392, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20028145817933392, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bdc5a8ed1d32a141be2b78569d334c5, type: 2}
   m_IsPrefabParent: 0
