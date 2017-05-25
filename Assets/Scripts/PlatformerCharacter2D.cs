@@ -52,7 +52,10 @@ using UnityEngine;
             GetComponent<SpriteRenderer>().enabled = false;
 
     }
-
+        void Start()
+    {
+        m_Anim.SetInteger("Costume", costume);
+    }
 
         private void FixedUpdate()
         {
