@@ -12,7 +12,7 @@ public class hp_gauge : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject milk = GameObject.Find("milk");
+        //GameObject milk = GameObject.Find("milk");
     }
 	
 	// Update is called once per frame
@@ -24,8 +24,12 @@ public class hp_gauge : MonoBehaviour {
         GameObject milk=GameObject.Find("milk");
         if (milk!=null)
         {
+            if (milk.GetComponent<AvgEngine>().enabled)
+                return;
             hp = milk.GetComponent<Status>().GetHp();
             mhp = milk.GetComponent<Status>().hpmax;
+            
+
         }
         
         float scale = (float)hp / (float)mhp;

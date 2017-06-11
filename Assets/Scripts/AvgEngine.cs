@@ -8,18 +8,26 @@ using UnityEngine;
     public class AvgEngine : MonoBehaviour {
 
         public Texture2D icon;
+    public Texture2D icon_milk;
         public Texture2D frame;
     public Texture2D frame1;
         public Texture2D np;
-
+        
+        /*
+        0 nextscene
+        1 hime
+        */
         public GameObject[] createid;
+    private GameObject npc;
 
         private string[] text;
         private string dialogue_next = "";
         //ifstream file;
         private string[] commands;
         private int i = 0;
-        private string speaker = "";
+        private int speaker = -1;
+    private string speaker_name = "";
+    public string[] speakerid;
         private string words = "";
         private bool pause = false;
         private bool wait = false;
@@ -91,27 +99,46 @@ using UnityEngine;
                     case "say":
                     
                         pause = true;
-                        speaker = para[1];
+                        int.TryParse(para[1], out speaker);
+                        speaker_name = speakerid[speaker];
                         words = para[2];
                         for (int j = 3; j < para.Length; j++)
                         {
                             words += " ";
                             words += para[j];
                         }
-                        if (speaker == "1")
+                        if (speaker == 1)
                             words = "<color=magenta>" + words + "</color>";
                         break;
 
-                    //charaset charaid x y
-                    //case "charaset":
+                    //say0 name text
+                    case "say0":
 
+                        pause = true;
+                        speaker = 0;
+                        speaker_name=para[1];
+                        words = para[2];
+                        for (int j = 3; j < para.Length; j++)
+                        {
+                            words += " ";
+                            words += para[j];
+                        }
+                        break;
 
-                    //charaid = real(para[1]);
-                    //charax = real(para[2]);
-                    //charay = real(para[3]);
-                    //time=para[4];
-                    //instance_create(charax, charay, chaid2obj[charaid]);
+                    //create id x y
+                    case "create":
+                        int id, x, y;
+                        int.TryParse(para[1], out id);
+                        int.TryParse(para[2], out x);
+                        int.TryParse(para[3], out y);
+                        npc=Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
+                        i++;
+                        break;
 
+                    case "downstairs":
+                        npc.GetComponent<Move>().Downstairs();
+                        wait = true;
+                        break;
 
                     //charaunset charaid
                     //case "charaunset")
@@ -144,7 +171,8 @@ using UnityEngine;
                     case "charamove":
                         
                             GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
-                            wait = true;
+                            //wait = true;
+                        //i--;
                         //chaid = real(para[1]);
                         //if instance_exists(chaid2obj[chaid])
                         //{
@@ -166,15 +194,7 @@ using UnityEngine;
                         ef.GetComponent<EndingFastest>().EndFlagOn();
                         i++;
                         break;
-                    //create id x y
-                    case "create":
-                        int id, x, y;
-                        int.TryParse(para[1], out id);
-                        int.TryParse(para[2], out x);
-                        int.TryParse(para[3], out y);
-                        Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
-                        i++;
-                        break;
+                    
                     //hp-1
                     case "hp-999":
                         GetComponent<Status>().HPChange(16);
@@ -192,11 +212,14 @@ using UnityEngine;
                 else
                 {
                     GetComponent<Platformer2DUserControl>().enabled = true;
+                    //GetComponent<hp_gauge>().enabled = true;
                     GetComponent<AvgEngineInput>().enabled = false;
                     enabled = false;
                 }
             }
         }
+
+        
 
         void OnGUI()
         {
@@ -250,17 +273,20 @@ using UnityEngine;
                 }*/
                 if (words != "")
                 {
-                    //frame
-                    if (speaker == "1")
+                //icon
+                if (speaker==1)
+                    GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
+                //frame
+                if (speaker == 1)
                         GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
-                    else
+               else
                         GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
-                    //nextpage
-                    if (al)
+                //nextpage
+                if (al)
                         GUI.Label(new Rect(xscreen-4f*tile, yscreen-tile, tile, tile), np);
-                //words
-
-                
+                //name
+                GUI.Label(new Rect(3f * tile, yscreen - 2.5f * tile, xscreen - 6 * tile, 2 * tile), speaker_name, gs);
+                //words           
 
                 GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
                 }
@@ -290,5 +316,11 @@ using UnityEngine;
             }
         }
 
+    public void Resume()
+    {
+        wait = false;
+        i++;
     }
+
+}
 //}

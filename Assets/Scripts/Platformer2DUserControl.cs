@@ -264,6 +264,7 @@ using UnityStandardAssets.CrossPlatformInput;
         GetComponent<AvgEngine>().enabled = true;
         GetComponent<AvgEngineInput>().enabled = true;
         enabled = false;
+        //GetComponent<hp_gauge>().enabled = false;
 
         m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         m_Character.Move(0, false, false, true);

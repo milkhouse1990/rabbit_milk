@@ -243,8 +243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
+  icon_milk: {fileID: 0}
   frame: {fileID: 2800000, guid: 4fa4023704bd3944c9fea34e60224327, type: 3}
+  frame1: {fileID: 0}
   np: {fileID: 2800000, guid: 5b52f4494d6851749afa6145d27866c6, type: 3}
+  createid: []
   gs:
     m_Name: 
     m_Normal:
@@ -332,6 +335,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  costume: 0
 --- !u!114 &114843793876793038
 MonoBehaviour:
   m_ObjectHideFlags: 1

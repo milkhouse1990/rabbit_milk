@@ -77,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728741132f32184b8c7ed4fe8769ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: s02
+  scenename: Palace_demo
