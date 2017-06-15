@@ -27,7 +27,12 @@ using UnityEngine;
         private int i = 0;
         private int speaker = -1;
     private string speaker_name = "";
-    public string[] speakerid;
+    /*
+    1 milk
+    2 cola
+    3 hime
+    */
+    private string[] speakerid= { "0","牛奶酱","可乐炭","公主殿下" };
         private string words = "";
         private bool pause = false;
         private bool wait = false;

@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1805006115231654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.509, y: 4.501, z: -1}
+  m_LocalPosition: {x: 1, y: 4.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4461331145343584}
@@ -168,7 +168,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -179,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.8}
+  m_Size: {x: 0.8, y: 2.3}
   m_EdgeRadius: 0.1
 --- !u!95 &95914981852131376
 Animator:
@@ -243,11 +243,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
-  icon_milk: {fileID: 0}
+  icon_milk: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
   frame: {fileID: 2800000, guid: 4fa4023704bd3944c9fea34e60224327, type: 3}
-  frame1: {fileID: 0}
+  frame1: {fileID: 2800000, guid: c135e1165477f5742810167e35c66b47, type: 3}
   np: {fileID: 2800000, guid: 5b52f4494d6851749afa6145d27866c6, type: 3}
-  createid: []
+  createid:
+  - {fileID: 1014857682835502, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}
+  - {fileID: 1693564676118678, guid: 2a7d95bb7a3fe97499c24948ed89b1ea, type: 2}
+  speakerid:
+  - 0
+  - "\u725B\u5976\u9171"
   gs:
     m_Name: 
     m_Normal:
@@ -314,7 +319,7 @@ MonoBehaviour:
     m_FixedWidth: 0
     m_FixedHeight: 0
     m_StretchWidth: 1
-    m_StretchHeight: 0
+    m_StretchHeight: 1
 --- !u!114 &114719667588682844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,7 +340,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
-  costume: 0
+  costume: 5
 --- !u!114 &114843793876793038
 MonoBehaviour:
   m_ObjectHideFlags: 1
