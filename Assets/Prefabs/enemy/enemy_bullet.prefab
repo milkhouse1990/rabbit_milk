@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpmax: 2
-  atk: 4
+  atk: 1
   def: 0
   milk_die: {fileID: 0}
   b_autorecover: 0

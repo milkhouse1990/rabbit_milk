@@ -168,7 +168,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -250,9 +250,6 @@ MonoBehaviour:
   createid:
   - {fileID: 1014857682835502, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}
   - {fileID: 1693564676118678, guid: 2a7d95bb7a3fe97499c24948ed89b1ea, type: 2}
-  speakerid:
-  - 0
-  - "\u725B\u5976\u9171"
   gs:
     m_Name: 
     m_Normal:
@@ -307,7 +304,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 403c54b6a5b63d248a0132f57ac97e9f, type: 3}
+    m_Font: {fileID: 12800000, guid: 31484f0d8586a6e408ad29e5909bcc31, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
     m_Alignment: 0

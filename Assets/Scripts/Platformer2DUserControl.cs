@@ -36,6 +36,9 @@ using UnityStandardAssets.CrossPlatformInput;
         private GameObject teki;
         private bool b_damage;
 
+    //counter
+    private int c_stun=0;
+    private bool b_back_left;
 
     private void Awake()
         {
@@ -70,21 +73,25 @@ using UnityStandardAssets.CrossPlatformInput;
                         
                         if (CrossPlatformInputManager.GetButtonDown("X"))
                     {
-                        int cos = m_Character.GetCostume();
-                        if (cos>0 && cos<6)
+                
+                int cos = m_Character.GetCostume();
+                
+                if (cos>0 && cos<6)
                         {
+                    
                             m_Character.CostumeChange(0);
                             change_finish = true;
                         }
                             
                     }
-                        
+                      
                     if (CrossPlatformInputManager.GetButtonDown("Y"))
                     {
                         m_Character.Shoot();
                     }
                     if (CrossPlatformInputManager.GetButtonDown("A"))
-                        m_Character.CostumeChange(6);
+                        if (m_Character.GetCrouch())
+                            m_Character.CostumeChange(6);
                     if (!m_Jump)
                     {
                         // Read the jump input in Update so button presses aren't missed.
@@ -119,10 +126,9 @@ using UnityStandardAssets.CrossPlatformInput;
                 //damage
                 if (b_damage)
             {
-                if (m_Character.GetInvincible() == 0)
+                
                 {
-                    m_Status.GetDamage(teki.GetComponent<Status>());
-                    m_Character.Backward(teki.transform.position.x - transform.position.x);
+                MeetEnemy(teki);
                 }
             }
             
@@ -133,30 +139,42 @@ using UnityStandardAssets.CrossPlatformInput;
 
         private void FixedUpdate()
         {
-            //if (act)
-            //{
+        if (!change)
+        {         
+            if (c_stun==0)
+            {
+                
                 // Read the inputs.
                 bool crouch = CrossPlatformInputManager.GetButton("down");
                 float h = CrossPlatformInputManager.GetAxis("Horizontal");
-                if (!change)
-                // Pass all parameters to the character control script.
-                    m_Character.Move(h, crouch, m_Jump,b_Jump);
-                m_Jump = false;
+                //move operation
+                m_Character.Move(h, crouch, m_Jump, b_Jump);
+            }                
+            else
+                //forced backward
+                m_Character.Backward(b_back_left);
+            //counter update
+            if (c_stun > 0)
+                c_stun--;
+        }
+        m_Jump = false;
         b_Jump = false;
-           // }
             
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
         //Debug.Log(other.name);
-        switch (other.tag)
+        switch (other.gameObject.tag)
             {
                 case "enemy":
-                    b_damage = true;
                     teki = other.gameObject;
+
+                MeetEnemy(teki);
+                                     
                     
                     Destroy(other.gameObject);
+                //teki = null;
                 break;
                 case "npc":
                     m_waitnpc = true;
@@ -203,8 +221,8 @@ using UnityStandardAssets.CrossPlatformInput;
         switch (other.tag)
         {
             case "enemy":
-                b_damage = false;
-                teki = null;
+                //b_damage = false;
+                //teki = null;
                 break;
         }
         
@@ -255,7 +273,7 @@ using UnityStandardAssets.CrossPlatformInput;
             }
             else if (m_waitnpc)
                 if (m_Character.GetGround())
-                    GUI.Label(new Rect(screenpos.x-32, screenpos.y-64 , 64, 64), waitnpc);         
+                    GUI.Label(new Rect(screenpos.x-24, screenpos.y+32 , 64, 64), waitnpc);         
         }
 
         public void EnterAVGMode(string[] plot)
@@ -269,6 +287,17 @@ using UnityStandardAssets.CrossPlatformInput;
         m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         m_Character.Move(0, false, false, true);
     }
-        
+        public void MeetEnemy(GameObject teki)
+    {
+        if (m_Character.GetInvincible() == 0)
+        {
+            m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(m_Character.GetComponent<Rigidbody2D>().velocity.x,0);
+            c_stun = (int)(60 * 0.25f);
+            b_back_left = (teki.transform.position.x - transform.position.x) > 0 ? true : false;
+            m_Status.GetDamage(teki.GetComponent<Status>());
+            m_Character.SetInvincible(60);
+        }
+            
+    }
     }
 //}

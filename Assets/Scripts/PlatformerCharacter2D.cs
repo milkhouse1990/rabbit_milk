@@ -31,9 +31,17 @@ using UnityEngine;
         private bool double_jump = false;
         private bool m_clothes = false;
 
+        //ability
+        private bool a_doublejump;
+    
         private int invincible = 0;
-        
-        private void Awake()
+    private bool a_jump;
+    void Start()
+    {
+        CostumeChange(costume);
+        m_Anim.SetInteger("Costume", costume);
+    }
+    private void Awake()
         {
             // Setting up references.
             m_GroundCheckL = transform.Find("GroundCheckL");
@@ -51,10 +59,6 @@ using UnityEngine;
         else
             GetComponent<SpriteRenderer>().enabled = false;
 
-    }
-        void Start()
-    {
-        m_Anim.SetInteger("Costume", costume);
     }
 
         private void FixedUpdate()
@@ -110,7 +114,7 @@ using UnityEngine;
         {
             
             
-                if (costume == 5)
+                if (costume == 6)
                     crouch = false;
                 // If crouching, check to see if the character can stand up
                 if (!crouch && m_Anim.GetBool("Crouch"))
@@ -157,6 +161,7 @@ using UnityEngine;
                     }
                 }
                 // If the player should jump...
+                if (a_jump)
                 if (m_Grounded && jump && m_Anim.GetBool("Ground"))
                 {
                     // Add a vertical force to the player.
@@ -164,7 +169,8 @@ using UnityEngine;
                     m_Anim.SetBool("Ground", false);
                     m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 12);
             }
-                else if (!m_Grounded && jump &&!double_jump)
+                else if (a_doublejump)
+                    if (!m_Grounded && jump &&!double_jump)
                 {
                     m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 12);
                     double_jump = true;
@@ -193,21 +199,28 @@ using UnityEngine;
             {
                 case 0:
                     m_MaxSpeed = 10f;
+                    a_jump = true;
+                    a_doublejump = true;
+                //print(a_jump);
+                    break;
+                case 1:
+                    a_jump = true;
+                    a_doublejump = false;
+                    break;
+                case 5:
+                    a_jump = false;
+                    a_doublejump = false;
                     break;
                 case 6:
-                    if (m_Crouch)
-                    {
+                    //if (m_Crouch)
+                    //{
                         m_MaxSpeed = 15f;
                         //speed = 16;
                         //motion = 0;
 
                         Instantiate(clothes, transform.position, transform.rotation);
-                    }
-                    else
-                    {
-                        costume = 0;
-                        m_Anim.SetInteger("Costume", 0);
-                    }
+                    //}
+                 
                     break;
             }
         }
@@ -232,17 +245,27 @@ using UnityEngine;
         {
             return m_Grounded;
         }
-    public void Backward(float deltax)
+    public void Backward(bool left)
     {
-        if (deltax > 0)
-            transform.position=new Vector3(transform.position.x - 2,transform.position.y,0);
+        if (left)
+            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1/0.25f,transform.GetComponent<Rigidbody2D>().velocity.y);
+            //transform.position=new Vector3(transform.position.x - 1/60f/0.5f,transform.position.y,0);
         else
-            transform.position = new Vector3(transform.position.x + 2, transform.position.y, 0);
-        invincible = 60;
+            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(1 / 0.25f, transform.GetComponent<Rigidbody2D>().velocity.y);
+            //transform.position = new Vector3(transform.position.x + 1/60f/0.5f, transform.position.y, 0);
+        
     }
     public int GetInvincible()
     {
         return invincible;
+    }
+    public void SetInvincible(int inv)
+    {
+        invincible = inv;
+    }
+    public bool GetCrouch()
+    {
+        return m_Crouch;
     }
     }
 //}
