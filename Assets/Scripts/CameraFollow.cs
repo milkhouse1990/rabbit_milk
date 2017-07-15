@@ -10,13 +10,25 @@ public class CameraFollow : MonoBehaviour {
     public float[] scroll_door;
     private int i = 0;
     private bool b_moving = false;
-    public Transform target;
+    private Transform target;
     public Transform airwall;
     public Transform warning;
 	// Use this for initialization
 	void Start () {
         left_border = 10;
         right_border = scroll_door[i]-10;
+        target = GameObject.Find("milk").transform;
+        if (target!=null)
+        {
+            while (target.position.x > scroll_door[i])
+            {
+                left_border = scroll_door[i] + 10;
+                i++;
+                right_border = scroll_door[i] - 10;
+                
+            }
+            Instantiate(airwall, new Vector3(scroll_door[i],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
+        }
 	}
 	
 	// Update is called once per frame
@@ -51,7 +63,7 @@ public class CameraFollow : MonoBehaviour {
                     transform.position = new Vector3(transform.position.x, target.position.y, -10);
                 if (i == scroll_door.Length - 1)
                 {
-                    Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
+                    //Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
                     i++;
                 }
                 else

@@ -14,7 +14,7 @@ public class Ready : MonoBehaviour {
         player = Instantiate(milk, new Vector3(0.5f, 3.5f, 0), Quaternion.identity);
         player.name = "milk";
         GameObject camera=GameObject.Find("Main Camera");
-        camera.GetComponent<CameraFollow>().target = player;
+        //camera.GetComponent<CameraFollow>().target = player;
         player.gameObject.GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
         player.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
 		

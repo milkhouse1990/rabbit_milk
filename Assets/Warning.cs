@@ -28,8 +28,8 @@ public class Warning : MonoBehaviour {
             case 2:
                 player.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
                 GameObject bossi=Instantiate(boss, new Vector3(100, 8, 0), Quaternion.identity);
-                Instantiate(bosshp, new Vector3(100, 8, 0), Quaternion.identity);
-                bossi.name = "boss";
+                //Instantiate(bosshp, new Vector3(100, 8, 0), Quaternion.identity);
+                //bossi.name = "boss";
                 GameObject.Destroy(gameObject);
                 index++;
                 break;
