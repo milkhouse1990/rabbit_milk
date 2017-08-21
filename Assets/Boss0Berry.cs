@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss0Berry : MonoBehaviour {
     private int skill = -1;
+    private Counter c_Counter;
     private int timer = 60;
     private int counter2 = -1;
     private int a_arms=1;
@@ -18,6 +19,7 @@ public class Boss0Berry : MonoBehaviour {
 	void Awake()
     {
         T_arms[0] = transform.Find("Arm");
+        c_Counter = GetComponent<Counter>();
     }
 	// Update is called once per frame
 	void Update () {

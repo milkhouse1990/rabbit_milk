@@ -27,7 +27,8 @@ public class CameraFollow : MonoBehaviour {
                 right_border = scroll_door[i] - 10;
                 
             }
-            Instantiate(airwall, new Vector3(scroll_door[i],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
+            if (i>0)
+            Instantiate(airwall, new Vector3(scroll_door[i-1],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
         }
 	}
 	

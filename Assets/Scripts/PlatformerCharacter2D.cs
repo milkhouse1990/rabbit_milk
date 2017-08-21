@@ -36,6 +36,8 @@ using UnityEngine;
     
         private int invincible = 0;
     private bool a_jump;
+
+    private int counter_attack=-1;//FROM attack action start TO attack action end
     void Start()
     {
         CostumeChange(costume);
@@ -97,13 +99,17 @@ using UnityEngine;
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
-            /*
-            colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(100, 100), 0);
-            for (int i=0;i<colliders.Length;i++)
-            {
-                if (colliders[i].gameObject.name == "clothes")
-                    m_clothes = true;
-            }*/
+        /*
+        colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(100, 100), 0);
+        for (int i=0;i<colliders.Length;i++)
+        {
+            if (colliders[i].gameObject.name == "clothes")
+                m_clothes = true;
+        }*/
+        if (counter_attack == 0)
+            m_Anim.SetBool("Attack", false);
+        if (counter_attack >= 0)
+            counter_attack--;
         }
 
 
@@ -229,7 +235,8 @@ using UnityEngine;
         {
             if (costume==0)
             {
-                
+            m_Anim.SetBool("Attack", true);
+            counter_attack = 10;
                     Transform new_bullet = Instantiate(bullet, new Vector3(transform.position.x+transform.localScale.x,transform.position.y,0), transform.rotation);
                     new_bullet.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
                     new_bullet.gameObject.transform.localScale = transform.localScale;
