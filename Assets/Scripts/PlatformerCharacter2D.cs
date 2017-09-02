@@ -5,7 +5,8 @@ using UnityEngine;
 //{
     public class PlatformerCharacter2D : MonoBehaviour
     {
-        public Transform bullet;
+    public Transform milk_die;
+    public Transform bullet;
         public Transform clothes;
 
         [SerializeField] private float m_MaxSpeed = 8f;                    // The fastest the player can travel in the x axis.
@@ -65,6 +66,14 @@ using UnityEngine;
 
         private void FixedUpdate()
         {
+        //check whether dead
+        if (GetComponent<Status>().GetDead())
+
+        {
+            Instantiate(milk_die, transform.position, Quaternion.identity);
+
+            GameObject.Destroy(gameObject);
+        }
         // status update
         if (invincible > 0)
         

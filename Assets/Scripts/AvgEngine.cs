@@ -112,6 +112,7 @@ public class AvgEngine : MonoBehaviour {
                             words += " ";
                             words += para[j];
                         }
+                        //text color
                         if (speaker == 1)
                             words = "<color=magenta>" + words + "</color>";
                         break;

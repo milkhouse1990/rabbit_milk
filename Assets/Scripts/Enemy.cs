@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (GetComponent<Status>().GetDead())
+            GameObject.Destroy(gameObject);
 	}
     void OnTriggerEnter2D(Collider2D other)
     {

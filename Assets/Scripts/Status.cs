@@ -7,10 +7,11 @@ public class Status : MonoBehaviour {
     private int hp;
     public int atk;
     public int def;
-    public Transform milk_die;
 
     public bool b_autorecover = false;
     private int autorecover_timer = 0;
+
+    private bool b_dead = false;
 	// Use this for initialization
 	void Start () {
         hp = hpmax;
@@ -53,15 +54,20 @@ public class Status : MonoBehaviour {
             hp = 0;
         if (hp == 0)
         {
-            if (tag == "Player")
+            b_dead = true;
+            /*if (tag == "Player")
             {
                 Instantiate(milk_die, transform.position, Quaternion.identity);
             }
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject);*/
         }
     }
     public int GetHp()
     {
         return hp;
+    }
+    public bool GetDead()
+    {
+        return b_dead;
     }
 }
