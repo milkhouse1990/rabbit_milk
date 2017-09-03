@@ -1,6 +1,6 @@
 [MENU0001]
-0
-1
+milk酱
+公主
 2
 3
 4
@@ -13,3 +13,7 @@
 [MENU0002]
 A
 B
+[MENU0003]
+Happy Ending
+最速Clear
+地狱Ending

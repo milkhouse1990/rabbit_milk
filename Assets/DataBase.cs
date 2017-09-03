@@ -12,6 +12,7 @@ public class DataBase : MonoBehaviour {
     private int delay = 0;
     private string[] labelname= {"Characters","Enemies","Endings" };
     private string[] item;
+    private string[] binid= {"[MENU0001]","[MENU0002]","[MENU0003]" };
     private bool[][] b_item;
     public Texture2D vector;
     private string[] info;
@@ -22,6 +23,7 @@ public class DataBase : MonoBehaviour {
     private int labels;
     private bool b_info=true;
 
+
     public List list;
     private List page;
 
@@ -30,60 +32,84 @@ public class DataBase : MonoBehaviour {
         labels = labelname.Length;
         item = new string[labels];
 
-        item[1]= "1\n2";
-        item[2] = "Happy Ending\n最速Clear\n地狱Ending";
-
-        //string raw="milk酱\n公主\n233\n4\n5\n6\n7\n8\n9\n10\n11";
-
         b_item = new bool[labels][];
 
-        FileStream fs;
-        string mes;
-
+        //read .txt
         string path = "Text\\mnu.txt";
-
         string[] readins= File.ReadAllLines(path);
+
+        //open .bin
+        path = "Text\\mnu.bin";
+        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+
         string raw = "";
         int k = 0;
+        int len=0;
+        string label = "";
         foreach (string readin in readins)
         {
-            k++;
-            if (readins.Length > k)
+            //k++;
+            if (readin[0] == '[')
+            {
+                if (label!="")
+                    WriteBlock(fs,label,len,raw);
+                label = readin;
+                len = 0;
+                raw = "";
+                continue;
+            }            
+            len += readin.Length+1;
+            //if (readins.Length > k)
                 raw += readin + "\n";
-            else
-                raw += readin;
+            //else
+                //raw += readin;
         }
-            
-        path= "Text\\temp.txt";
-        fs = new FileStream(path, FileMode.OpenOrCreate);
-        StreamWriter sw = new StreamWriter(fs);
-        sw.Write(raw);
-        sw.Flush();
-        sw.Close();
-        fs.Close();
+        WriteBlock(fs, label, len, raw);
 
-        fs = new FileStream(path, FileMode.OpenOrCreate);
-        byte[] bytes = new byte[fs.Length];
-        fs.Read(bytes, 0, (int)fs.Length);
-        
-        path = "Text\\mnu.bin";
-        FileStream fsout = new FileStream(path, FileMode.OpenOrCreate);
-        fsout.Write(bytes, 0, (int)bytes.Length);
-        fsout.Flush();
-        fsout.Close();
+        fs.Flush();
         fs.Close();
 
         if (File.Exists(path))
         {
             fs = new FileStream(path, FileMode.Open);
-            byte[] bytes2 = new byte[fs.Length];
-            fs.Read(bytes2, 0, (int)fs.Length);
-            fs.Close();
+            byte[] labelr = new byte[10];
+            byte[] lenr = new byte[4];
             Decoder d = Encoding.UTF8.GetDecoder();
-            char[] chars=new char[bytes2.Length];
-            d.GetChars(bytes2, 0, bytes2.Length, chars, 0);
-            Debug.Log(chars[0]);
-            item[0] = new string(chars);
+            do
+            {
+                
+                //read head
+                fs.Read(labelr, 0, labelr.Length);
+                fs.Read(lenr, 0, lenr.Length);
+                //decode label
+                
+                char[] label_chars = new char[labelr.Length];
+                d.GetChars(labelr, 0, labelr.Length, label_chars, 0);
+                string label_str = new string(label_chars);
+                //decode length
+                int len_int = bytesToInt(lenr, 0);
+                //check label
+                if (label_str == binid[k])
+                {
+                    byte[] bytes2 = new byte[len_int - 1];
+                    fs.Read(bytes2, 0, (int)bytes2.Length);
+                    char[] content = new char[bytes2.Length];
+                    d.GetChars(bytes2, 0, bytes2.Length, content, 0);
+                    item[k] = new string(content);
+                    k++;
+                    fs.Seek(1, SeekOrigin.Current);
+                }
+                else
+                {
+                    fs.Seek(len_int, SeekOrigin.Current);
+                    if (fs.Position == fs.Length - 1)
+                        Debug.Log("Wrong BinID.");
+
+                }
+            }
+            while (k<labels);
+
+            fs.Close();          
 
         }
         else
@@ -97,7 +123,7 @@ public class DataBase : MonoBehaviour {
         {
             //File.Create(path);
             fs = new FileStream(path, FileMode.Create);
-            sw = new StreamWriter(fs);
+            StreamWriter sw = new StreamWriter(fs);
             for (int i = 0; i < labels; i++)
             {
                 sw.Write("0");
@@ -164,6 +190,22 @@ public class DataBase : MonoBehaviour {
             page.InitText(item[labelpos],info[labelpos]);
         }
     }
+    private void WriteBlock(FileStream fs,string label,int len,string raw)
+    {
+        //encode
+        Encoder e = Encoding.UTF8.GetEncoder();
+        byte[] bytes = new byte[14 + e.GetByteCount(raw.ToCharArray(),0,raw.Length,true)];
+        //Debug.Log(raw.Length);
+
+        e.GetBytes(label.ToCharArray(), 0, label.Length, bytes, 0, true);
+        byte[] bytes_temp = intToBytes(len);
+        for (int i = 10; i < 14; i++)
+            bytes[i] = bytes_temp[i - 10];
+        e.GetBytes(raw.ToCharArray(), 0, raw.Length, bytes, 14, true);
+        //write
+        fs.Write(bytes, 0, (int)bytes.Length);
+    }
+    
 	
 	// Update is called once per frame
 	void Update () {
@@ -206,5 +248,24 @@ public class DataBase : MonoBehaviour {
         //help
         GUI.Label(new Rect(1280 - 400, 100, 400, 20), dis);
 
+    }
+
+    public static byte[] intToBytes(int value)
+    {
+        byte[] src = new byte[4];
+        src[0] = (byte)((value >> 24) & 0xFF);
+        src[1] = (byte)((value >> 16) & 0xFF);
+        src[2] = (byte)((value >> 8) & 0xFF);
+        src[3] = (byte)(value & 0xFF);
+        return src;
+    }
+    public static int bytesToInt(byte[] src, int offset)
+    {
+        int value;
+        value = (int)(((src[offset] & 0xFF) << 24)
+                | ((src[offset + 1] & 0xFF) << 16)
+                | ((src[offset + 2] & 0xFF) << 8)
+                | (src[offset + 3] & 0xFF));
+        return value;
     }
 }
