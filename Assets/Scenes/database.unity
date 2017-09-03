@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tachie: []
   vector: {fileID: 2800000, guid: af6eb9f7505ec3045a02258aa5c66a73, type: 3}
-  List: {fileID: 1001903814473092, guid: 5e10936b3803d5c4e8cc48de68bb6d4a, type: 2}
+  list: {fileID: 114616137399734274, guid: 5e10936b3803d5c4e8cc48de68bb6d4a, type: 2}
 --- !u!4 &660983320
 Transform:
   m_ObjectHideFlags: 0
