@@ -14,15 +14,18 @@ public class List : MonoBehaviour {
     private Texture2D vector;
     private bool b_info=true;
 
-    public Rect pos;
+    private Rect pos;
+    private Rect info_pos;
     public int vspace;
     
 
     private int itemperscr = 10;
     private int dispos = 0;
 
-    public void Init(Texture2D p_vector)
+    public void Init(Rect p_pos, Rect p_info_pos, Texture2D p_vector)
     {
+        pos = p_pos;
+        info_pos = p_info_pos;
         vector = p_vector;
     }
     public void InitText(string p_pre_items, string p_pre_infos)
@@ -30,8 +33,16 @@ public class List : MonoBehaviour {
         pre_items = p_pre_items;
         items = pre_items.Split('\n');
 
-        pre_infos = p_pre_infos;
-        infos = pre_infos.Split('\n');
+        infos = new string[items.Length];
+        for (int i=0;i<items.Length;i++)
+        {
+            int point = p_pre_infos.LastIndexOf("\n\n");
+            infos[items.Length - 1 - i] = p_pre_infos.Substring(point + 2);
+            p_pre_infos = p_pre_infos.Substring(0, point);
+            Debug.Log(infos[items.Length - 1 - i]);
+        }
+        //pre_infos = p_pre_infos;
+        //infos = pre_infos.Split('\n');
     }
     // Use this for initialization
     void Start()
@@ -67,7 +78,8 @@ public class List : MonoBehaviour {
                 if (item == -1)
                 {
                     item = items.Length - 1;
-                    dispos = item - itemperscr + 1;
+                    if ((dispos = item - itemperscr + 1)<0)
+                        dispos=0;
                 }
             }
         }
@@ -100,9 +112,9 @@ public class List : MonoBehaviour {
         if (b_info)
         {
             dis = "<color=black>" + infos[item] + "</color>";
-            GUI.Label(new Rect(640, 360, 640, 360), dis);
+            GUI.Label(info_pos, dis);
         }
-    }
+    }   
 
     public int GetFocus()
     {

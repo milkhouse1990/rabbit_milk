@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 //namespace UnityStandardAssets._2D
 //{
@@ -36,6 +37,8 @@ using UnityStandardAssets.CrossPlatformInput;
         private GameObject teki;
         private bool b_damage;
 
+    private bool pause=false;
+
     //counter
     private int c_stun=0;
     private bool b_back_left;
@@ -48,92 +51,103 @@ using UnityStandardAssets.CrossPlatformInput;
         
 
         private void Update()
-        {              
+        {
+        if (pause)
+            Time.timeScale = 0;
+        else
+        {
             if (change)
-                {
-                    Time.timeScale = 0;
-                    
-                    if (CrossPlatformInputManager.GetButtonDown("up"))
-                        {
-                            m_Character.CostumeChange(1);
-                            change_finish = true;
-                        }
-                }
-                else
-                {
-                    Time.timeScale = 1;
-                    if (CrossPlatformInputManager.GetButtonDown("up"))
-                    {
-                        if (m_waitnpc)
-                        {
-                            EnterAVGMode(npcplot);
-                            
-                         }
-                    }
-                        
-                        if (CrossPlatformInputManager.GetButtonDown("X"))
-                    {
-                
-                int cos = m_Character.GetCostume();
-                
-                if (cos>0 && cos<6)
-                        {
-                    
-                            m_Character.CostumeChange(0);
-                            change_finish = true;
-                        }
-                            
-                    }
-                      
-                    if (CrossPlatformInputManager.GetButtonDown("Y"))
-                    {
-                        m_Character.Shoot();
-                    }
-                    if (CrossPlatformInputManager.GetButtonDown("A"))
-                        if (m_Character.GetCrouch())
-                            m_Character.CostumeChange(6);
-                    if (!m_Jump)
-                    {
-                        // Read the jump input in Update so button presses aren't missed.
-                        m_Jump = CrossPlatformInputManager.GetButtonDown("B");
-                    }
-            if (!b_Jump)
-                b_Jump = CrossPlatformInputManager.GetButtonUp("B");
-                }
-                //changing check
-                if (CrossPlatformInputManager.GetButtonDown("X"))
-                    guioffset = 0;
-                if (CrossPlatformInputManager.GetButton("X"))
-                {
-                    if (CrossPlatformInputManager.GetButton("down"))
-                        change_finish = true;
-                    else if (change_finish)
-                        change = false;
-                    else
-                    {
-                        change = true;
-                        guialarm = 0;
-
-                    }
-
-                }
-                else
-                {
-                    change = false;
-                    change_finish = false;
-                }
-
-                //damage
-                if (b_damage)
             {
-                
+                Time.timeScale = 0;
+
+                if (CrossPlatformInputManager.GetButtonDown("up"))
                 {
-                MeetEnemy(teki);
+                    m_Character.CostumeChange(1);
+                    change_finish = true;
                 }
             }
-            
-            
+            else
+            {
+                Time.timeScale = 1;
+                if (CrossPlatformInputManager.GetButtonDown("up"))
+                {
+                    if (m_waitnpc)
+                    {
+                        EnterAVGMode(npcplot);
 
+                    }
+                }
+
+                if (CrossPlatformInputManager.GetButtonDown("X"))
+                {
+
+                    int cos = m_Character.GetCostume();
+
+                    if (cos > 0 && cos < 6)
+                    {
+
+                        m_Character.CostumeChange(0);
+                        change_finish = true;
+                    }
+
+                }
+
+                if (CrossPlatformInputManager.GetButtonDown("Y"))
+                {
+                    m_Character.Shoot();
+                }
+                if (CrossPlatformInputManager.GetButtonDown("A"))
+                    if (m_Character.GetCrouch())
+                        m_Character.CostumeChange(6);
+                if (!m_Jump)
+                {
+                    // Read the jump input in Update so button presses aren't missed.
+                    m_Jump = CrossPlatformInputManager.GetButtonDown("B");
+                }
+                if (CrossPlatformInputManager.GetButtonDown("SELECT"))
+                    SceneManager.LoadScene("Map");
+                if (CrossPlatformInputManager.GetButtonDown("START"))
+                {
+                    pause=true;
+                    GetComponent<PauseMenu>().enabled = true;
+                }
+                if (!b_Jump)
+                    b_Jump = CrossPlatformInputManager.GetButtonUp("B");
+            }
+            //changing check
+            if (CrossPlatformInputManager.GetButtonDown("X"))
+                guioffset = 0;
+            if (CrossPlatformInputManager.GetButton("X"))
+            {
+                if (CrossPlatformInputManager.GetButton("down"))
+                    change_finish = true;
+                else if (change_finish)
+                    change = false;
+                else
+                {
+                    change = true;
+                    guialarm = 0;
+
+                }
+
+            }
+            else
+            {
+                change = false;
+                change_finish = false;
+            }
+
+            //damage
+            if (b_damage)
+            {
+
+                {
+                    MeetEnemy(teki);
+                }
+            }
+
+
+        }
        }
 
 
@@ -298,6 +312,10 @@ using UnityStandardAssets.CrossPlatformInput;
             m_Character.SetInvincible(60);
         }
             
+    }
+    public void SetPause(bool p_pause)
+    {
+        pause = p_pause;
     }
     }
 //}

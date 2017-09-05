@@ -60,12 +60,16 @@
      <Compile Include="Assets\EndingFastest.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\List.cs" />
+     <Compile Include="Assets\MakeBin.cs" />
+     <Compile Include="Assets\MapMove.cs" />
      <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\NextScene.cs" />
      <Compile Include="Assets\Npc.cs" />
      <Compile Include="Assets\Palace.cs" />
+     <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\Plot.cs" />
+     <Compile Include="Assets\ReadList.cs" />
      <Compile Include="Assets\Ready.cs" />
      <Compile Include="Assets\RealtimeAvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
@@ -80,6 +84,7 @@
      <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\test.cs" />
+     <Compile Include="Assets\TitleMenu.cs" />
      <Compile Include="Assets\Warning.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
