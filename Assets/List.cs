@@ -17,6 +17,7 @@ public class List : MonoBehaviour {
     private Rect pos;
     private Rect info_pos;
     public int vspace;
+    public Texture2D bg;
     
 
     private int itemperscr = 10;
@@ -90,12 +91,15 @@ public class List : MonoBehaviour {
         if (delay > 0)
             delay--;
     }
-    void OnGUI()
+
+    public void Display()
     {
+        //items
+
+        //background
+        GUI.DrawTextureWithTexCoords(new Rect(pos.x - 20, pos.y - 20, pos.width + 40, pos.height * itemperscr + 40), bg, new Rect(1, 1, 1, 1));
         //text
         string dis = "";
-        //for (int i = 0; i < m_item; i++)
-        //GUI.Label(pos, list_text);
         for (int i = dispos; i < Mathf.Min(dispos + itemperscr, items.Length); i++)
         {
             if (i == item)
@@ -104,17 +108,20 @@ public class List : MonoBehaviour {
                 dis = "<color=black>" + items[i] + "</color>";
             GUI.Label(new Rect(pos.x, pos.y + (i - dispos) * vspace, pos.width, pos.width), dis);
         }
-
         //vector
-        GUI.Label(new Rect(pos.x-20, pos.y + (item - dispos) * vspace, 20, 20), vector);
+        GUI.Label(new Rect(pos.x - 20, pos.y + (item - dispos) * vspace, 20, 20), vector);
 
         //info
+
+        //background
+        GUI.DrawTextureWithTexCoords(new Rect(info_pos.x - 20, info_pos.y - 20, info_pos.width + 40, info_pos.height + 40), bg, new Rect(1, 1, 1, 1));
+
         if (b_info)
         {
             dis = "<color=black>" + infos[item] + "</color>";
             GUI.Label(info_pos, dis);
         }
-    }   
+    }
 
     public int GetFocus()
     {
