@@ -54,6 +54,7 @@ public class TitleMenu : MonoBehaviour {
     void OnGUI()
     {
         GUI.Label(title_pos, "兔耳魔女牛奶酱 Demo 0.1");
+        page.Display();
     }
 
 

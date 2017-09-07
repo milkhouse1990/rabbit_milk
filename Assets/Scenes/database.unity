@@ -166,7 +166,7 @@ Prefab:
     - target: {fileID: 114214796871645656, guid: c7f5b5fa4f2d7e24a8fe290e5994cafe,
         type: 2}
       propertyPath: info_pos.height
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114214796871645656, guid: c7f5b5fa4f2d7e24a8fe290e5994cafe,
         type: 2}

@@ -70,4 +70,10 @@ public class Status : MonoBehaviour {
     {
         return b_dead;
     }
+    public void SetHPMax(int hpm)
+    {
+        hpmax = hpm;
+        if (hp > hpmax)
+            hp = hpmax;
+    }
 }

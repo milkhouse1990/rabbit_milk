@@ -51,10 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18793048626ac324faa5d706bb6fa0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos:
-    serializedVersion: 2
-    x: 100
-    y: 100
-    width: 640
-    height: 20
   vspace: 20
+  bg: {fileID: 2800000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}

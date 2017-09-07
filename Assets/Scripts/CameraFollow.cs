@@ -7,7 +7,8 @@ public class CameraFollow : MonoBehaviour {
     private float right_border;
     public float top_border;
     public float bottom_border;
-    public float[] scroll_door;
+    private int[] scroll_door;
+    private int l_door;
     private int i = 0;
     private bool b_moving = false;
     private Transform target;
@@ -15,6 +16,20 @@ public class CameraFollow : MonoBehaviour {
     public Transform warning;
 	// Use this for initialization
 	void Start () {
+        GameObject[] invisible_doorxs=GameObject.FindGameObjectsWithTag("InvisibleDoorx");
+        l_door = invisible_doorxs.Length;
+        scroll_door = new int[l_door];
+        foreach (GameObject invisible in invisible_doorxs)
+            scroll_door[i++] = (int)invisible.transform.position.x;
+        for (i=0;i<l_door;i++)
+            for (int j=i;j<l_door;j++)
+                if (scroll_door[i]>scroll_door[j])
+                {
+                    int temp = scroll_door[j];
+                    scroll_door[j] = scroll_door[i];
+                    scroll_door[i] = temp;
+                }
+        i = 0;
         left_border = 10;
         right_border = scroll_door[i]-10;
         target = GameObject.Find("milk").transform;
@@ -30,6 +45,7 @@ public class CameraFollow : MonoBehaviour {
             if (i>0)
             Instantiate(airwall, new Vector3(scroll_door[i-1],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
         }
+        Debug.Log(i);
 	}
 	
 	// Update is called once per frame
@@ -86,7 +102,7 @@ public class CameraFollow : MonoBehaviour {
                 }
             }     
         }
-        
+        Debug.Log(right_border);
      
         
 

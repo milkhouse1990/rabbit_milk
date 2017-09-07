@@ -174,7 +174,7 @@ public class DataBase : MonoBehaviour {
         //help
         GUI.Label(new Rect(640, 100, 400, 20), dis);
 
-        //GUI.Label(new Rect(0, 0, 400, 720), debug);
+        page.Display();
 
     }
 
