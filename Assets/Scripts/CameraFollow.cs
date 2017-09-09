@@ -45,7 +45,6 @@ public class CameraFollow : MonoBehaviour {
             if (i>0)
             Instantiate(airwall, new Vector3(scroll_door[i-1],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
         }
-        Debug.Log(i);
 	}
 	
 	// Update is called once per frame
@@ -102,7 +101,6 @@ public class CameraFollow : MonoBehaviour {
                 }
             }     
         }
-        Debug.Log(right_border);
      
         
 

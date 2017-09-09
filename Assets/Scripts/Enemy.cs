@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
         {
             case "weapon":
                 GetComponent<Status>().GetDamage(other.gameObject.GetComponent<Status>());
-                Destroy(other.gameObject,0.1f);
+                other.GetComponent<Bullet>().Init();
                 break;
             
         }

@@ -1,13 +1,13 @@
 @MENU0000
 New Game
-Load Data
+Highway
 Library
 Option
 Quit
 
 从头开始游戏
 
-读取存档开始游戏（不可用）
+高速公路试做
 
 查看游戏的各种资料
 

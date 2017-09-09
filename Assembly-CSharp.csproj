@@ -54,6 +54,7 @@
      <Compile Include="Assets\Boss0Berry.cs" />
      <Compile Include="Assets\Boss0BerryArm.cs" />
      <Compile Include="Assets\BossHPGauge.cs" />
+     <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\CameraForcedRoll.cs" />
      <Compile Include="Assets\Counter.cs" />
      <Compile Include="Assets\DataBase.cs" />

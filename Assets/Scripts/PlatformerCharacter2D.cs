@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-//namespace UnityStandardAssets._2D
-//{
     public class PlatformerCharacter2D : MonoBehaviour
     {
     public Transform milk_die;
@@ -28,6 +26,8 @@ using UnityEngine;
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+    private Transform[] bullets = new Transform[3];
+
         public int costume;//0 majo 1 maid 2 idol 3 mermaid 4 hime 5 dress 6 bunny 7 bathtowel
         private bool double_jump = false;
         private bool m_clothes = false;
@@ -43,6 +43,9 @@ using UnityEngine;
     {
         CostumeChange(costume);
         m_Anim.SetInteger("Costume", costume);
+        for (int i = 0; i < 3; i++)
+            bullets[i] = Instantiate(bullet, Vector3.zero,Quaternion.identity);
+
     }
     private void Awake()
         {
@@ -51,7 +54,8 @@ using UnityEngine;
             m_GroundCheckR = transform.Find("GroundCheckR");
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
-            m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        
         }
 
 
@@ -240,15 +244,23 @@ using UnityEngine;
             }
         }
 
-        public void Shoot()
+    public void Shoot()
+    {
+        if (costume == 0)
         {
-            if (costume==0)
-            {
             m_Anim.SetBool("Attack", true);
             counter_attack = 10;
-                    Transform new_bullet = Instantiate(bullet, new Vector3(transform.position.x+transform.localScale.x,transform.position.y,0), transform.rotation);
-                    new_bullet.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
-                    new_bullet.gameObject.transform.localScale = transform.localScale;
+
+            for (int i = 0; i < 3; i++)
+                if (!bullets[i].GetComponent<Bullet>().GetWorking())
+                {
+                    bullets[i].GetComponent<Bullet>().SetWorking(true);
+                    bullets[i].position= new Vector3(transform.position.x + transform.localScale.x, transform.position.y, 0);
+                    bullets[i].GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
+                    bullets[i].localScale = transform.localScale;
+                    break;
+                }
+                    
                 
             }
         }
@@ -264,8 +276,9 @@ using UnityEngine;
     public void Backward(bool left)
     {
         if (left)
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1/0.25f,transform.GetComponent<Rigidbody2D>().velocity.y);
-            //transform.position=new Vector3(transform.position.x - 1/60f/0.5f,transform.position.y,0);
+            transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
+        //transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1/0.25f,transform.GetComponent<Rigidbody2D>().velocity.y);
+        //transform.position=new Vector3(transform.position.x - 1/60f/0.5f,transform.position.y,0);
         else
             transform.GetComponent<Rigidbody2D>().velocity = new Vector2(1 / 0.25f, transform.GetComponent<Rigidbody2D>().velocity.y);
             //transform.position = new Vector3(transform.position.x + 1/60f/0.5f, transform.position.y, 0);
