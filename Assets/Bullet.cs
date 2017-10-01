@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
     public void Init()
     {
         working = false;
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(-99,-99,-99);
         GetComponent<Rigidbody2D>().velocity=Vector3.zero;
     }
 	// Use this for initialization

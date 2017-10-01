@@ -43,8 +43,8 @@ using UnityEngine;
     {
         CostumeChange(costume);
         m_Anim.SetInteger("Costume", costume);
-        for (int i = 0; i < 3; i++)
-            bullets[i] = Instantiate(bullet, Vector3.zero,Quaternion.identity);
+        //for (int i = 0; i < 3; i++)
+        //    bullets[i] = Instantiate(bullet, new Vector3(-99,-99,-99), Quaternion.identity);
 
     }
     private void Awake()

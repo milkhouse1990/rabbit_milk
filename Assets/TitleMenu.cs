@@ -39,6 +39,9 @@ public class TitleMenu : MonoBehaviour {
                 case 0:
                     SceneManager.LoadScene("Party_demo");
                     break;
+                case 1:
+                    SceneManager.LoadScene("Highway_demo");
+                    break;
                 case 2:
                     SceneManager.LoadScene("database");
                     break;
@@ -53,7 +56,7 @@ public class TitleMenu : MonoBehaviour {
     }
     void OnGUI()
     {
-        GUI.Label(title_pos, "兔耳魔女牛奶酱 Demo 0.1");
+        GUI.Label(title_pos, "兔耳魔女牛奶酱 Ver. 201709");
         page.Display();
     }
 

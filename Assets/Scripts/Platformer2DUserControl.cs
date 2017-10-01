@@ -160,7 +160,12 @@ using UnityEngine.SceneManagement;
                 
                 // Read the inputs.
                 bool crouch = CrossPlatformInputManager.GetButton("down");
-                float h = CrossPlatformInputManager.GetAxis("Horizontal");
+                //float h = CrossPlatformInputManager.GetAxis("Horizontal");
+                float h = 0;
+                if (CrossPlatformInputManager.GetButton("left"))
+                    h--;
+                if (CrossPlatformInputManager.GetButton("right"))
+                    h++;
                 //move operation
                 m_Character.Move(h, crouch, m_Jump, b_Jump);
             }                

@@ -16,7 +16,12 @@ public class MovingLeft : MonoBehaviour {
     void FixedUpdate()
     {
         transform.position -= new Vector3(speed, 0, 0);
-        if (transform.position.x < -10)
-            transform.position += new Vector3(40f, 0, 0);
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        if (pos.x < -640)
+        {
+            pos += new Vector3(2 * 1280, 0,0);
+            transform.position = Camera.main.ScreenToWorldPoint(pos);
+        }
+            
     }
 }

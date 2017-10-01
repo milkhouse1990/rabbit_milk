@@ -57,6 +57,7 @@
      <Compile Include="Assets\BossHPGauge.cs" />
      <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\CameraForcedRoll.cs" />
+     <Compile Include="Assets\Car.cs" />
      <Compile Include="Assets\Counter.cs" />
      <Compile Include="Assets\DataBase.cs" />
      <Compile Include="Assets\EndingFastest.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\ReadList.cs" />
      <Compile Include="Assets\Ready.cs" />
      <Compile Include="Assets\RealtimeAvgEngine.cs" />
+     <Compile Include="Assets\RoadSign.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngineInput.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
