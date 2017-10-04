@@ -796,8 +796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776e1a564b4a40848a8142aa124c263a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase: 5
-  ammunition: 999
+  phase: 1
+  ammunition: 5
   bomb: {fileID: 1212036936940590, guid: 4c3e14190921be34b9bbf3a76c249191, type: 2}
   aim: {fileID: 1249865253617056, guid: d4d5e0e365026c9458b09a005fbf369c, type: 2}
   missile: {fileID: 1499971011749556, guid: 7220f4c0338f7764cb43961f9366b4d7, type: 2}

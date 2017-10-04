@@ -37,7 +37,7 @@ public class TitleMenu : MonoBehaviour {
             switch (page.GetFocus())
             {
                 case 0:
-                    SceneManager.LoadScene("Party_demo");
+                    SceneManager.LoadScene("Palace_demo");
                     break;
                 case 1:
                     SceneManager.LoadScene("Highway_demo");

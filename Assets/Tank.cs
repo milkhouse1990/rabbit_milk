@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tank : MonoBehaviour {
     private int counter = 60*2;
@@ -102,7 +103,7 @@ public class Tank : MonoBehaviour {
                     else
                     {
                         counter = 60;
-                        ammunition = 180;
+                        ammunition = 20;
                         phase++;
                     }
                     break;
@@ -132,7 +133,7 @@ public class Tank : MonoBehaviour {
                     else
                     {
                         counter = 60;
-                        ammunition = 100;
+                        ammunition = 3;
                         phase++;
                         subphase = 0;
                     }
@@ -171,7 +172,7 @@ public class Tank : MonoBehaviour {
                     else
                     {
                         counter = 60;
-                        ammunition = 100;
+                        ammunition = 3;
                         phase++;
                         //subphase = 0;
                     }
@@ -187,7 +188,8 @@ public class Tank : MonoBehaviour {
                     else
                     {
                         counter = 60*1000;
-                        ammunition = 20;
+                        ammunition = 3;
+                        SceneManager.LoadScene("Title");
                         phase++;
                     }
                     break;

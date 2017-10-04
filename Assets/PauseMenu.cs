@@ -78,6 +78,53 @@ public class PauseMenu : MonoBehaviour {
             GUI.Label(new Rect(list_pos.x-60, list_pos.y + 20*equip, list_pos.width, list_pos.height), "<color=red>装备中</color>");
         GUI.Label(new Rect(list_pos.x-100, list_pos.y + 20*feed, list_pos.width, list_pos.height), "<color=red>培养中</color>");
 
+        for (int i=0;i<2;i++)
+        {
+            string lv_info = "";
+            int lva = lvs[i * 2];
+            int lvb = lvs[i * 2 + 1];
+            //effect A
+            if (lva<0)
+            {
+                lv_info = "<color=red><";
+                for (int j = 0; j > lva; j--)
+                    lv_info += "-";
+                lv_info += "</color>";
+            }
+            else
+            {
+                lv_info = "<color=black>";
+                for (int j = 0; j < lvs[i * 2]; j++)
+                    lv_info += "-";
+                lv_info += ">";
+                lv_info += "</color>";
+            }
+            //empty
+            lv_info += "<color=black>";
+            for (int j = 0; j < 10 - (lva>0?lva:0) - (lvb>0?lvb:0);j++)
+                lv_info += "-";
+            lv_info += "</color>";
+            //effect B
+            if (lvb<0)
+            {
+                lv_info += "<color=red>";
+                for (int j = 0; j > lvb; j--)
+                    lv_info += "-";
+                lv_info += "></color>";
+            }
+            else
+            {
+                lv_info += "<color=black>";
+                lv_info += "<";
+                for (int j = 0; j < lvb; j++)
+                    lv_info += "-";
+                lv_info += "</color>";
+            }
+            
+            GUI.Label(new Rect(list_pos.x + 100+(lva<0?lva*4:0), list_pos.y + 20 * i, list_pos.width, list_pos.height), "<color=black>"+lv_info+"</color>");
+        }
+        
+
         
     }
 }

@@ -26,6 +26,8 @@ using UnityEngine;
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+    private BoxCollider2D c_BoxCollider2D;
+
     private Transform[] bullets = new Transform[3];
 
         public int costume;//0 majo 1 maid 2 idol 3 mermaid 4 hime 5 dress 6 bunny 7 bathtowel
@@ -43,8 +45,8 @@ using UnityEngine;
     {
         CostumeChange(costume);
         m_Anim.SetInteger("Costume", costume);
-        //for (int i = 0; i < 3; i++)
-        //    bullets[i] = Instantiate(bullet, new Vector3(-99,-99,-99), Quaternion.identity);
+        for (int i = 0; i < 3; i++)
+            bullets[i] = Instantiate(bullet, new Vector3(-99,-99,-99), Quaternion.identity);
 
     }
     private void Awake()
@@ -55,6 +57,7 @@ using UnityEngine;
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        c_BoxCollider2D = transform.Find("milkCollider").GetComponent<BoxCollider2D>();
         
         }
 
@@ -65,7 +68,6 @@ using UnityEngine;
             GetComponent<SpriteRenderer>().enabled = true;
         else
             GetComponent<SpriteRenderer>().enabled = false;
-
     }
 
         private void FixedUpdate()
@@ -94,13 +96,13 @@ using UnityEngine;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheckL.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject != gameObject)
+                if (colliders[i].name != "milkCollider")
                     m_GroundedL = true;       
             }
             colliders = Physics2D.OverlapCircleAll(m_GroundCheckR.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject != gameObject)
+                if (colliders[i].name != "milkCollider")
                     m_GroundedR = true;
              }
             if (m_GroundedL||m_GroundedR)
@@ -234,15 +236,33 @@ using UnityEngine;
                     //if (m_Crouch)
                     //{
                         m_MaxSpeed = 15f;
-                        //speed = 16;
-                        //motion = 0;
+                //speed = 16;
+                //motion = 0;
+                a_jump = true;
+                a_doublejump = true;
 
-                        Instantiate(clothes, transform.position, transform.rotation);
+                Instantiate(clothes, transform.position, transform.rotation);
                     //}
                  
                     break;
             }
+        //collider set
+        float pic_height,col_height,rad=0.1f;
+        if (cos==6)
+        {
+            pic_height = 0.5f;col_height = 0.5f;
         }
+        else
+        {
+            pic_height = 3f;col_height = 2.5f;
+        }
+
+            c_BoxCollider2D.offset = new Vector2(0, (col_height-pic_height)/2);
+            c_BoxCollider2D.size = new Vector2(0.8f, col_height-2*rad);
+            m_GroundCheckL.transform.localPosition = new Vector3(-0.4f, -pic_height/2, 0);
+            m_GroundCheckR.transform.localPosition = new Vector3(0.4f, -pic_height/2, 0);
+
+    }
 
     public void Shoot()
     {

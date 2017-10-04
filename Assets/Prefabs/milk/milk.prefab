@@ -41,6 +41,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1666143638836138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4854188959776716}
+  - component: {fileID: 61194725967428504}
+  m_Layer: 0
+  m_Name: milkCollider
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1711403355406144
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,13 +83,15 @@ GameObject:
   - component: {fileID: 212694698307451460}
   - component: {fileID: 95914981852131376}
   - component: {fileID: 50476291895377780}
-  - component: {fileID: 61115712693845598}
   - component: {fileID: 114719667588682844}
   - component: {fileID: 114034201724344886}
   - component: {fileID: 114695438717195234}
   - component: {fileID: 114861144662817178}
   - component: {fileID: 114604722654406774}
   - component: {fileID: 114843793876793038}
+  - component: {fileID: 114535931978814806}
+  - component: {fileID: 114316937485195296}
+  - component: {fileID: 114463663952651958}
   m_Layer: 0
   m_Name: milk
   m_TagString: Player
@@ -120,6 +138,19 @@ Transform:
   m_Father: {fileID: 4858534111205726}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4854188959776716
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1666143638836138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4858534111205726}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4858534111205726
 Transform:
   m_ObjectHideFlags: 1
@@ -127,12 +158,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1805006115231654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 88.95, y: 3.71, z: -1}
+  m_LocalPosition: {x: 43.7, y: 12.2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4461331145343584}
   - {fileID: 4831108022935078}
   - {fileID: 4807950549793360}
+  - {fileID: 4854188959776716}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154,14 +186,14 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61115712693845598
+--- !u!61 &61194725967428504
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1805006115231654}
+  m_GameObject: {fileID: 1666143638836138}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -171,13 +203,13 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 3}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.8, y: 2.3}
   m_EdgeRadius: 0.1
@@ -215,6 +247,60 @@ MonoBehaviour:
   change_right: {fileID: 2800000, guid: 97ff8132557025f4ebbcd1121b25c396, type: 3}
   waitnpc: {fileID: 2800000, guid: df1635ab990dfce468d2b010ced7af3f, type: 3}
   warning: {fileID: 4290131265494466, guid: 150aa8599b4fe1d4881778e84e345010, type: 2}
+--- !u!114 &114316937485195296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805006115231654}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3046e5da1ae0954191dfbd1f646421e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  list: {fileID: 114616137399734274, guid: 5e10936b3803d5c4e8cc48de68bb6d4a, type: 2}
+  vector: {fileID: 2800000, guid: af6eb9f7505ec3045a02258aa5c66a73, type: 3}
+  list_pos:
+    serializedVersion: 2
+    x: 320
+    y: 200
+    width: 320
+    height: 20
+  info_pos:
+    serializedVersion: 2
+    x: 640
+    y: 500
+    width: 320
+    height: 40
+  title_pos:
+    serializedVersion: 2
+    x: 600
+    y: 50
+    width: 100
+    height: 20
+  bg: {fileID: 2800000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}
+--- !u!114 &114463663952651958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805006115231654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7c2624d2c847f4bba5f842fbdfa58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114535931978814806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805006115231654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7cbf8f426d3b34bb23b485df02c587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114604722654406774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,7 +315,6 @@ MonoBehaviour:
   hpmax: 16
   atk: 1
   def: 0
-  milk_die: {fileID: 4608305040964738, guid: c5b8912cf74db4d4ab91c5690e32c971, type: 2}
   b_autorecover: 0
 --- !u!114 &114695438717195234
 MonoBehaviour:
@@ -328,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd81680f9b428204f9c199444c4279d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  milk_die: {fileID: 4608305040964738, guid: c5b8912cf74db4d4ab91c5690e32c971, type: 2}
   bullet: {fileID: 4528707008014580, guid: ad76d227f745dc1488906766ddae8815, type: 2}
   clothes: {fileID: 4885190307933132, guid: c02503e2eb4e25949977b64e86c94390, type: 2}
   m_MaxSpeed: 10
@@ -392,7 +478,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b35378109fcdb8447a7587137e826f70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09258dfeeb9169b429f12ef012d5403b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -400,3 +486,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

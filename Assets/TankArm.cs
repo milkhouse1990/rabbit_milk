@@ -13,7 +13,7 @@ public class TankArm : MonoBehaviour {
 	void Update () {
 		
 	}
-    void OnCollisionEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         //if (other.tag=="Player")
 

@@ -1,11 +1,11 @@
 @MENU0000
-New Game
+Island
 Highway
 Library
 Option
 Quit
 
-从头开始游戏
+普通平台试做
 
 高速公路试做
 
