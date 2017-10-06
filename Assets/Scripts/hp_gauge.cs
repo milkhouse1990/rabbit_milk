@@ -44,5 +44,9 @@ public class hp_gauge : MonoBehaviour {
         //icon
         GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
 
+        System.DateTime now = System.DateTime.Now;
+        string dis = now.ToString();
+        GUI.Label(new Rect(0, 0, 720, 720), "<color=red>"+dis+"</color>");
+
     }
 }
