@@ -37,7 +37,7 @@ public class EndingFastest : MonoBehaviour {
                 "say 2 不要！不要拿走人家的制服喵！人家好不容易才能穿上这种适合贫乳的妹抖服，不能拿走喵！只要不拿走，叫人家做什么都行！",
                 "say 1 既然这样，那么…"
             };
-            milk.GetComponent<Platformer2DUserControl>().EnterAVGMode(plot);
+            milk.GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT0000");
         }
 
     }

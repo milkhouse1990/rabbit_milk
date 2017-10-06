@@ -1,0 +1,15 @@
+Island
+Highway
+Library
+Option
+Quit
+
+普通平台试做
+
+高速公路试做
+
+查看游戏的各种资料
+
+游戏的各种设定（不可用）
+
+退出游戏

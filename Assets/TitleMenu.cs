@@ -19,11 +19,9 @@ public class TitleMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        string binid = "@MENU0000";
+        string binid = "MENU0000";
 
-        string path = "Text\\mnu.bin";
-
-        string[] temp = GetComponent<ReadList>().Read(path, binid);
+        string[] temp = GetComponent<ReadList>().Read(binid);
 
         page = Instantiate<List>(list);
         page.Init(list_pos, info_pos, vector);
