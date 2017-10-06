@@ -32,12 +32,12 @@ public class PauseMenu : MonoBehaviour {
 
         string binid;
         if (moon)
-            binid = "@MENU0005";
+            binid = "MENU0005";
         else
-            binid = "@MENU0004";
+            binid = "MENU0004";
 
 
-        basic_text = GetComponent<ReadList>().Read(path, binid);
+        basic_text = GetComponent<ReadList>().Read(binid);
 
         page = Instantiate<List>(list);
         page.Init(list_pos, info_pos, vector);

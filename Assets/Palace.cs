@@ -25,7 +25,7 @@ public class Palace : MonoBehaviour {
             "say 1 说的是呢，哎嘿嘿…",
             "say 0 这是给你的惩罚。",
             "hp-999"};
-            milk.GetComponent<Platformer2DUserControl>().EnterAVGMode(plot);
+            milk.GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT0001");
         }
 }
 }

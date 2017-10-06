@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4379927929592116}
   - component: {fileID: 212771864437639560}
   - component: {fileID: 61419633091758688}
+  - component: {fileID: 114844247207227356}
   m_Layer: 8
   m_Name: npc0
   m_TagString: npc
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038525341891554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 5, z: 0}
+  m_LocalPosition: {x: 3, y: 4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,8 +65,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1.5, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &114844247207227356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038525341891554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890c125327a04e6438fe88dce6652e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcno: 0000
+  plot:
+  - "say 0 \u4ECA\u5929\u662F\u516C\u4E3B\u6BBF\u4E0B\u7684\u751F\u65E5\uFF0C\u4F46\u662F\u516C\u4E3B\u6BBF\u4E0B\u4ECA\u5E74\u51E0\u5C81\u5462\uFF1F"
 --- !u!212 &212771864437639560
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -97,7 +112,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2e39db4e4439ff9489350f34233c1348, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,3 +121,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

@@ -28,7 +28,7 @@ using UnityEngine.SceneManagement;
 
         private bool m_waitnpc=false;
         public Texture2D waitnpc;
-        private string[] npcplot;
+        private string npcplot;
     
     public Transform warning;
 
@@ -197,7 +197,7 @@ using UnityEngine.SceneManagement;
                 break;
                 case "npc":
                     m_waitnpc = true;
-                    npcplot = other.GetComponent<Npc>().plot;
+                    npcplot = other.GetComponent<Npc>().npcno;
                     break;
             }
             switch(other.name)
@@ -295,9 +295,9 @@ using UnityEngine.SceneManagement;
                     GUI.Label(new Rect(screenpos.x-24, screenpos.y+32 , 64, 64), waitnpc);         
         }
 
-        public void EnterAVGMode(string[] plot)
+        public void EnterAVGMode(string npcno)
     {
-        GetComponent<AvgEngine>().Open(plot);
+        GetComponent<AvgEngine>().Open(npcno);
         GetComponent<AvgEngine>().enabled = true;
         GetComponent<AvgEngineInput>().enabled = true;
         enabled = false;

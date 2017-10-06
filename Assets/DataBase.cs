@@ -14,7 +14,7 @@ public class DataBase : MonoBehaviour {
     private int delay = 0;
     private string[] labelname= {"Characters","Enemies","Endings" };
     private string[] item;
-    private string binid= "@MENU0001";
+    private string binid;
     private bool[][] b_item;
     public Texture2D vector;
     private string[] info;
@@ -42,11 +42,13 @@ public class DataBase : MonoBehaviour {
         string path = "Text\\mnu.bin";
         FileStream fs;
 
-        string[] temp = GetComponent<ReadList>().Read(path, binid, labels);
         for (int i = 0;i<labels;i++)
         {
-            item[i] = temp[i * 2];
-            info[i] = temp[i * 2 + 1];
+            int j = i + 1;
+            binid = "MENU000" + j.ToString();
+            string[] temp = GetComponent<ReadList>().Read(binid);
+            item[i] = temp[0];
+            info[i] = temp[1];
         }
            
         path = "Save\\database.txt";

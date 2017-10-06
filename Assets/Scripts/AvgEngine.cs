@@ -311,10 +311,15 @@ public class AvgEngine : MonoBehaviour {
 
         }
 
-        public void Open(string[] plot)
+        public void Open(string npcno)
         {
-            commands = plot;
-            if (commands == null)
+        string binid = "NPC" + npcno;
+        TextAsset ta = Resources.Load("Text\\" + binid) as TextAsset;
+        if (ta!=null)
+        {
+            commands = ta.text.Split('\n');
+        }
+            else
                 Debug.Log("plot load failed.");
             i = 0;
         }
