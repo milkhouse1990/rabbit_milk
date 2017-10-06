@@ -311,9 +311,8 @@ public class AvgEngine : MonoBehaviour {
 
         }
 
-        public void Open(string npcno)
+        public void Open(string binid)
         {
-        string binid = "NPC" + npcno;
         TextAsset ta = Resources.Load("Text\\" + binid) as TextAsset;
         if (ta!=null)
         {

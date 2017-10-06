@@ -409,24 +409,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6330c62c00dc634e987c68752fbe62c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1284852143 stripped
+--- !u!1 &1231418703 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1038525341891554, guid: 426fc0af63eea894694fe847c9f28d3f,
+  m_PrefabParentObject: {fileID: 1302023069883342, guid: 76cada918bca94b4da87886eee7b4d8c,
     type: 2}
-  m_PrefabInternal: {fileID: 1868345090}
---- !u!114 &1284852144
+  m_PrefabInternal: {fileID: 1491015587}
+--- !u!114 &1231418704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1284852143}
+  m_GameObject: {fileID: 1231418703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890c125327a04e6438fe88dce6652e6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot:
-  - "say 0 \u4ECA\u5929\u662F\u516C\u4E3B\u6BBF\u4E0B\u7684\u751F\u65E5\uFF0C\u4F46\u662F\u516C\u4E3B\u6BBF\u4E0B\u4ECA\u5E74\u51E0\u5C81\u5462\uFF1F"
+  plotno: 0000
 --- !u!1001 &1388204935
 Prefab:
   m_ObjectHideFlags: 0
@@ -518,7 +517,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114798913411148444, guid: 76cada918bca94b4da87886eee7b4d8c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114798913411148444, guid: 76cada918bca94b4da87886eee7b4d8c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 76cada918bca94b4da87886eee7b4d8c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1510747137
@@ -619,9 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890c125327a04e6438fe88dce6652e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot:
-  - "say 0 \u6211\u4EEC\u7687\u5BB6\u59B9\u6296\u90FD\u662F\u7ECF\u8FC7\u4E25\u683C\u6311\u9009\u548C\u8BAD\u7EC3\u57F9\u517B\u51FA\u6765\u7684\u7CBE\u82F1\u59B9\u6296\u3002"
-  - "say 1 \u5373\u4F7F\u8FD9\u6837\u4E5F\u4E0D\u81F3\u4E8E\u5B8C\u5168\u4E00\u6837\u5427\u2026"
+  npcno: 
 --- !u!1001 &1636741805
 Prefab:
   m_ObjectHideFlags: 0
@@ -814,17 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890c125327a04e6438fe88dce6652e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot:
-  - "say 1 \u4F60\u7684\u6837\u5B50\u6709\u70B9\u5947\u602A\u5462\uFF01"
-  - "say 2 \u600E\u4E48\uFF1F"
-  - "say 1 \u4F60\u7684\u8033\u6735\u5F88\u77ED\uFF0C\u76F8\u5BF9\u7684\u5C3E\u5DF4\u5374\u5F88\u957F\u3002"
-  - "say 2 \u6211\u6765\u81EA\u9065\u8FDC\u7684\u5361\u7279\u738B\u56FD\uFF0C\u6240\u4EE5\u6837\u5B50\u548C\u672C\u56FD\u7684\u5C45\u6C11\u4F1A\u6709\u70B9\u533A\u522B\u5566\u3002"
-  - "say 1 \u539F\u6765\u662F\u5916\u56FD\u4EBA\u554A\u3002\u4F46\u662F\u5361\u7279\u738B\u56FD\u2026\u6CA1\u542C\u8BF4\u8FC7\u5462\u2026"
-  - "say 1 \u4E0D\u8FC7\u8FD8\u6709\u4E00\u4EF6\u4E8B\u60C5\u975E\u5E38\u53EF\u7591\u2026"
-  - "say 2 \u4EC0\u2026\u4EC0\u4E48\uFF1F"
-  - "say 1 \u4E3A\u4EC0\u4E48\u4F60\u4F1A\u6709\u5934\u50CF\u5462\uFF1F\u6309\u9053\u7406\u8BB2\u53EA\u6709\u6211\u8FD9\u6837\u7684\u4E3B\u8981\u89D2\u8272\u624D\u4F1A\u6709\u5934\u50CF\u7684\uFF01"
-  - "say 2 \u3002"
-  - EndingFastest
+  npcno: 
 --- !u!114 &1878327147
 MonoBehaviour:
   m_ObjectHideFlags: 0

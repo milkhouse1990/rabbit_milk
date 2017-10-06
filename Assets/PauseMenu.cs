@@ -26,10 +26,7 @@ public class PauseMenu : MonoBehaviour {
     private bool moon = true;
     // Use this for initialization
     void Start () {
-        
-
-        string path = "Text\\mnu.bin";
-
+        Debug.Log("te");
         string binid;
         if (moon)
             binid = "MENU0005";
@@ -38,6 +35,7 @@ public class PauseMenu : MonoBehaviour {
 
 
         basic_text = GetComponent<ReadList>().Read(binid);
+        Debug.Log(basic_text[0]);
 
         page = Instantiate<List>(list);
         page.Init(list_pos, info_pos, vector);
@@ -46,11 +44,11 @@ public class PauseMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        page.GetComponent<List>().enabled = true;
+        page.enabled = true;
 		if (CrossPlatformInputManager.GetButtonDown("START"))
         {
             GetComponent<Platformer2DUserControl>().SetPause(false);
-            page.GetComponent<List>().enabled = false;
+            page.enabled = false;
             enabled = false;
 
             GetComponent<Status>().SetHPMax(16 + lvs[0]);

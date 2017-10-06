@@ -73,7 +73,8 @@ using UnityEngine.SceneManagement;
                 {
                     if (m_waitnpc)
                     {
-                        EnterAVGMode(npcplot);
+                        string binid = "NPC" + npcplot;
+                        EnterAVGMode(binid);
 
                     }
                 }
@@ -295,9 +296,9 @@ using UnityEngine.SceneManagement;
                     GUI.Label(new Rect(screenpos.x-24, screenpos.y+32 , 64, 64), waitnpc);         
         }
 
-        public void EnterAVGMode(string npcno)
+        public void EnterAVGMode(string binid)
     {
-        GetComponent<AvgEngine>().Open(npcno);
+        GetComponent<AvgEngine>().Open(binid);
         GetComponent<AvgEngine>().enabled = true;
         GetComponent<AvgEngineInput>().enabled = true;
         enabled = false;

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Npc : MonoBehaviour {
-    public string npcno;
-    public string[] plot;   
+    public string npcno; 
 	// Use this for initialization
 	void Start () {
 		
