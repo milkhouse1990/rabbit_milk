@@ -26,16 +26,13 @@ public class PauseMenu : MonoBehaviour {
     private bool moon = true;
     // Use this for initialization
     void Start () {
-        Debug.Log("te");
         string binid;
         if (moon)
             binid = "MENU0005";
         else
             binid = "MENU0004";
 
-
         basic_text = GetComponent<ReadList>().Read(binid);
-        Debug.Log(basic_text[0]);
 
         page = Instantiate<List>(list);
         page.Init(list_pos, info_pos, vector);
