@@ -43,6 +43,16 @@ using UnityEngine.SceneManagement;
     private int c_stun=0;
     private bool b_back_left;
 
+    private GameObject co_act_menu;
+    private GameObject co_pause_menu;
+
+    void Start()
+    {
+        co_act_menu = GameObject.Find("ACT_Canvas");
+        co_act_menu.SetActive(true);
+        co_pause_menu = GameObject.Find("Pause_Canvas");
+        co_pause_menu.SetActive(false);
+    }
     private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
@@ -52,6 +62,14 @@ using UnityEngine.SceneManagement;
 
         private void Update()
         {
+        //pause
+        if (CrossPlatformInputManager.GetButtonDown("START"))
+        {
+            pause = !pause;
+            co_pause_menu.SetActive(pause);
+            co_act_menu.SetActive(!pause);
+            //GetComponent<PauseMenu>().enabled = true;
+        }
         if (pause)
             Time.timeScale = 0;
         else
@@ -107,11 +125,7 @@ using UnityEngine.SceneManagement;
                 }
                 if (CrossPlatformInputManager.GetButtonDown("SELECT"))
                     SceneManager.LoadScene("Map");
-                if (CrossPlatformInputManager.GetButtonDown("START"))
-                {
-                    pause=true;
-                    GetComponent<PauseMenu>().enabled = true;
-                }
+                
                 if (!b_Jump)
                     b_Jump = CrossPlatformInputManager.GetButtonUp("B");
             }

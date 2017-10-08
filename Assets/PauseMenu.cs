@@ -136,17 +136,7 @@ public class PauseMenu : MonoBehaviour {
         }
         else
         {
-            //status
-            GUI.Label(new Rect(200, 360, 1280, 360), "<color=red>STATUS</color>");
-
-            Status c_status=GetComponent<Status>();
-            GUI.Label(new Rect(200, 380, 1280, 360), "<color=black>Lv 1" + "</color>");
-            GUI.Label(new Rect(200, 400, 1280, 360), "<color=black>HP "+ c_status.GetHp().ToString()+"/"+ c_status.hpmax.ToString()+"</color>");
-            GUI.Label(new Rect(200, 420, 1280, 360), "<color=black>MP " + c_status.GetHp().ToString() + "/" + c_status.hpmax.ToString() + "</color>");
-            GUI.Label(new Rect(200, 440, 1280, 360), "<color=black>ATK " + c_status.atk.ToString() + "</color>");
-            GUI.Label(new Rect(200, 460, 1280, 360), "<color=black>DEF " + c_status.def.ToString() + "</color>");
-            GUI.Label(new Rect(200, 480, 1280, 360), "<color=black>EXP " + "0" + "</color>");
-            GUI.Label(new Rect(200, 500, 1280, 360), "<color=black>NEXT " + "10" + "</color>");
+            
         }
 
         

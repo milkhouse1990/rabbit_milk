@@ -44,10 +44,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>E:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>E:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,12 +63,17 @@
      <Compile Include="Assets\EndingFastest.cs" />
      <Compile Include="Assets\EnemyBullet.cs" />
      <Compile Include="Assets\FarmBoard.cs" />
+     <Compile Include="Assets\FarmItemTool.cs" />
      <Compile Include="Assets\FarmMenu.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\GameDataManager.cs" />
+     <Compile Include="Assets\HPMP.cs" />
+     <Compile Include="Assets\ItemList_name.cs" />
+     <Compile Include="Assets\ItemListCursor.cs" />
      <Compile Include="Assets\List.cs" />
      <Compile Include="Assets\MakeBin.cs" />
      <Compile Include="Assets\MapMove.cs" />
+     <Compile Include="Assets\Menu.cs" />
      <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\MovingLeft.cs" />
@@ -77,6 +82,7 @@
      <Compile Include="Assets\Npc.cs" />
      <Compile Include="Assets\Palace.cs" />
      <Compile Include="Assets\PauseMenu.cs" />
+     <Compile Include="Assets\PlayerPrefsClear.cs" />
      <Compile Include="Assets\Plot.cs" />
      <Compile Include="Assets\ReadList.cs" />
      <Compile Include="Assets\Ready.cs" />
@@ -93,12 +99,13 @@
      <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
      <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
+     <Compile Include="Assets\StatusDisplay.cs" />
      <Compile Include="Assets\Tank.cs" />
      <Compile Include="Assets\TankArm.cs" />
      <Compile Include="Assets\test.cs" />
      <Compile Include="Assets\TitleMenu.cs" />
      <Compile Include="Assets\TitleMenuMoon.cs" />
-     <Compile Include="Assets\UI.cs" />
+     <Compile Include="Assets\UI_ACT_time.cs" />
      <Compile Include="Assets\Warning.cs" />
      <Compile Include="Assets\XmlSaver.cs" />
      <None Include="Assets\Resources\Text\NPC0001.txt" />
@@ -107,31 +114,32 @@
      <None Include="Assets\Resources\Text\NPC0000.txt" />
      <None Include="Assets\Resources\Text\PLOT0000.txt" />
      <None Include="Assets\Resources\Text\MENU0000.txt" />
+     <None Include="Assets\Resources\Text\PLOT0010.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Resources\Text\MENU0005.txt" />
      <None Include="Assets\Resources\Text\MENU0002.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />
      <None Include="Assets\Resources\Text\MENU0004.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Timeline">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
- <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

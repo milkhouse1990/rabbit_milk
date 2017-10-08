@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bg: {fileID: 2800000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}
+  field: {fileID: 0}
+  square: {fileID: 0}
+  cursor: {fileID: 0}
 --- !u!61 &206250167
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -473,6 +476,11 @@ Prefab:
     - target: {fileID: 4006192484980804, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114198525986165164, guid: bbb363d29d57c5f42a5335947bcd0333,
+        type: 2}
+      propertyPath: scenename
+      value: Milkhouse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}

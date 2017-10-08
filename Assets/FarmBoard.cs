@@ -9,20 +9,37 @@ public class FarmBoard : MonoBehaviour {
     private bool m_waitnpc = false;
     private PlatformerCharacter2D milk;
     public Texture2D waitnpc;
+    private GameObject farm_menu;
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start() {
+        farm_menu = GameObject.Find("Farm_Canvas");
+        farm_menu.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (waitnpc)
-        if (CrossPlatformInputManager.GetButtonDown("up"))
+        if (m_waitnpc)
         {
-                milk.GetComponent<Platformer2DUserControl>().SetPause(true);
-                enabled = false;
-            GetComponent<FarmMenu>().enabled = true;
-        }
+            if (pause)
+            {
+                if (CrossPlatformInputManager.GetButtonDown("B"))
+                    {
+                        milk.GetComponent<Platformer2DUserControl>().SetPause(false);
+                    pause = false;
+                    farm_menu.SetActive(false);
+                    }
+               
+            }
+            else
+            {
+                if (CrossPlatformInputManager.GetButtonDown("up"))
+                {
+                    milk.GetComponent<Platformer2DUserControl>().SetPause(true);
+                    pause=true;
+                    farm_menu.SetActive(true);
+                }
+            }
+        }            
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
