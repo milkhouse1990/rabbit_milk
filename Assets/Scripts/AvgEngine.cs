@@ -85,7 +85,7 @@ public class AvgEngine : MonoBehaviour {
             if (!pause && !wait)
             {
                 //command load
-                if (i < commands.Length && !wait && !pause)
+                if (i < commands.Length-1 && !wait && !pause)
                 {
                     //command analysis
                     //int i = 0;
@@ -210,6 +210,7 @@ public class AvgEngine : MonoBehaviour {
                     default:
                         
                             errmsg = "can't understand command: " + para[0];
+                        Debug.Log(commands[i]);
                             err = true;
                             wait = true;
                         break;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Status : MonoBehaviour {
     public int hpmax;
     private int hp;
+    public int mpmax;
+    private int mp;
     public int atk;
     public int def;
 
@@ -15,6 +17,7 @@ public class Status : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         hp = hpmax;
+        mp = mpmax;
 	}
 	
 	// Update is called once per frame
@@ -75,5 +78,9 @@ public class Status : MonoBehaviour {
         hpmax = hpm;
         if (hp > hpmax)
             hp = hpmax;
+    }
+    public int GetMp()
+    {
+        return mp;
     }
 }

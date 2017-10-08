@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4109449814560742}
-  - component: {fileID: 114798913411148444}
+  - component: {fileID: 114709519217148408}
   m_Layer: 8
   m_Name: plot000
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114798913411148444
+--- !u!114 &114709519217148408
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -51,11 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot:
-  - "say0 \u7687\u5BB6\u59B9\u6296 \u516C\u4E3B\u6BBF\u4E0B\u9A7E\u5230\uFF01"
-  - create 1 10 9
-  - downstairs
-  - "say 2 \u611F\u8C22\u5927\u5BB6\u6765\u5230\u6211\u7684\u821E\u4F1A\u3002"
-  - "say 2 \u4E00\u76F4\u4EE5\u6765\uFF0C\u6709\u4E86\u5927\u5BB6\u7684\u5E2E\u52A9\uFF0C\u738B\u56FD\u624D\u80FD\u5982\u6B64\u548C\u5E73\u3002"
-  - "say 2 \u5E0C\u671B\u80FD\u548C\u5927\u5BB6\u4E00\u8D77\u521B\u9020\u66F4\u597D\u7684\u672A\u6765\uFF01"
-  - "say 2 \u90A3\u4E48\uFF0C\u8BF7\u5C3D\u60C5\u4EAB\u53D7\u821E\u4F1A\u5427\uFF01"
+  plotno: 0000
