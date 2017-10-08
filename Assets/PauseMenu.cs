@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour {
         Debug.Log("te");
         string binid;
         if (moon)
-            binid = "MENU0005";
+            binid = "MENU0004";
         else
             binid = "MENU0004";
 

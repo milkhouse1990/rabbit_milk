@@ -34,3 +34,5 @@ documentation/*.synctex.gz
 
 # Abandoned assets
 Abandon/
+*.suo
+*.csproj
