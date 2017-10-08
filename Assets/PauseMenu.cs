@@ -74,7 +74,9 @@ public class PauseMenu : MonoBehaviour {
     }
     void OnGUI()
     {
+        //bg
         GUI.DrawTextureWithTexCoords(new Rect(100, 100, 1080, 520), bg, new Rect(1, 1, 1, 1));
+
         page.Display();
         if (!moon)
         {

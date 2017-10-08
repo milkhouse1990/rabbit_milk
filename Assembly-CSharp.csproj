@@ -62,7 +62,10 @@
      <Compile Include="Assets\DataBase.cs" />
      <Compile Include="Assets\EndingFastest.cs" />
      <Compile Include="Assets\EnemyBullet.cs" />
+     <Compile Include="Assets\FarmBoard.cs" />
+     <Compile Include="Assets\FarmMenu.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
+     <Compile Include="Assets\GameDataManager.cs" />
      <Compile Include="Assets\List.cs" />
      <Compile Include="Assets\MakeBin.cs" />
      <Compile Include="Assets\MapMove.cs" />
@@ -94,7 +97,10 @@
      <Compile Include="Assets\TankArm.cs" />
      <Compile Include="Assets\test.cs" />
      <Compile Include="Assets\TitleMenu.cs" />
+     <Compile Include="Assets\TitleMenuMoon.cs" />
+     <Compile Include="Assets\UI.cs" />
      <Compile Include="Assets\Warning.cs" />
+     <Compile Include="Assets\XmlSaver.cs" />
      <None Include="Assets\Resources\Text\NPC0001.txt" />
      <None Include="Assets\Resources\Text\NPC0002.txt" />
      <None Include="Assets\Resources\Text\MENU0003.txt" />
