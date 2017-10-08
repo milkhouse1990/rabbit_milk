@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour {
     void Start () {
         string binid;
         if (moon)
-            binid = "MENU0005";
+            binid = "MENU0004";
         else
             binid = "MENU0004";
 
