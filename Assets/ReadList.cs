@@ -16,9 +16,10 @@ public class ReadList : MonoBehaviour {
                     res[0] = ta.text;
 
                     //split into items and infos
-                    int split_point = res[0].IndexOf("\n\n");
+                    int split_point = res[0].IndexOf("\r\n\r\n");
             if (split_point == -1)
-                Debug.Log("cant find \n\n in " + binid);
+                Debug.Log("cant find \r\n\r\n in " + binid);
+          
                     res[1] = res[0].Substring(split_point);
                     res[0] = res[0].Substring(0, split_point);
     
