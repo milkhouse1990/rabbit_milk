@@ -1,7 +1,7 @@
 Island
 Highway
 Library
-Option
+Load Data
 Quit
 
 普通平台试做
@@ -10,6 +10,6 @@ Quit
 
 查看游戏的各种资料
 
-游戏的各种设定（不可用）
+读取存档继续游戏
 
 退出游戏

@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212045079433578028}
   - component: {fileID: 50630667991621634}
   - component: {fileID: 61776086084783616}
+  - component: {fileID: 114180134124914298}
   m_Layer: 0
   m_Name: catcher
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +88,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &114180134124914298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438377502951316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5cc9cb955db644aa55872f48ebac5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpmax: 1
+  mpmax: 0
+  atk: 1
+  def: 99
+  b_autorecover: 0
 --- !u!212 &212045079433578028
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -37,10 +37,10 @@ public class List : MonoBehaviour {
         infos = new string[items.Length];
         for (int i=0;i<items.Length;i++)
         {
-            int point = p_pre_infos.LastIndexOf("\n\n");
-            infos[items.Length - 1 - i] = p_pre_infos.Substring(point + 2);
+            int point = p_pre_infos.LastIndexOf("\r\n\r\n");
+            infos[items.Length - 1 - i] = p_pre_infos.Substring(point + 4);
             p_pre_infos = p_pre_infos.Substring(0, point);
-            Debug.Log(infos[items.Length - 1 - i]);
+            //Debug.Log(infos[items.Length - 1 - i]);
         }
         //pre_infos = p_pre_infos;
         //infos = pre_infos.Split('\n');

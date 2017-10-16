@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[RequireComponent(typeof(ReadList))]
 public class PauseMenu : MonoBehaviour {
     public List list;
     public Texture2D vector;
@@ -32,11 +31,11 @@ public class PauseMenu : MonoBehaviour {
         else
             binid = "MENU0004";
 
-        basic_text = GetComponent<ReadList>().Read(binid);
-
+        ReadList rl = new ReadList(binid);
+        
         page = Instantiate<List>(list);
         page.Init(list_pos, info_pos, vector);
-        page.InitText(basic_text[0], basic_text[1]);
+        page.InitText(rl.item, rl.info);
     }
 	
 	// Update is called once per frame

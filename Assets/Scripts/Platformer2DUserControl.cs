@@ -48,10 +48,10 @@ using UnityEngine.SceneManagement;
 
     void Start()
     {
-        co_act_menu = GameObject.Find("ACT_Canvas");
-        co_act_menu.SetActive(true);
+        //co_act_menu = GameObject.Find("ACT_Canvas");
+        //co_act_menu.SetActive(true);
         co_pause_menu = GameObject.Find("Pause_Canvas");
-        co_pause_menu.SetActive(false);
+        //co_pause_menu.SetActive(false);
     }
     private void Awake()
         {
@@ -65,9 +65,9 @@ using UnityEngine.SceneManagement;
         //pause
         if (CrossPlatformInputManager.GetButtonDown("START"))
         {
-            pause = !pause;
-            co_pause_menu.SetActive(pause);
-            co_act_menu.SetActive(!pause);
+            //pause = !pause;
+            //co_pause_menu.SetActive(pause);
+            //co_act_menu.SetActive(!pause);
             //GetComponent<PauseMenu>().enabled = true;
         }
         if (pause)

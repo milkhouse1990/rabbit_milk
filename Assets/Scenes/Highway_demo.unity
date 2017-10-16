@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 284646270}
   m_Layer: 0
   m_Name: car
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 748287899}
   m_Layer: 0
   m_Name: berrytank
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

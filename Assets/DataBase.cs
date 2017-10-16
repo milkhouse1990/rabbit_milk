@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(ReadList))]
 public class DataBase : MonoBehaviour {
     public Texture2D[] tachie;
 
@@ -24,12 +23,16 @@ public class DataBase : MonoBehaviour {
     private int cospos = 0;
     private int labels;
     private bool b_info=true;
+    ReadList[] rls;
 
     public List list;
     private List page;
 
     public Rect list_pos;
     public Rect info_pos;
+
+    private ListTool db_list;
+    public ListTool listtool;
 
     // Use this for initialization
     void Start () {
@@ -42,13 +45,15 @@ public class DataBase : MonoBehaviour {
         string path = "Text\\mnu.bin";
         FileStream fs;
 
+        rls = new ReadList[labels];
         for (int i = 0;i<labels;i++)
         {
             int j = i + 1;
             binid = "MENU000" + j.ToString();
-            string[] temp = GetComponent<ReadList>().Read(binid);
-            item[i] = temp[0];
-            info[i] = temp[1];
+            rls[i] = new ReadList(binid);
+
+            item[i] = rls[i].item;
+            info[i] = rls[i].info;
         }
            
         path = "Save\\database.txt";
@@ -104,16 +109,16 @@ public class DataBase : MonoBehaviour {
 
             for (int j = mes_len; j >0; j--)
             {
-                int point = info[i].LastIndexOf("\n\n");
+                int point = info[i].LastIndexOf("\r\n\r\n");
                 if (b_item[i][j-1])
-                    messages[j-1]= info[i].Substring(point + 2);
+                    messages[j-1]= info[i].Substring(point + 4);
                 else
                     messages[j-1] = "???????";
                 info[i] = info[i].Substring(0, point);
                 //Debug.Log(infos[items.Length - 1 - i]);
             }
             
-            info[i] = "\n\n";
+            info[i] = "\r\n\r\n";
             for (int j = 0; j < mes_len; j++)
             {
                 
@@ -124,10 +129,11 @@ public class DataBase : MonoBehaviour {
         }
 
         {
-            page = Instantiate<List>(list);
-            
-            page.Init(list_pos,info_pos,vector);
-            page.InitText(item[labelpos],info[labelpos]);
+            db_list = Instantiate(listtool, transform);
+            db_list.SetListPos(list_pos);
+            db_list.SetInfoPos(info_pos);
+            db_list.InitText(rls[labelpos]);
+            db_list.SetInfoAlign(TextAnchor.UpperLeft);
         }
     }
     
@@ -137,28 +143,30 @@ public class DataBase : MonoBehaviour {
 	void Update () {
         if (CrossPlatformInputManager.GetButtonDown("left"))
         {
-            pos[labelpos] = page.GetFocus();
-            dispos[labelpos] = page.GetScroll();
+            pos[labelpos] = db_list.GetFocus();
+            //dispos[labelpos] = page.GetScroll();
             labelpos--;
             if (labelpos == -1)
                 labelpos = labels-1;
-            page.InitText(item[labelpos],info[labelpos]);
-            page.SetFocus(pos[labelpos]);
-            page.SetScroll(dispos[labelpos]);
+            db_list.SetFocus(pos[labelpos]);
+            db_list.InitText(rls[labelpos]);
+            
+            //page.SetScroll(dispos[labelpos]);
         }
         if (CrossPlatformInputManager.GetButtonDown("right"))
         {
-            pos[labelpos] = page.GetFocus();
-            dispos[labelpos] = page.GetScroll();
+            pos[labelpos] = db_list.GetFocus();
+            //dispos[labelpos] = page.GetScroll();
             labelpos++;
             if (labelpos == labels)
                 labelpos = 0;
-            page.InitText(item[labelpos],info[labelpos]);
-            page.SetFocus(pos[labelpos]);
-            page.SetScroll(dispos[labelpos]);
+            db_list.SetFocus(pos[labelpos]);
+            db_list.InitText(rls[labelpos]);
+            
+            //page.SetScroll(dispos[labelpos]);
         }
         if (CrossPlatformInputManager.GetButtonDown("A"))
-            page.SetBInfo(!page.GetBInfo());
+            //page.SetBInfo(!page.GetBInfo());
         if (CrossPlatformInputManager.GetButtonDown("X"))
             cospos++;
         if (CrossPlatformInputManager.GetButtonDown("B"))
@@ -169,17 +177,6 @@ public class DataBase : MonoBehaviour {
         if (delay > 0)
             delay--;
     }
-    void OnGUI()
-    {
-        string dis="<color=black>"+ "↑↓项目选择 ←→标签选择 A文字显示/隐藏 B返回标题"+"</color>";
-                            
-        //help
-        GUI.Label(new Rect(640, 100, 400, 20), dis);
-
-        page.Display();
-
-    }
-
     
     public static int bytesToInt(byte[] src, int offset)
     {

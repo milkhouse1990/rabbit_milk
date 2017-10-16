@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 114843793876793038}
   - component: {fileID: 114535931978814806}
   - component: {fileID: 114316937485195296}
-  - component: {fileID: 114463663952651958}
   m_Layer: 0
   m_Name: milk
   m_TagString: Player
@@ -279,17 +278,6 @@ MonoBehaviour:
     width: 100
     height: 20
   bg: {fileID: 2800000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}
---- !u!114 &114463663952651958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1805006115231654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7c2624d2c847f4bba5f842fbdfa58b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114535931978814806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpmax: 16
+  mpmax: 0
   atk: 1
   def: 0
   b_autorecover: 0

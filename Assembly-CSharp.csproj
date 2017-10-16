@@ -63,7 +63,6 @@
      <Compile Include="Assets\EndingFastest.cs" />
      <Compile Include="Assets\EnemyBullet.cs" />
      <Compile Include="Assets\FarmBoard.cs" />
-     <Compile Include="Assets\FarmItemTool.cs" />
      <Compile Include="Assets\FarmMenu.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\GameDataManager.cs" />
@@ -71,6 +70,7 @@
      <Compile Include="Assets\ItemList_name.cs" />
      <Compile Include="Assets\ItemListCursor.cs" />
      <Compile Include="Assets\List.cs" />
+     <Compile Include="Assets\ListTool.cs" />
      <Compile Include="Assets\MakeBin.cs" />
      <Compile Include="Assets\MapMove.cs" />
      <Compile Include="Assets\Menu.cs" />
@@ -88,6 +88,7 @@
      <Compile Include="Assets\Ready.cs" />
      <Compile Include="Assets\RealtimeAvgEngine.cs" />
      <Compile Include="Assets\RoadSign.cs" />
+     <Compile Include="Assets\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngineInput.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -112,11 +113,13 @@
      <None Include="Assets\Resources\Text\NPC0002.txt" />
      <None Include="Assets\Resources\Text\MENU0003.txt" />
      <None Include="Assets\Resources\Text\NPC0000.txt" />
+     <None Include="Assets\Resources\Text\NPC0003.txt" />
      <None Include="Assets\Resources\Text\PLOT0000.txt" />
      <None Include="Assets\Resources\Text\MENU0000.txt" />
      <None Include="Assets\Resources\Text\PLOT0010.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Resources\Text\MENU0005.txt" />
+     <None Include="Assets\Resources\Text\PLOT0001.txt" />
      <None Include="Assets\Resources\Text\MENU0002.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />
      <None Include="Assets\Resources\Text\MENU0004.txt" />

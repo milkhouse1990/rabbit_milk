@@ -12,7 +12,7 @@ public class FarmBoard : MonoBehaviour {
     private GameObject farm_menu;
 	// Use this for initialization
 	void Start() {
-        farm_menu = GameObject.Find("Farm_Canvas");
+        farm_menu = GameObject.Find("DataCanvas");
         farm_menu.SetActive(false);
     }
 	
@@ -36,6 +36,7 @@ public class FarmBoard : MonoBehaviour {
                 {
                     milk.GetComponent<Platformer2DUserControl>().SetPause(true);
                     pause=true;
+                    PlayerPrefs.SetInt("SaveFlag", 1);
                     farm_menu.SetActive(true);
                 }
             }

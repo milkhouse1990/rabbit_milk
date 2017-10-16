@@ -18,7 +18,7 @@ public class ItemList_name : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        int current = GetComponentInParent<FarmItemTool>().GetFocus();
+        int current = GetComponentInParent<ListTool>().GetFocus();
         string dis;
         if (bag[current] == 0)
             dis = "";

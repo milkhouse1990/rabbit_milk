@@ -87,6 +87,8 @@ public class AvgEngine : MonoBehaviour {
                 //command load
                 if (i < commands.Length-1 && !wait && !pause)
                 {
+                commands[i] = commands[i].Substring(0, commands[i].Length-1);
+                //Debug.Log(commands[i]);
                     //command analysis
                     //int i = 0;
                     string[] para = commands[i].Split(' ');
@@ -177,7 +179,7 @@ public class AvgEngine : MonoBehaviour {
                     case "charamove":
                         
                             GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
-                            //wait = true;
+                            wait = true;
                         //i--;
                         //chaid = real(para[1]);
                         //if instance_exists(chaid2obj[chaid])
@@ -209,7 +211,7 @@ public class AvgEngine : MonoBehaviour {
                     //error
                     default:
                         
-                            errmsg = "can't understand command: " + para[0];
+                        Debug.Log("can't understand command: " + para[0]);
                         Debug.Log(commands[i]);
                             err = true;
                             wait = true;
@@ -318,9 +320,10 @@ public class AvgEngine : MonoBehaviour {
         if (ta!=null)
         {
             commands = ta.text.Split('\n');
+            //Debug.Log(commands.Length);
         }
             else
-                Debug.Log("plot load failed.");
+                Debug.Log(binid+"plot load failed.");
             i = 0;
         }
 

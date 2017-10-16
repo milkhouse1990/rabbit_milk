@@ -18,7 +18,10 @@ public class CameraFollow : MonoBehaviour {
 	void Start () {
         GameObject[] invisible_doorxs=GameObject.FindGameObjectsWithTag("InvisibleDoorx");
         l_door = invisible_doorxs.Length;
-        scroll_door = new int[l_door];
+        if (l_door != 0)
+            scroll_door = new int[l_door];
+        else
+            scroll_door = new int[1] { 20 };
         foreach (GameObject invisible in invisible_doorxs)
             scroll_door[i++] = (int)invisible.transform.position.x;
         for (i=0;i<l_door;i++)

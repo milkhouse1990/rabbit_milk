@@ -7,7 +7,7 @@ public class Plot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         int flag = PlayerPrefs.GetInt(plotno, 0);
-        if (flag==0)
+        //if (flag==0)
         {
             string binid = "PLOT" + plotno;
             GameObject milk = GameObject.Find("milk");

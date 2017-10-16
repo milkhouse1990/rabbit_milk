@@ -92,11 +92,13 @@
      <None Include="Assets\Resources\Text\NPC0002.txt" />
      <None Include="Assets\Resources\Text\MENU0003.txt" />
      <None Include="Assets\Resources\Text\NPC0000.txt" />
+     <None Include="Assets\Resources\Text\NPC0003.txt" />
      <None Include="Assets\Resources\Text\PLOT0000.txt" />
      <None Include="Assets\Resources\Text\MENU0000.txt" />
      <None Include="Assets\Resources\Text\PLOT0010.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Resources\Text\MENU0005.txt" />
+     <None Include="Assets\Resources\Text\PLOT0001.txt" />
      <None Include="Assets\Resources\Text\MENU0002.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />
      <None Include="Assets\Resources\Text\MENU0004.txt" />

@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 50005348023974986}
   - component: {fileID: 61204415168136112}
   - component: {fileID: 114939235822315158}
+  - component: {fileID: 114556652991472928}
   m_Layer: 0
   m_Name: tank_arm
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +89,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 1.6}
   m_EdgeRadius: 0
+--- !u!114 &114556652991472928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262856426758442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5cc9cb955db644aa55872f48ebac5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpmax: 1
+  mpmax: 0
+  atk: 1
+  def: 99
+  b_autorecover: 0
 --- !u!114 &114939235822315158
 MonoBehaviour:
   m_ObjectHideFlags: 1
