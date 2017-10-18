@@ -670,11 +670,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4858534111205726, guid: 905a76a0db9ef384580e2b64c4b24c72, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.99
+      value: 84.3
       objectReference: {fileID: 0}
     - target: {fileID: 4858534111205726, guid: 905a76a0db9ef384580e2b64c4b24c72, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.84
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 4858534111205726, guid: 905a76a0db9ef384580e2b64c4b24c72, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1409,11 +1409,27 @@ Prefab:
     - target: {fileID: 114198525986165164, guid: bbb363d29d57c5f42a5335947bcd0333,
         type: 2}
       propertyPath: scenename
-      value: Title
+      value: 'CrossRoad '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &914554179 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1014857682835502, guid: bbb363d29d57c5f42a5335947bcd0333,
+    type: 2}
+  m_PrefabInternal: {fileID: 914554178}
+--- !u!114 &914554180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 914554179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f78dbcfddf23f541b4d70aa59fb1075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &948272844
 Prefab:
   m_ObjectHideFlags: 0

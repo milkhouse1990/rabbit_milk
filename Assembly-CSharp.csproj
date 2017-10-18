@@ -66,6 +66,8 @@
      <Compile Include="Assets\FarmMenu.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\GameDataManager.cs" />
+     <Compile Include="Assets\GotoCrossRoad.cs" />
+     <Compile Include="Assets\GotoScene.cs" />
      <Compile Include="Assets\HPMP.cs" />
      <Compile Include="Assets\ItemList_name.cs" />
      <Compile Include="Assets\ItemListCursor.cs" />
@@ -78,7 +80,6 @@
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\MovingLeft.cs" />
      <Compile Include="Assets\MovingRandom.cs" />
-     <Compile Include="Assets\NextScene.cs" />
      <Compile Include="Assets\Npc.cs" />
      <Compile Include="Assets\Palace.cs" />
      <Compile Include="Assets\PauseMenu.cs" />

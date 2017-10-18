@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextScene : MonoBehaviour {
-    public string scenename;
+public class GotoCrossRoad : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,6 +17,10 @@ public class NextScene : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
-            SceneManager.LoadScene(scenename);
+        {
+            SceneManager.LoadScene("CrossRoad");
+            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name);
+        }
+            
     }
 }
