@@ -3,6 +3,7 @@ Highway
 Library
 Load Data
 Quit
+Extra
 
 普通平台试做
 
@@ -13,3 +14,5 @@ Quit
 读取存档继续游戏
 
 退出游戏
+
+Moon Story试做

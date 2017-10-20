@@ -13,7 +13,7 @@ public class HPMP : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject milk = GameObject.Find("milk");
+        GameObject milk = GameObject.Find("milkMoon");
         if (milk != null)
         {
             if (milk.GetComponent<AvgEngine>().enabled)

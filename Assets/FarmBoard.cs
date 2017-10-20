@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[RequireComponent(typeof(FarmMenu))]
 public class FarmBoard : MonoBehaviour {
     private bool pause = false;
     private bool m_waitnpc = false;
     private PlatformerCharacter2D milk;
     public Texture2D waitnpc;
     private GameObject farm_menu;
+    private string player_name;
 	// Use this for initialization
 	void Start() {
-        farm_menu = GameObject.Find("DataCanvas");
+        farm_menu = GameObject.Find("UpCanvas");
         farm_menu.SetActive(false);
     }
 	
@@ -24,7 +24,10 @@ public class FarmBoard : MonoBehaviour {
             {
                 if (CrossPlatformInputManager.GetButtonDown("B"))
                     {
+                    if (player_name == "milk")
                         milk.GetComponent<Platformer2DUserControl>().SetPause(false);
+                    else
+                        milk.GetComponent<Platformer2DUserControlMoon>().SetPause(false);
                     pause = false;
                     farm_menu.SetActive(false);
                     }
@@ -34,7 +37,10 @@ public class FarmBoard : MonoBehaviour {
             {
                 if (CrossPlatformInputManager.GetButtonDown("up"))
                 {
-                    milk.GetComponent<Platformer2DUserControl>().SetPause(true);
+                    if (player_name == "milk")
+                        milk.GetComponent<Platformer2DUserControl>().SetPause(true);
+                    else
+                        milk.GetComponent<Platformer2DUserControlMoon>().SetPause(true);
                     pause=true;
                     PlayerPrefs.SetInt("SaveFlag", 1);
                     farm_menu.SetActive(true);
@@ -49,6 +55,7 @@ public class FarmBoard : MonoBehaviour {
         {
             case "Player":
                 milk = other.GetComponentInParent<PlatformerCharacter2D>();
+                player_name = other.transform.parent.name;
                 m_waitnpc = true;
                 break;
         }

@@ -98,6 +98,7 @@
      <Compile Include="Assets\Scripts\hp_gauge.cs" />
      <Compile Include="Assets\Scripts\OutsideDestory.cs" />
      <Compile Include="Assets\Scripts\Platformer2DUserControl.cs" />
+     <Compile Include="Assets\Scripts\Platformer2DUserControlMoon.cs" />
      <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
      <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />

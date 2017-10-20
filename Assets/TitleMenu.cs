@@ -75,6 +75,9 @@ public class TitleMenu : MonoBehaviour {
                         PlayerPrefs.DeleteAll();
                         Application.Quit();
                         break;
+                    case 5:
+                        SceneManager.LoadScene("Milkhouse");
+                        break;
                 }
 
             }

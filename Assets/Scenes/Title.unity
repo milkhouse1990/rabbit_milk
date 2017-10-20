@@ -397,9 +397,9 @@ MonoBehaviour:
     height: 400
   info_pos:
     serializedVersion: 2
-    x: 500
+    x: 470
     y: 600
-    width: 280
+    width: 340
     height: 200
 --- !u!1 &1084373926
 GameObject:

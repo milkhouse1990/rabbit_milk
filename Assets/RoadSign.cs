@@ -10,12 +10,15 @@ public class RoadSign : MonoBehaviour {
     public float width,height;
     public GameObject exit;
     public GameObject milk;
+    public GameObject sign;
 	// Use this for initialization
 	void Start () {
         GameObject exit_left = Instantiate(exit, new Vector3(2, 2,0), Quaternion.identity);
         GameObject exit_right = Instantiate(exit, new Vector3(16, 2,0), Quaternion.identity);
         GameObject player = Instantiate(milk, new Vector3(10, 2, 0), Quaternion.identity);
         player.name = "milk";
+        Vector3 roadsign_pos = new Vector3(10, 5, 0);
+        Instantiate(sign, roadsign_pos, Quaternion.identity);
 
         string last_scene = PlayerPrefs.GetString("LastScene", null);
         switch (last_scene)
@@ -28,7 +31,7 @@ public class RoadSign : MonoBehaviour {
                 player.transform.position = new Vector3(4, 2, 0);
                 break;
         }
-        pos=Camera.main.WorldToScreenPoint(transform.position);
+        pos=Camera.main.WorldToScreenPoint(roadsign_pos);
     for (int i=0;i<2;i++)
         label[i] = "<color=magenta>To\n" + label[i]+"</color>";
 

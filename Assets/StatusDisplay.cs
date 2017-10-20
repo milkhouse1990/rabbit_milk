@@ -12,7 +12,8 @@ public class StatusDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject milk = GameObject.Find("milk");
+        string player_name = "milkMoon";
+        GameObject milk = GameObject.Find("milkMoon");
         if (milk != null)
         {
             Status c_status = milk.GetComponent<Status>();
