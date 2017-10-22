@@ -8,69 +8,90 @@ public class MakeBin : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        string world="x";
+        string scene="x";
+        string cut="x";
+        string filename="xxx";
         //read .txt
-        string path = "Text\\mnu.txt";
+        string path = "Scenario\\world0.script";
         string[] readins = File.ReadAllLines(path);
 
-        //open .bin
-        path = "Text\\mnu.bin";
-        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-
-        string raw = "";
+        path = "Assets\\Resources\\Text\\PLOT" + world + scene + cut + ".txt";
+        StreamWriter sw = new StreamWriter(path);
         
-        //int len = 0;
-        string label = "";
         foreach (string readin in readins)
         {
-            if (readin!="")
-                if (readin[0] == '@')
+            //comment
+            if (readin.Length>2)
+            if (readin[0] == '/' && readin[1] == '/')
+                continue;         
+            {
+                //split by \s
+                string[] commands = readin.Split(' ');
+                //execute commands
+                switch (commands[0])
                 {
-                if (label != "")
-                    WriteBlock(fs, label, raw);
-                label = readin;
-                //len = 0;
-                raw = "";
-                continue;
+                    //file name
+                    case "world":
+                        world = commands[1];
+                        break;
+                    case "scene":
+                        scene = commands[1];
+                        break;
+                    case "cut":
+                        sw.Flush();
+                        sw.Close();
+                        if (filename!="xxx")
+                            Debug.Log(filename + " success!");
+                        cut = commands[1];
+                        //open or create .txt
+                        filename= "PLOT"+world + scene + cut + ".txt";
+                        path = "Scenario\\" + filename;                      
+                        sw = new StreamWriter(path);                         
+                        break;
+                    case "npccut":
+                        sw.Flush();
+                        sw.Close();
+                        if (filename!="xxx")
+                            Debug.Log(filename + " success!");
+                        cut = commands[1];
+                        filename = "NPC"+world + scene + cut + ".txt";
+                        path = "Scenario\\" + filename;                        
+                        sw = new StreamWriter(path);
+                        break;
+                    case "":
+                        break;
+                    //file contents
+                    default:
+                        if (isNpcName(commands[0]) || isCommand(commands[0]))
+                            sw.WriteLine(readin);
+                        else
+                            Debug.Log("cannot understand this command: " + readin)
+;
+                        break;
                 }
-            //len += readin.Length + 1;
-            //if (readins.Length > k)
-            raw += readin + "\n";
-            //else
-            //raw += readin;
+            }
         }
-        WriteBlock(fs, label, raw);
-
-        fs.Flush();
-        fs.Close();
+        sw.Flush();
+        sw.Close();
+        Debug.Log(filename + " success!");
+        File.Delete("Assets\\Resources\\Text\\PLOTxxx.txt");
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    private void WriteBlock(FileStream fs, string label, string raw)
-    {
-        //encode
-        Encoder e = Encoding.UTF8.GetEncoder();
-        int len = e.GetByteCount(raw.ToCharArray(), 0, raw.Length, true);
-        byte[] bytes = new byte[label.Length+4 + len];
-        //Debug.Log(raw.Length);
 
-        e.GetBytes(label.ToCharArray(), 0, label.Length, bytes, 0, true);
-        byte[] bytes_temp = intToBytes(len);
-        for (int i = 0; i < 4; i++)
-            bytes[i+label.Length] = bytes_temp[i];
-        e.GetBytes(raw.ToCharArray(), 0, raw.Length, bytes, label.Length+4, true);
-        //write
-        fs.Write(bytes, 0, (int)bytes.Length);
-    }
-    public static byte[] intToBytes(int value)
+    public bool isNpcName(string name)
     {
-        byte[] src = new byte[4];
-        src[0] = (byte)((value >> 24) & 0xFF);
-        src[1] = (byte)((value >> 16) & 0xFF);
-        src[2] = (byte)((value >> 8) & 0xFF);
-        src[3] = (byte)(value & 0xFF);
-        return src;
+        string[] npcnames = { "皇家妹抖", "公主殿下","牛奶酱","草莓汁","皇家妹抖？" };
+        foreach (string npcname in npcnames)
+            if (npcname==name)
+                 return true;
+        return false;
+    }
+    public bool isCommand(string name)
+    {
+        string[] commands = { "create", "downstairs" ,"EndingFastest","charamove","boss"};
+        foreach (string npcname in commands)
+            if (npcname == name)
+                return true;
+        return false;
     }
 }

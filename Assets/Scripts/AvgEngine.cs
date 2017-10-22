@@ -102,36 +102,6 @@ public class AvgEngine : MonoBehaviour {
                         int.TryParse(para[1], out temp);
                         alarm = temp * FPS;
                             break;
-                    //say charaid text
-                    case "say":
-                    
-                        pause = true;
-                        int.TryParse(para[1], out speaker);
-                        speaker_name = speakerid[speaker];
-                        words = para[2];
-                        for (int j = 3; j < para.Length; j++)
-                        {
-                            words += " ";
-                            words += para[j];
-                        }
-                        //text color
-                        if (speaker == 1)
-                            words = "<color=magenta>" + words + "</color>";
-                        break;
-
-                    //say0 name text
-                    case "say0":
-
-                        pause = true;
-                        speaker = 0;
-                        speaker_name=para[1];
-                        words = para[2];
-                        for (int j = 3; j < para.Length; j++)
-                        {
-                            words += " ";
-                            words += para[j];
-                        }
-                        break;
 
                     //create id x y
                     case "create":
@@ -210,12 +180,23 @@ public class AvgEngine : MonoBehaviour {
                         break;
                     //error
                     default:
-                        
-                        Debug.Log("can't understand command: " + para[0]);
-                        Debug.Log(commands[i]);
-                            err = true;
-                            wait = true;
+                        pause = true;
+
+                        speaker_name = para[0];
+
+                        words = para[1];
+                        for (int j = 2; j < para.Length; j++)
+                        {
+                            words += " ";
+                            words += para[j];
+                        }
+
+                        //text color
+                        if (speaker_name == "牛奶酱")
+                            words = "<color=magenta>" + words + "</color>";
                         break;
+
+                        //Debug.Log("can't understand command: " + commands[i]);
                     }
                 }
                 else
@@ -289,10 +270,10 @@ public class AvgEngine : MonoBehaviour {
                 if (words != "")
                 {
                 //icon
-                if (speaker==1)
+                if (speaker_name=="牛奶酱")
                     GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
                 //frame
-                if (speaker == 1)
+                if (speaker_name=="牛奶酱")
                         GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
                else
                         GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
