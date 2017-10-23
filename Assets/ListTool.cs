@@ -28,20 +28,10 @@ public class ListTool : MonoBehaviour {
     private Rect info_pos;
     public void InitText(ReadList rl)
     {
-        items = rl.item.Split('\n');
+        items = rl.items;
+        infos = rl.infos;
+        length = rl.items.Length;
 
-        length = items.Length;
-
-        infos = new string[length];
-        string temp = rl.info;
-        for (int i = 0; i < items.Length; i++)
-        {
-            
-            int point = temp.LastIndexOf("\r\n\r\n");
-            infos[items.Length - 1 - i] = temp.Substring(point + 4);
-            temp = temp.Substring(0, point);
-            //Debug.Log(infos[items.Length - 1 - i]);
-        }
         if (ch_cursor==null)
         {
             ch_cursor = Instantiate(cursor, transform);

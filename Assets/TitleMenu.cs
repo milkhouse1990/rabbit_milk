@@ -26,20 +26,20 @@ public class TitleMenu : MonoBehaviour {
         farm_menu = GameObject.Find("DataCanvas");
         farm_menu.SetActive(false);
 
+        //list
         string binid = "MENU0000";
-
         ReadList rl = new ReadList(binid); 
-
-        //Debug.Log(temp[0]);
 
         main_menu = Instantiate(list_tool,transform);
         main_menu.SetListPos(list_pos);
         main_menu.SetInfoPos(info_pos);
         main_menu.GetComponent<ListTool>().InitText(rl);
+        main_menu.SetInfoAlign(TextAnchor.MiddleCenter);
     }
 
     // Update is called once per frame
     void Update() {
+        //deactive
         if (pause)
         {
             if (CrossPlatformInputManager.GetButtonDown("B"))
@@ -52,6 +52,7 @@ public class TitleMenu : MonoBehaviour {
         }
         else
         {
+            //operation
             if (CrossPlatformInputManager.GetButtonDown("A"))
             {
                 switch (main_menu.GetComponent<ListTool>().GetFocus())

@@ -12,11 +12,11 @@ public class DataBase : MonoBehaviour {
     private int itemperscr = 10;
     private int delay = 0;
     private string[] labelname= {"Characters","Enemies","Endings" };
-    private string[] item;
+    private string[][] item;
     private string binid;
     private bool[][] b_item;
     public Texture2D vector;
-    private string[] info;
+    private string[][] info;
     private int[] pos = { 0, 0, 0};
     private int[] dispos = { 0, 0, 0 };
     private int labelpos = 0;
@@ -37,8 +37,8 @@ public class DataBase : MonoBehaviour {
     // Use this for initialization
     void Start () {
         labels = labelname.Length;
-        item = new string[labels];
-        info = new string[labels];
+        item = new string[labels][];
+        info = new string[labels][];
 
         b_item = new bool[labels][];
 
@@ -52,8 +52,8 @@ public class DataBase : MonoBehaviour {
             binid = "MENU000" + j.ToString();
             rls[i] = new ReadList(binid);
 
-            item[i] = rls[i].item;
-            info[i] = rls[i].info;
+            item[i] = rls[i].items;
+            info[i] = rls[i].infos;
         }
            
         path = "Save\\database.txt";
@@ -93,38 +93,18 @@ public class DataBase : MonoBehaviour {
             
         for (int i=0;i<item.Length;i++)
         {           
-            string[] messages = item[i].Split('\n');
+            string[] messages = item[i];
             int mes_len = messages.Length;
             if (b_item[i].Length != mes_len)
                 Debug.Log("savedata wrong.");
-            item[i] = "";
+            
             for (int j=0;j<mes_len;j++)
             {
                 if (!b_item[i][j])
-                    messages[j] = "???";
-                item[i] += messages[j];
-                if (j!=mes_len-1)
-                    item[i]+="\n";
-            }
-
-            for (int j = mes_len; j >0; j--)
-            {
-                int point = info[i].LastIndexOf("\r\n\r\n");
-                if (b_item[i][j-1])
-                    messages[j-1]= info[i].Substring(point + 4);
-                else
-                    messages[j-1] = "???????";
-                info[i] = info[i].Substring(0, point);
-                //Debug.Log(infos[items.Length - 1 - i]);
-            }
-            
-            info[i] = "\r\n\r\n";
-            for (int j = 0; j < mes_len; j++)
-            {
-                
-                info[i] += messages[j];
-                if (j != mes_len - 1)
-                    info[i] += "\n\n";
+                {
+                    item[i][j] = "???";
+                    info[i][j]= "???????";
+                }       
             }
         }
 
@@ -133,7 +113,6 @@ public class DataBase : MonoBehaviour {
             db_list.SetListPos(list_pos);
             db_list.SetInfoPos(info_pos);
             db_list.InitText(rls[labelpos]);
-            db_list.SetInfoAlign(TextAnchor.UpperLeft);
         }
     }
     

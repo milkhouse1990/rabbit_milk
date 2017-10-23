@@ -43,6 +43,7 @@ using UnityEngine.SceneManagement;
     private int c_stun=0;
     private bool b_back_left;
 
+    public GameObject pause_menu;
     private GameObject co_act_menu;
     private GameObject co_pause_menu;
 
@@ -50,8 +51,8 @@ using UnityEngine.SceneManagement;
     {
         //co_act_menu = GameObject.Find("ACT_Canvas");
         //co_act_menu.SetActive(true);
-        co_pause_menu = GameObject.Find("Pause_Canvas");
-        //co_pause_menu.SetActive(false);
+        co_pause_menu = Instantiate(pause_menu);
+        co_pause_menu.SetActive(false);
     }
     private void Awake()
         {
@@ -65,10 +66,20 @@ using UnityEngine.SceneManagement;
         //pause
         if (CrossPlatformInputManager.GetButtonDown("START"))
         {
-            //pause = !pause;
-            //co_pause_menu.SetActive(pause);
+            pause = !pause;
+            co_pause_menu.SetActive(pause);
             //co_act_menu.SetActive(!pause);
             //GetComponent<PauseMenu>().enabled = true;
+            if (!pause)
+            {
+                FairySystem fairy = co_pause_menu.transform.Find("FairySystem").GetComponent<FairySystem>();
+                if (fairy.GetEquip()==0)
+                {
+                    GetComponent<Status>().SetHPMax(16 + fairy.GetLvA(0));
+                }
+                else
+                    GetComponent<Status>().SetHPMax(16);
+            }
         }
         if (pause)
             Time.timeScale = 0;
