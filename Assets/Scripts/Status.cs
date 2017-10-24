@@ -55,6 +55,8 @@ public class Status : MonoBehaviour {
         hp -= damage;
         if (hp < 0)
             hp = 0;
+        if (hp > hpmax)
+            hp = hpmax;
         if (hp == 0)
         {
             b_dead = true;

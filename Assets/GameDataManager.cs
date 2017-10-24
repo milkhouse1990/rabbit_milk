@@ -19,11 +19,11 @@ public class GameData
 
     //下面是添加需要储存的内容//
     public string Position;
-    public float MusicVolume;
+    public int crystal;
     public GameData()
     {
         Position = "Player";
-        MusicVolume = 0.6f;
+        crystal=0;
     }
 }
 //管理数据储存的类//
@@ -85,7 +85,11 @@ public class GameDataManager : MonoBehaviour
     public void Save(int current)
     {
         string gameDataFile = GetDataPath() + "/" + dataFileName+current.ToString()+".sav";
+
+        //save game data
         gameData.Position = SceneManager.GetActiveScene().name;
+        gameData.crystal = PlayerPrefs.GetInt("Crystal");
+
         string dataString = xs.SerializeObject(gameData, typeof(GameData));
         xs.CreateXML(gameDataFile, dataString);
     }

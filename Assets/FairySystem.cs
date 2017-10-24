@@ -4,24 +4,39 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
 
+public class fairy
+{
+    public int lv;
+    public int[] next;
+    public fairy()
+    {
+        lv = 5;
+        next = new int[]{ 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 } ;
+    }
+}
 public class FairySystem : MonoBehaviour {
     //list
     public ListTool list_tool;
     private ListTool fairy_list;
     public Rect list_pos;
     public Rect info_pos;
+    public Rect crystal_pos;
 
     private int[] lvs = new int[2 * 2] { 0, 0, 0, 0 };
+    private int crystal=0;
     private int equip = -1;
     private int feed = 0;
     private string[] info;
+    private fairy[] fys;
 
     private ReadList rl;
 
     public Text text;
     private Text[] fairy_lv_bar;
+    private Text[] fairy_lv_status;
+    private Text crystal_amount;
     // Use this for initialization
-    void Start () {
+    void Awake () {
         string binid = "MENU0004";
         rl = new ReadList(binid);
         int a_fairy = rl.items.Length;
@@ -37,16 +52,33 @@ public class FairySystem : MonoBehaviour {
         fairy_list.GetComponent<ListTool>().InitText(rl);
 
         fairy_lv_bar = new Text[a_fairy];
+        fairy_lv_status = new Text[a_fairy];
+
+        fys = new fairy[a_fairy];
         for (int i = 0; i < a_fairy; i++)
         {
             fairy_lv_bar[i] = Instantiate(text, transform);
-            RectTransform rt = fairy_lv_bar[i].GetComponent<RectTransform>();
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, list_pos.x + 100, list_pos.width);
-            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, list_pos.y + i * 30, list_pos.height);
+            fairy_lv_bar[i].name = "lv_bar_" + i.ToString();
+            TextSetPos(fairy_lv_bar[i], new Rect(list_pos.x + 100, list_pos.y + i * 30, list_pos.width, list_pos.height));
             fairy_lv_bar[i].text = lv_bar(i);
-        }            
+
+            fairy_lv_status[i] = Instantiate(text, transform);
+            fairy_lv_status[i].name = "lv_status_" + i.ToString();
+            TextSetPos(fairy_lv_status[i], new Rect(list_pos.x + 300, list_pos.y + i * 30, list_pos.width, list_pos.height));
+            fys[i] = new fairy();
+            FairyUpdate(i);
+        }
+        crystal_amount = Instantiate(text, transform);
+        crystal_amount.name = "CrystalAmount";
+        TextSetPos(crystal_amount, crystal_pos);
+        //crystal = PlayerPrefs.GetInt("Crystal", 0);
+        CrystalUpdate();
+        
     }
-	
+	void OnEnable()
+    {
+        CrystalUpdate();
+    }
 	// Update is called once per frame
 	void Update () {
         int current = fairy_list.GetFocus();
@@ -59,7 +91,7 @@ public class FairySystem : MonoBehaviour {
                 fairy_lv_bar[current].text = lv_bar(current);
             }             
         if (CrossPlatformInputManager.GetButtonDown("right"))
-            if (lvs[current * 2] + lvs[current * 2 + 1] < 5)
+            if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
             {
                 lvs[current * 2]++;
                 rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
@@ -67,7 +99,7 @@ public class FairySystem : MonoBehaviour {
                 fairy_lv_bar[current].text = lv_bar(current);
             }              
         if (CrossPlatformInputManager.GetButtonDown("Y"))
-            if (lvs[current * 2] + lvs[current * 2 + 1] < 5)
+            if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
             {
                 lvs[current * 2 + 1]++;
                 rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
@@ -88,7 +120,21 @@ public class FairySystem : MonoBehaviour {
             else
                 equip = current;
         if (CrossPlatformInputManager.GetButtonDown("B"))
-            feed = current;
+        {
+            if (fys[current].lv<10)
+                if (crystal>=fys[current].next[fys[current].lv])
+            {
+                    crystal -= fys[current].next[fys[current].lv];
+                    fys[current].lv++;
+                    PlayerPrefs.SetInt("Crystal", crystal);
+                    CrystalUpdate();
+                    FairyUpdate(current);
+                    
+                        }
+
+        }
+        
+        //CrystalUpdate();
     }
     private string lv_bar(int i)
     {
@@ -145,5 +191,31 @@ public class FairySystem : MonoBehaviour {
     public int GetLvA(int fairyno)
     {
         return lvs[fairyno * 2];
+    }
+    public int GetLvB(int fairyno)
+    {
+        return lvs[fairyno * 2+1];
+    }
+    public void CrystalUpdate()
+    {
+        crystal = PlayerPrefs.GetInt("Crystal", 0);
+        crystal_amount.text="Crystal: " + crystal.ToString();
+        //Debug.Log("update");
+    }
+    private void FairyUpdate(int i)
+    {
+        fairy_lv_status[i].text = "Lv " + fys[i].lv + " NEXT ";
+        if (fys[i].lv < 10)
+            fairy_lv_status[i].text += fys[i].next[fys[i].lv];
+        else if (fys[i].lv == 10)
+            fairy_lv_status[i].text += "MAX";
+        else
+            Debug.Log("fairy " + i.ToString() + " lv over.");
+    }
+    private void TextSetPos(Text txt,Rect pos)
+    {
+        RectTransform rt = txt.GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, pos.x, pos.width);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, pos.y, pos.height);
     }
 }

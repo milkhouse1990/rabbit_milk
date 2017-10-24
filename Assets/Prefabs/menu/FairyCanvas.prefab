@@ -87,6 +87,12 @@ MonoBehaviour:
     y: 500
     width: 420
     height: 100
+  crystal_pos:
+    serializedVersion: 2
+    x: 1100
+    y: 100
+    width: 160
+    height: 60
   text: {fileID: 114511150358698452, guid: 90f3c5c54526f824f9aebb5346f73310, type: 2}
 --- !u!114 &114432317860414128
 MonoBehaviour:

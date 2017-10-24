@@ -79,6 +79,21 @@ using UnityEngine.SceneManagement;
                 }
                 else
                     GetComponent<Status>().SetHPMax(16);
+                if (fairy.GetEquip()==1)
+                {
+                    PlayerPrefs.SetInt("HeartDrop", 5 * fairy.GetLvA(1));
+                    PlayerPrefs.SetInt("CrystalDrop", 5 * fairy.GetLvB(1));
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("HeartDrop", 0);
+                    PlayerPrefs.SetInt("CrystalDrop", 0);
+                }
+            }
+            else
+            {
+                //FairySystem fairy = co_pause_menu.transform.Find("FairySystem").GetComponent<FairySystem>();
+               // fairy.CrystalUpdate();
             }
         }
         if (pause)
@@ -347,6 +362,10 @@ using UnityEngine.SceneManagement;
     public void SetPause(bool p_pause)
     {
         pause = p_pause;
+    }
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
     }
     }
 //}
