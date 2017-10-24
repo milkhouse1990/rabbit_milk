@@ -40,23 +40,7 @@ public class Enemy1 : MonoBehaviour {
         timer--;
     }
 
-    int choose(float[] probs)
-    {
-        //将事件元素加入到数组中，如上面有4个元素，分别为50,25,20,5
-        float total = 0;
-        foreach (float elem in probs)
-            total += elem;
-        //Random.value方法返回一个0—1的随机数
-        float randomPoint = Random.value * total;
-        for (int i = 0; i < probs.Length; i++)
-        {
-            if (randomPoint < probs[i])
-                return i;
-            else
-                randomPoint -= probs[i];
-        }
-        return probs.Length - 1;
-    }
+    
     /*void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "weapon")

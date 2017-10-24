@@ -52,16 +52,19 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Standard Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+     <None Include="Assets\Resources\Text\DIAG001.txt" />
      <None Include="Assets\Resources\Text\NPC001.txt" />
      <None Include="Assets\Resources\Text\NPC000.txt" />
      <None Include="Assets\Resources\Text\MENU0003.txt" />
      <None Include="Assets\Resources\Text\PLOT000.txt" />
      <None Include="Assets\Resources\Text\MENU0000.txt" />
      <None Include="Assets\Resources\Text\PLOT0010.txt" />
+     <None Include="Assets\Resources\Text\DIAG000.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Resources\Text\MENU0005.txt" />
      <None Include="Assets\Resources\Text\NPC003.txt" />
      <None Include="Assets\Resources\Text\PLOT0001.txt" />
+     <None Include="Assets\Resources\Text\MENU006.txt" />
      <None Include="Assets\Resources\Text\NPC002.txt" />
      <None Include="Assets\Resources\Text\MENU0002.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />

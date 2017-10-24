@@ -35,6 +35,10 @@ public class FairySystem : MonoBehaviour {
     private Text[] fairy_lv_bar;
     private Text[] fairy_lv_status;
     private Text crystal_amount;
+
+    public GameObject diag;
+    private GameObject feed_confirm;
+    private bool pause=false;
     // Use this for initialization
     void Awake () {
         string binid = "MENU0004";
@@ -73,7 +77,9 @@ public class FairySystem : MonoBehaviour {
         TextSetPos(crystal_amount, crystal_pos);
         //crystal = PlayerPrefs.GetInt("Crystal", 0);
         CrystalUpdate();
-        
+
+        feed_confirm = Instantiate(diag,transform);
+        feed_confirm.SetActive(false);
     }
 	void OnEnable()
     {
@@ -82,59 +88,78 @@ public class FairySystem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int current = fairy_list.GetFocus();
-        if (CrossPlatformInputManager.GetButtonDown("left"))
-            if (lvs[current * 2] > -5)
-            {
-                lvs[current * 2]--;
-                rl.infos[current] = info[current] + "("+lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                fairy_list.GetComponent<ListTool>().InitText(rl);
-                fairy_lv_bar[current].text = lv_bar(current);
-            }             
-        if (CrossPlatformInputManager.GetButtonDown("right"))
-            if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
-            {
-                lvs[current * 2]++;
-                rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                fairy_list.GetComponent<ListTool>().InitText(rl);
-                fairy_lv_bar[current].text = lv_bar(current);
-            }              
-        if (CrossPlatformInputManager.GetButtonDown("Y"))
-            if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
-            {
-                lvs[current * 2 + 1]++;
-                rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                fairy_list.GetComponent<ListTool>().InitText(rl);
-                fairy_lv_bar[current].text = lv_bar(current);
-            }
-        if (CrossPlatformInputManager.GetButtonDown("A"))
-            if (lvs[current * 2 + 1] > -5)
-            {
-                lvs[current * 2 + 1]--;
-                rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                fairy_list.GetComponent<ListTool>().InitText(rl);
-                fairy_lv_bar[current].text = lv_bar(current);
-            }               
-        if (CrossPlatformInputManager.GetButtonDown("X"))
-            if (equip == current)
-                equip = -1;
-            else
-                equip = current;
-        if (CrossPlatformInputManager.GetButtonDown("B"))
+        if (!pause)
         {
-            if (fys[current].lv<10)
-                if (crystal>=fys[current].next[fys[current].lv])
+            
+            if (CrossPlatformInputManager.GetButtonDown("left"))
+                if (lvs[current * 2] > -5)
+                {
+                    lvs[current * 2]--;
+                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
+                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    fairy_lv_bar[current].text = lv_bar(current);
+                }
+            if (CrossPlatformInputManager.GetButtonDown("right"))
+                if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
+                {
+                    lvs[current * 2]++;
+                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
+                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    fairy_lv_bar[current].text = lv_bar(current);
+                }
+            if (CrossPlatformInputManager.GetButtonDown("Y"))
+                if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
+                {
+                    lvs[current * 2 + 1]++;
+                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
+                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    fairy_lv_bar[current].text = lv_bar(current);
+                }
+            if (CrossPlatformInputManager.GetButtonDown("A"))
+                if (lvs[current * 2 + 1] > -5)
+                {
+                    lvs[current * 2 + 1]--;
+                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
+                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    fairy_lv_bar[current].text = lv_bar(current);
+                }
+            if (CrossPlatformInputManager.GetButtonDown("X"))
+                if (equip == current)
+                    equip = -1;
+                else
+                    equip = current;
+            if (CrossPlatformInputManager.GetButtonDown("B"))
             {
-                    crystal -= fys[current].next[fys[current].lv];
-                    fys[current].lv++;
-                    PlayerPrefs.SetInt("Crystal", crystal);
-                    CrystalUpdate();
-                    FairyUpdate(current);
-                    
-                        }
+                if (fys[current].lv < 10)
+                    if (crystal >= fys[current].next[fys[current].lv])
+                    {
+                        pause = true;
+                        feed_confirm.SetActive(true);
 
+                        
+                    }
+
+            }
         }
-        
-        //CrystalUpdate();
+        else
+        {
+            if (CrossPlatformInputManager.GetButtonDown("A"))
+            {
+                crystal -= fys[current].next[fys[current].lv];
+                fys[current].lv++;
+                PlayerPrefs.SetInt("Crystal", crystal);
+                CrystalUpdate();
+                FairyUpdate(current);
+
+                pause = false;
+                feed_confirm.SetActive(false);
+            }
+            if (CrossPlatformInputManager.GetButtonDown("B"))
+            {
+                pause = false;
+                feed_confirm.SetActive(false);
+            }
+        }
     }
     private string lv_bar(int i)
     {

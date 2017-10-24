@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public class Enemy : MonoBehaviour {
-
+    public GameObject[] drop;
 	// Use this for initialization
 	void Start () {
 		
@@ -27,4 +27,15 @@ public class Enemy : MonoBehaviour {
             
         }
     }
+    void OnDestroy()
+    {
+        float[] probs = new float[] { 25, 25, 0 };//heart crystal nothing
+        probs[0] += PlayerPrefs.GetInt("DropHeart", 0);
+        probs[1] += PlayerPrefs.GetInt("DropCrystal", 0);
+        probs[2] = 100 - probs[0] - probs[1];
+        RandomGroup rg = new RandomGroup(probs);
+        int drop_item = rg.RandomChoose();
+        if (drop_item<2)
+        Instantiate(drop[drop_item],transform.position,Quaternion.identity);
+;    }
 }

@@ -81,13 +81,13 @@ using UnityEngine.SceneManagement;
                     GetComponent<Status>().SetHPMax(16);
                 if (fairy.GetEquip()==1)
                 {
-                    PlayerPrefs.SetInt("HeartDrop", 5 * fairy.GetLvA(1));
-                    PlayerPrefs.SetInt("CrystalDrop", 5 * fairy.GetLvB(1));
+                    PlayerPrefs.SetInt("DropHeart", 5 * fairy.GetLvA(1));
+                    PlayerPrefs.SetInt("DropCrystal", 5 * fairy.GetLvB(1));
                 }
                 else
                 {
-                    PlayerPrefs.SetInt("HeartDrop", 0);
-                    PlayerPrefs.SetInt("CrystalDrop", 0);
+                    PlayerPrefs.SetInt("DropHeart", 0);
+                    PlayerPrefs.SetInt("DropCrystal", 0);
                 }
             }
             else

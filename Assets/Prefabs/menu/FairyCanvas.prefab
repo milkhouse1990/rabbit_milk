@@ -94,6 +94,7 @@ MonoBehaviour:
     width: 160
     height: 60
   text: {fileID: 114511150358698452, guid: 90f3c5c54526f824f9aebb5346f73310, type: 2}
+  diag: {fileID: 1181039356734766, guid: f9208ab159ae49e4db57de8d84999894, type: 2}
 --- !u!114 &114432317860414128
 MonoBehaviour:
   m_ObjectHideFlags: 1
