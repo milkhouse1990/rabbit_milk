@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GotoCrossRoad : MonoBehaviour {
-    public string LR;//left exit or right exit
+public class KillingZone : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,9 +17,9 @@ public class GotoCrossRoad : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene("CrossRoad");
-            PlayerPrefs.SetString("LastScene", SceneManager.GetActiveScene().name+LR);
+            Status p_status = other.GetComponentInParent<Status>();
+            p_status.HPChange(p_status.GetHp());
+            GameObject.Destroy(gameObject);
         }
-            
     }
 }

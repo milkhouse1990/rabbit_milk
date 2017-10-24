@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 public class MakeBin : MonoBehaviour {
-
+    public string MakeWorld;
 	// Use this for initialization
 	void Start () {
         string world="x";
@@ -13,7 +13,7 @@ public class MakeBin : MonoBehaviour {
         string cut="x";
         string filename="xxx";
         //read .txt
-        string path = "Scenario\\world0.script";
+        string path = "Scenario\\world"+MakeWorld+".script";
         string[] readins = File.ReadAllLines(path);
 
         path = "Assets\\Resources\\Text\\PLOT" + world + scene + cut + ".txt";
@@ -46,7 +46,7 @@ public class MakeBin : MonoBehaviour {
                         cut = commands[1];
                         //open or create .txt
                         filename= "PLOT"+world + scene + cut + ".txt";
-                        path = "Scenario\\" + filename;                      
+                        path = "Assets\\Resources\\Text\\" + filename;                      
                         sw = new StreamWriter(path);                         
                         break;
                     case "npccut":
@@ -56,7 +56,7 @@ public class MakeBin : MonoBehaviour {
                             Debug.Log(filename + " success!");
                         cut = commands[1];
                         filename = "NPC"+world + scene + cut + ".txt";
-                        path = "Scenario\\" + filename;                        
+                        path = "Assets\\Resources\\Text\\" + filename;                        
                         sw = new StreamWriter(path);
                         break;
                     case "":
@@ -80,7 +80,7 @@ public class MakeBin : MonoBehaviour {
 
     public bool isNpcName(string name)
     {
-        string[] npcnames = { "皇家妹抖", "公主殿下","牛奶酱","草莓汁","皇家妹抖？" };
+        string[] npcnames = { "皇家妹抖", "公主殿下","牛奶酱","草莓汁","皇家妹抖？","Drop","？？？" };
         foreach (string npcname in npcnames)
             if (npcname==name)
                  return true;

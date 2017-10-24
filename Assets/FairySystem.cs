@@ -48,17 +48,14 @@ public class FairySystem : MonoBehaviour {
         for(int i=0;i<a_fairy;i++)
             info[i] = rl.infos[i];
 
+        fys = new fairy[a_fairy];
+
         fairy_list = Instantiate(list_tool, transform);
         fairy_list.SetListPos(list_pos);
         fairy_list.SetInfoPos(info_pos);
-        for (int i = 0; i < a_fairy; i++)
-            rl.infos[i] =info[i]+ "("+lvs[i * 2].ToString() + " + " + lvs[i * 2 + 1].ToString() + ") / 5";
-        fairy_list.GetComponent<ListTool>().InitText(rl);
 
         fairy_lv_bar = new Text[a_fairy];
         fairy_lv_status = new Text[a_fairy];
-
-        fys = new fairy[a_fairy];
         for (int i = 0; i < a_fairy; i++)
         {
             fairy_lv_bar[i] = Instantiate(text, transform);
@@ -71,7 +68,8 @@ public class FairySystem : MonoBehaviour {
             TextSetPos(fairy_lv_status[i], new Rect(list_pos.x + 300, list_pos.y + i * 30, list_pos.width, list_pos.height));
             fys[i] = new fairy();
             FairyUpdate(i);
-        }
+        }          
+
         crystal_amount = Instantiate(text, transform);
         crystal_amount.name = "CrystalAmount";
         TextSetPos(crystal_amount, crystal_pos);
@@ -95,32 +93,28 @@ public class FairySystem : MonoBehaviour {
                 if (lvs[current * 2] > -5)
                 {
                     lvs[current * 2]--;
-                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    
                     fairy_lv_bar[current].text = lv_bar(current);
                 }
             if (CrossPlatformInputManager.GetButtonDown("right"))
                 if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
                 {
                     lvs[current * 2]++;
-                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    FairyLvABUpdate(current);
                     fairy_lv_bar[current].text = lv_bar(current);
                 }
             if (CrossPlatformInputManager.GetButtonDown("Y"))
                 if (lvs[current * 2] + lvs[current * 2 + 1] < fys[current].lv)
                 {
                     lvs[current * 2 + 1]++;
-                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    FairyLvABUpdate(current);
                     fairy_lv_bar[current].text = lv_bar(current);
                 }
             if (CrossPlatformInputManager.GetButtonDown("A"))
                 if (lvs[current * 2 + 1] > -5)
                 {
                     lvs[current * 2 + 1]--;
-                    rl.infos[current] = info[current] + "(" + lvs[current * 2].ToString() + " + " + lvs[current * 2 + 1].ToString() + ") / 5";
-                    fairy_list.GetComponent<ListTool>().InitText(rl);
+                    FairyLvABUpdate(current);
                     fairy_lv_bar[current].text = lv_bar(current);
                 }
             if (CrossPlatformInputManager.GetButtonDown("X"))
@@ -236,6 +230,13 @@ public class FairySystem : MonoBehaviour {
             fairy_lv_status[i].text += "MAX";
         else
             Debug.Log("fairy " + i.ToString() + " lv over.");
+
+        FairyLvABUpdate(i);
+    }
+    private void FairyLvABUpdate(int i)
+    {
+        rl.infos[i] = info[i] + "(" + lvs[i * 2].ToString() + " + " + lvs[i * 2 + 1].ToString() + ") / " + fys[i].lv.ToString();
+        fairy_list.GetComponent<ListTool>().InitText(rl);
     }
     private void TextSetPos(Text txt,Rect pos)
     {

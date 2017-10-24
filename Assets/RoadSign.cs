@@ -23,11 +23,18 @@ public class RoadSign : MonoBehaviour {
         string last_scene = PlayerPrefs.GetString("LastScene", null);
         switch (last_scene)
         {
-            case "0Castle1Outside":
+            case "0Castle1OutsideR":
                 label[0] = "PRINCESS CASTLE";
                 label[1] = "PUZZLING FOREST";
                 exit_left.GetComponent<GotoScene>().scenename = "0Castle1Outside";
                 exit_right.GetComponent<GotoScene>().scenename = "1Forest";
+                player.transform.position = new Vector3(4, 2, 0);
+                break;
+            case "1ForestR":
+                label[0] = "PUZZLING FOREST";
+                label[1] = "HIGHWAY";
+                exit_left.GetComponent<GotoScene>().scenename = "1Forest";
+                exit_right.GetComponent<GotoScene>().scenename = "2Highway";
                 player.transform.position = new Vector3(4, 2, 0);
                 break;
         }

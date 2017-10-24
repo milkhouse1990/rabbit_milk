@@ -304,7 +304,7 @@ public class AvgEngine : MonoBehaviour {
             //Debug.Log(commands.Length);
         }
             else
-                Debug.Log(binid+"plot load failed.");
+                Debug.Log("plot load failed:"+ binid);
             i = 0;
         }
 
