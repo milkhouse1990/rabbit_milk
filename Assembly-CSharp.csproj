@@ -73,6 +73,7 @@
      <Compile Include="Assets\GotoPlot.cs" />
      <Compile Include="Assets\GotoScene.cs" />
      <Compile Include="Assets\HPMP.cs" />
+     <Compile Include="Assets\InsideOutsideTree.cs" />
      <Compile Include="Assets\ItemCrystal.cs" />
      <Compile Include="Assets\ItemHeart.cs" />
      <Compile Include="Assets\ItemList_name.cs" />

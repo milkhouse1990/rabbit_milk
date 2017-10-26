@@ -68,18 +68,18 @@ public class CameraFollow : MonoBehaviour {
             if (target!=null)
             {
                 if (target.position.x < left_border)
-                    transform.position = new Vector3(left_border, target.position.y, -10);
+                    transform.position = new Vector3(left_border, target.position.y, -20);
                 else if (target.position.x > right_border)
-                    transform.position = new Vector3(right_border, target.position.y, -10);
+                    transform.position = new Vector3(right_border, target.position.y, -20);
                 else
-                    transform.position = new Vector3(target.position.x, target.position.y, -10);
+                    transform.position = new Vector3(target.position.x, target.position.y, -20);
 
                 if (target.position.y > top_border)
-                    transform.position = new Vector3(transform.position.x, top_border, -10);
+                    transform.position = new Vector3(transform.position.x, top_border, -20);
                 else if (target.position.y < bottom_border)
-                    transform.position = new Vector3(transform.position.x, bottom_border, -10);
+                    transform.position = new Vector3(transform.position.x, bottom_border, -20);
                 else
-                    transform.position = new Vector3(transform.position.x, target.position.y, -10);
+                    transform.position = new Vector3(transform.position.x, target.position.y, -20);
                 if (i == scroll_door.Length - 1)
                 {
                     //Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
