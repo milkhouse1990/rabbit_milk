@@ -13,7 +13,11 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (GetComponent<Status>().GetDead())
+        {
+            Drop();
             GameObject.Destroy(gameObject);
+        }
+            
 	}
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -27,7 +31,7 @@ public class Enemy : MonoBehaviour {
             
         }
     }
-    void OnDestroy()
+    void Drop()
     {
         float[] probs = new float[] { 25, 25, 0 };//heart crystal nothing
         probs[0] += PlayerPrefs.GetInt("DropHeart", 0);

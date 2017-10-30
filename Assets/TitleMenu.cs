@@ -11,6 +11,7 @@ public class TitleMenu : MonoBehaviour {
 
     private string info;
 
+    public GameObject data_canvas;
     private GameObject farm_menu;
     private bool pause = false;
 
@@ -23,7 +24,8 @@ public class TitleMenu : MonoBehaviour {
     void Start() {
         PlayerPrefs.DeleteAll();
 
-        farm_menu = GameObject.Find("DataCanvas");
+        farm_menu = Instantiate(data_canvas);
+        farm_menu.GetComponentInChildren<GameDataManager>().save_flag = false;
         farm_menu.SetActive(false);
 
         //list
@@ -58,17 +60,14 @@ public class TitleMenu : MonoBehaviour {
                 switch (main_menu.GetComponent<ListTool>().GetFocus())
                 {
                     case 0:
-                        SceneManager.LoadScene("Party_demo");
-                        break;
-                    case 1:
-                        SceneManager.LoadScene("Highway_demo");
+                        DataInit();
+                        SceneManager.LoadScene("0Castle0Party");
                         break;
                     case 2:
                         SceneManager.LoadScene("database");
                         break;
-                    case 3:
+                    case 1:
                         pause = true;
-                        PlayerPrefs.SetInt("SaveFlag", 0);
                         farm_menu.SetActive(true);
                         main_menu.gameObject.SetActive(false);
                         break;
@@ -76,7 +75,7 @@ public class TitleMenu : MonoBehaviour {
                         PlayerPrefs.DeleteAll();
                         Application.Quit();
                         break;
-                    case 5:
+                    case 3:
                         SceneManager.LoadScene("Milkhouse");
                         break;
                 }
@@ -85,11 +84,11 @@ public class TitleMenu : MonoBehaviour {
         }
 
     }
-    void OnGUI()
+    void DataInit()
     {
-        //GUI.Label(title_pos, "兔耳魔女牛奶酱 Ver. 201709");
-        //page.Display();
+        //crystal
+        PlayerPrefs.SetInt("Crystal", 0);
+        //fairy
+        PlayerPrefs.SetInt("Fairy", 0);
     }
-
-
 }

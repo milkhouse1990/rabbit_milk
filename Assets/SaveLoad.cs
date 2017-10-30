@@ -4,17 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SaveLoad : MonoBehaviour {
-
+    private GameDataManager bro_gamedatamanage;
 	// Use this for initialization
-	void Awake () {
-        
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        if (PlayerPrefs.GetInt("SaveFlag") == 1)
+	void Start () {
+        if (transform.parent.GetComponentInChildren<GameDataManager>().save_flag)
             GetComponent<Text>().text = "SAVE";
         else
             GetComponent<Text>().text = "LOAD";
     }
+	
 }

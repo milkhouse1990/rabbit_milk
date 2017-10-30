@@ -128,7 +128,7 @@ using UnityEngine.SceneManagement;
 
                     int cos = m_Character.GetCostume();
 
-                    if (cos > 0 && cos < 6)
+                    if (cos > 0 && cos < 5)
                     {
 
                         m_Character.CostumeChange(0);
@@ -150,7 +150,7 @@ using UnityEngine.SceneManagement;
                     m_Jump = CrossPlatformInputManager.GetButtonDown("B");
                 }
                 if (CrossPlatformInputManager.GetButtonDown("SELECT"))
-                    SceneManager.LoadScene("Map");
+                    SceneManager.LoadScene("Title");
                 
                 if (!b_Jump)
                     b_Jump = CrossPlatformInputManager.GetButtonUp("B");
@@ -164,7 +164,7 @@ using UnityEngine.SceneManagement;
                     change_finish = true;
                 else if (change_finish)
                     change = false;
-                else
+                else if (m_Character.GetCostume()<5)
                 {
                     change = true;
                     guialarm = 0;

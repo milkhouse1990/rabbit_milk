@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224059204377468794}
   - component: {fileID: 114828744263194996}
-  - component: {fileID: 114239193771670860}
   - component: {fileID: 114480157207835882}
   m_Layer: 5
   m_Name: data_list
@@ -277,17 +276,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114239193771670860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1375845679789768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b015844dd01b8479accf635a4e24b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114242587822142548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   datainfo: {fileID: 224617967798600784, guid: cc9f1bd9b92dff74ea1c8a7de6a03396, type: 2}
+  save_flag: 1
 --- !u!114 &114554499722369384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,7 +428,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -492,7 +481,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertical: 1
-  length: 3
+  data: 1
+  cursor: {fileID: 224101314493054924, guid: 011a12448b735da4986776572c0a050a, type: 2}
+  list: {fileID: 224971167339003198, guid: bbaca1817f80e3d46a647f6d7370e9af, type: 2}
+  info: {fileID: 224202045362021030, guid: bdafed4bace39e74e983ff6d300fae43, type: 2}
 --- !u!114 &114895367745328550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,7 +568,7 @@ Canvas:
   m_GameObject: {fileID: 1990528157262472}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

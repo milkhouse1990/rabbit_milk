@@ -15,7 +15,7 @@ public class DataBase : MonoBehaviour {
     private string[][] item;
     private string binid;
     private bool[][] b_item;
-    public Texture2D vector;
+
     private string[][] info;
     private int[] pos = { 0, 0, 0};
     private int[] dispos = { 0, 0, 0 };
@@ -25,7 +25,6 @@ public class DataBase : MonoBehaviour {
     private bool b_info=true;
     ReadList[] rls;
 
-    public List list;
     private List page;
 
     public Rect list_pos;
@@ -55,43 +54,14 @@ public class DataBase : MonoBehaviour {
             item[i] = rls[i].items;
             info[i] = rls[i].infos;
         }
-           
-        path = "Save\\database.txt";
+       
+        b_item[0]= GetComponent<SystemDataManager>().LoadBools("character_collection");
+        b_item[1] = GetComponent<SystemDataManager>().LoadBools("setting_collection");
+        b_item[2] = GetComponent<SystemDataManager>().LoadBools("ending_collection");
         
-        if (!File.Exists(path))
-        {
-            //File.Create(path);
-            fs = new FileStream(path, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs);
-            for (int i = 0; i < labels; i++)
-            {
-                sw.Write("0");
-                for (int j = 1; j < item[i].Length; j++)
-                    sw.Write(" 0");
-                sw.Write("\r\n");
-            }
-            sw.Flush();
-            sw.Close();
-            fs.Close();
-        }
-        string[] commands = File.ReadAllLines(path);
-        if (commands.Length != labels)
-            Debug.Log("savefile wrong");
-        for (int i=0;i<labels;i++)
-        { 
-            string[] temp_string=commands[i].Split(' ');
-            b_item[i] = new bool[temp_string.Length];
+                //message lock manage    
 
-            for (int j=0; j < temp_string.Length; j++)
-                if (temp_string[j] == "1")
-                    b_item[i][j] = true;
-                else
-                    b_item[i][j] = false;
-        }
-        
-        //message lock manage    
-            
-        for (int i=0;i<item.Length;i++)
+                for (int i=0;i<item.Length;i++)
         {           
             string[] messages = item[i];
             int mes_len = messages.Length;
@@ -115,9 +85,7 @@ public class DataBase : MonoBehaviour {
             db_list.InitText(rls[labelpos]);
         }
     }
-    
-    
-	
+    	
 	// Update is called once per frame
 	void Update () {
         if (CrossPlatformInputManager.GetButtonDown("left"))
@@ -157,13 +125,4 @@ public class DataBase : MonoBehaviour {
             delay--;
     }
     
-    public static int bytesToInt(byte[] src, int offset)
-    {
-        int value;
-        value = (int)(((src[offset] & 0xFF) << 24)
-                | ((src[offset + 1] & 0xFF) << 16)
-                | ((src[offset + 2] & 0xFF) << 8)
-                | (src[offset + 3] & 0xFF));
-        return value;
-    }
 }

@@ -36,3 +36,6 @@ documentation/*.synctex.gz
 Abandon/
 *.suo
 *.csproj
+
+#save files
+Save/

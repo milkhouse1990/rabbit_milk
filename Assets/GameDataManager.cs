@@ -36,6 +36,7 @@ public class GameDataManager : MonoBehaviour
     public GameData gameData;
 
     public RectTransform datainfo;
+    public bool save_flag;
     void Start()
     {/*
         go_datainfo = new Transform[3];
@@ -68,7 +69,7 @@ public class GameDataManager : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("A"))
         {
             int current = GetComponent<ListTool>().GetFocus();
-            if (PlayerPrefs.GetInt("SaveFlag") == 1)
+            if (save_flag)
             {
                 Save(current);
                 Check(current);
@@ -87,7 +88,7 @@ public class GameDataManager : MonoBehaviour
         string gameDataFile = GetDataPath() + "/" + dataFileName+current.ToString()+".sav";
 
         //save game data
-        gameData.Position = SceneManager.GetActiveScene().name;
+        gameData.Position = PlayerPrefs.GetString("LastScene");
         gameData.crystal = PlayerPrefs.GetInt("Crystal");
 
         string dataString = xs.SerializeObject(gameData, typeof(GameData));

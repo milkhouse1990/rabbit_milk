@@ -55,6 +55,7 @@
      <None Include="Assets\Resources\Text\DIAG001.txt" />
      <None Include="Assets\Resources\Text\NPC001.txt" />
      <None Include="Assets\Resources\Text\NPC000.txt" />
+     <None Include="Assets\Resources\Text\PLOT010.txt" />
      <None Include="Assets\Resources\Text\MENU0003.txt" />
      <None Include="Assets\Resources\Text\PLOT100.txt" />
      <None Include="Assets\Resources\Text\PLOT000.txt" />
@@ -66,9 +67,11 @@
      <None Include="Assets\Resources\Text\MENU0005.txt" />
      <None Include="Assets\Resources\Text\NPC003.txt" />
      <None Include="Assets\Resources\Text\PLOT0001.txt" />
+     <None Include="Assets\Resources\Text\PLOT002.txt" />
      <None Include="Assets\Resources\Text\NPC002.txt" />
      <None Include="Assets\Resources\Text\PLOT102.txt" />
      <None Include="Assets\Resources\Text\MENU0002.txt" />
+     <None Include="Assets\Resources\Text\PLOT011.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />
      <None Include="Assets\Resources\Text\MENU0004.txt" />
  <Reference Include="UnityEditor.Advertisements">

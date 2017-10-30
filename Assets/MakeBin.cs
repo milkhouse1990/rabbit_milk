@@ -88,7 +88,7 @@ public class MakeBin : MonoBehaviour {
     }
     public bool isCommand(string name)
     {
-        string[] commands = { "create", "downstairs" ,"EndingFastest","charamove","boss"};
+        string[] commands = { "create", "downstairs" ,"EndingFastest","charamove","boss","add"};
         foreach (string npcname in commands)
             if (npcname == name)
                 return true;

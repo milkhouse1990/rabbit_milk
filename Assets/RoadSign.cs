@@ -13,7 +13,7 @@ public class RoadSign : MonoBehaviour {
     public GameObject sign;
 	// Use this for initialization
 	void Start () {
-        GameObject exit_left = Instantiate(exit, new Vector3(2, 2,0), Quaternion.identity);
+        //GameObject exit_left = Instantiate(exit, new Vector3(2, 2,0), Quaternion.identity);
         GameObject exit_right = Instantiate(exit, new Vector3(16, 2,0), Quaternion.identity);
         GameObject player = Instantiate(milk, new Vector3(10, 2, 0), Quaternion.identity);
         player.name = "milk";
@@ -26,14 +26,14 @@ public class RoadSign : MonoBehaviour {
             case "0Castle1OutsideR":
                 label[0] = "PRINCESS CASTLE";
                 label[1] = "PUZZLING FOREST";
-                exit_left.GetComponent<GotoScene>().scenename = "0Castle1Outside";
+                //exit_left.GetComponent<GotoScene>().scenename = "0Castle1Outside";
                 exit_right.GetComponent<GotoScene>().scenename = "1Forest";
                 player.transform.position = new Vector3(4, 2, 0);
                 break;
             case "1ForestR":
                 label[0] = "PUZZLING FOREST";
                 label[1] = "HIGHWAY";
-                exit_left.GetComponent<GotoScene>().scenename = "1Forest";
+                //exit_left.GetComponent<GotoScene>().scenename = "1Forest";
                 exit_right.GetComponent<GotoScene>().scenename = "2Highway";
                 player.transform.position = new Vector3(4, 2, 0);
                 break;

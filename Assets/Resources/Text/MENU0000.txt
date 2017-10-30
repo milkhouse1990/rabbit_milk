@@ -1,18 +1,15 @@
-Island
-Highway
-Library
+New Game
 Load Data
+Library
+Extra Scene
 Quit
-Extra
 
-普通平台试做
-
-高速公路试做
-
-查看游戏的各种资料
+从头开始游戏
 
 读取存档继续游戏
 
-退出游戏
+查看游戏的各种资料
 
-Moon Story试做
+一点想法
+
+退出游戏

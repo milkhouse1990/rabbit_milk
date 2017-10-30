@@ -150,7 +150,7 @@ Prefab:
     - target: {fileID: 114239168314023216, guid: e121216e1c98b524d901dd767545f98a,
         type: 2}
       propertyPath: MakeWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e121216e1c98b524d901dd767545f98a, type: 2}

@@ -10,9 +10,10 @@ public class FarmBoard : MonoBehaviour {
     public Texture2D waitnpc;
     private GameObject farm_menu;
     private string player_name;
+    public GameObject popup_menu;
 	// Use this for initialization
 	void Start() {
-        farm_menu = GameObject.Find("UpCanvas");
+        farm_menu = Instantiate(popup_menu);
         farm_menu.SetActive(false);
     }
 	

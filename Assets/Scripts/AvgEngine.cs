@@ -178,6 +178,15 @@ public class AvgEngine : MonoBehaviour {
                         GetComponent<Status>().HPChange(16);
                         i++;
                         break;
+
+                    //add key +value
+                    case "add":
+                        int value;
+                        //Debug.Log(commands[i]);
+                        int.TryParse(para[2], out value);
+                        PlayerPrefs.SetInt(para[1], PlayerPrefs.GetInt(para[1]) + value);
+                        i++;
+                        break;
                     //error
                     default:
                         pause = true;

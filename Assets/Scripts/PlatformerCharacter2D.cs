@@ -15,7 +15,7 @@ using UnityEngine;
 
         private Transform m_GroundCheckL;    // A position marking where to check if the player is grounded.
         private Transform m_GroundCheckR;
-        const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
+        const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
         private bool m_GroundedL;
         private bool m_GroundedR;

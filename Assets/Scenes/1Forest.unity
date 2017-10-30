@@ -285,6 +285,11 @@ Prefab:
       propertyPath: m_Name
       value: FallingWood (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212038513597117914, guid: fce47fbf744c5304fa065bd2d4fe783a,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114255253354664820, guid: fce47fbf744c5304fa065bd2d4fe783a, type: 2}
     - {fileID: 50954768993942132, guid: fce47fbf744c5304fa065bd2d4fe783a, type: 2}
@@ -399,11 +404,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4642240598706454, guid: 46591c3f63724514c85086096c60502b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 116.5
+      value: 92.5
       objectReference: {fileID: 0}
     - target: {fileID: 4642240598706454, guid: 46591c3f63724514c85086096c60502b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: 4642240598706454, guid: 46591c3f63724514c85086096c60502b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -818,7 +823,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 464325690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.2, y: 6.9, z: -1}
+  m_LocalPosition: {x: 2.2, y: 6.3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 33676914}
@@ -1051,7 +1056,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 1}
+  m_Size: {x: 200, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &688955241
 Transform:
@@ -1060,7 +1065,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 688955238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.2, y: -2, z: 0}
+  m_LocalPosition: {x: 100, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1419,11 +1424,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4392196095969110, guid: cafa3f45d8bb4c3488ed739129004ee3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 4.05
       objectReference: {fileID: 0}
     - target: {fileID: 4392196095969110, guid: cafa3f45d8bb4c3488ed739129004ee3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.26
+      value: 4.34
       objectReference: {fileID: 0}
     - target: {fileID: 4392196095969110, guid: cafa3f45d8bb4c3488ed739129004ee3, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1622,6 +1627,11 @@ Prefab:
     - target: {fileID: 61961948627302486, guid: fce47fbf744c5304fa065bd2d4fe783a,
         type: 2}
       propertyPath: m_UsedByComposite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212038513597117914, guid: fce47fbf744c5304fa065bd2d4fe783a,
+        type: 2}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

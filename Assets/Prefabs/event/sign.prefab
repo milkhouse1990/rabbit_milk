@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212040032273397802}
   - component: {fileID: 114033352237612490}
   - component: {fileID: 61769583710273666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitnpc: {fileID: 2800000, guid: df1635ab990dfce468d2b010ced7af3f, type: 3}
+  popup_menu: {fileID: 1990528157262472, guid: 2269530a7d8c1134d9c715fbe2da1a2e, type: 2}
 --- !u!212 &212040032273397802
 SpriteRenderer:
   m_ObjectHideFlags: 1
