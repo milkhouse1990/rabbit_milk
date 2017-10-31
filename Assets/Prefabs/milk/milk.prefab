@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 114604722654406774}
   - component: {fileID: 114843793876793038}
   - component: {fileID: 114535931978814806}
-  - component: {fileID: 114316937485195296}
   m_Layer: 0
   m_Name: milk
   m_TagString: Player
@@ -247,38 +246,6 @@ MonoBehaviour:
   waitnpc: {fileID: 2800000, guid: df1635ab990dfce468d2b010ced7af3f, type: 3}
   warning: {fileID: 4290131265494466, guid: 150aa8599b4fe1d4881778e84e345010, type: 2}
   pause_menu: {fileID: 1955572246279552, guid: 9b2680c130b3b994ba125fd8bc80c3e1, type: 2}
---- !u!114 &114316937485195296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1805006115231654}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3046e5da1ae0954191dfbd1f646421e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  list: {fileID: 114616137399734274, guid: 5e10936b3803d5c4e8cc48de68bb6d4a, type: 2}
-  vector: {fileID: 2800000, guid: af6eb9f7505ec3045a02258aa5c66a73, type: 3}
-  list_pos:
-    serializedVersion: 2
-    x: 320
-    y: 200
-    width: 320
-    height: 20
-  info_pos:
-    serializedVersion: 2
-    x: 640
-    y: 500
-    width: 320
-    height: 40
-  title_pos:
-    serializedVersion: 2
-    x: 600
-    y: 50
-    width: 100
-    height: 20
-  bg: {fileID: 2800000, guid: 424e7af2950cdbe41a7bb6bd9b46ea98, type: 3}
 --- !u!114 &114535931978814806
 MonoBehaviour:
   m_ObjectHideFlags: 1

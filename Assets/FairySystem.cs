@@ -100,7 +100,7 @@ public class FairySystem : MonoBehaviour {
         instructions = Instantiate(text, transform);
         instructions.name = "Instructions";
         instructions.GetComponent<TextSetPos>().SetPos(instructions_pos);
-        instructions.text = "↑↓ 精灵选择 ←→ 效果A等级调整 YA 效果B等级调整 X 精灵装备/卸下 B 精灵升级";
+        instructions.text = "↑↓ 精灵选择 ←→ 效果A等级调整 ⓎⒶ 效果B等级调整 Ⓧ 精灵装备/卸下 Ⓑ 精灵升级";
 
         //e for equipped
         e = Instantiate(picture_e, transform);

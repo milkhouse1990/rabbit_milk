@@ -20,10 +20,15 @@ public class GameData
     //下面是添加需要储存的内容//
     public string Position;
     public int crystal;
+    public string plot;
+    public int fairy;
+
     public GameData()
     {
         Position = "Player";
         crystal=0;
+        plot = "000";
+        fairy = 0;
     }
 }
 //管理数据储存的类//
@@ -90,6 +95,8 @@ public class GameDataManager : MonoBehaviour
         //save game data
         gameData.Position = PlayerPrefs.GetString("LastScene");
         gameData.crystal = PlayerPrefs.GetInt("Crystal");
+        gameData.plot = PlayerPrefs.GetString("Plot");
+        gameData.fairy = PlayerPrefs.GetInt("Fairy");
 
         string dataString = xs.SerializeObject(gameData, typeof(GameData));
         xs.CreateXML(gameDataFile, dataString);
@@ -108,6 +115,10 @@ public class GameDataManager : MonoBehaviour
             if (gameDataFromXML.key == gameData.key)
             {
                 gameData = gameDataFromXML;
+                PlayerPrefs.SetString("LastScene", gameData.Position);
+                PlayerPrefs.SetInt("Crystal", gameData.crystal);
+                PlayerPrefs.SetString("Plot", gameData.plot);
+                PlayerPrefs.SetInt("Fairy", gameData.fairy);
                 SceneManager.LoadScene(gameData.Position);
             }
             //是非法拷贝存档//
