@@ -119,7 +119,7 @@ public class GameDataManager : MonoBehaviour
                 PlayerPrefs.SetInt("Crystal", gameData.crystal);
                 PlayerPrefs.SetString("Plot", gameData.plot);
                 PlayerPrefs.SetInt("Fairy", gameData.fairy);
-                SceneManager.LoadScene(gameData.Position);
+                SceneManager.LoadScene("CrossRoad");
             }
             //是非法拷贝存档//
             else
