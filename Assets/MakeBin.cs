@@ -80,7 +80,7 @@ public class MakeBin : MonoBehaviour {
 
     public bool isNpcName(string name)
     {
-        string[] npcnames = { "皇家妹抖", "公主殿下","牛奶酱","草莓汁","皇家妹抖？","Drop","？？？" };
+        string[] npcnames = { "皇家妹抖", "公主殿下","牛奶酱","草莓汁","皇家妹抖？","Drop","？？？","果酱亲","台下","声音A","声音B","果酱P" };
         foreach (string npcname in npcnames)
             if (npcname==name)
                  return true;
