@@ -15,11 +15,6 @@ public class AvgEngineInput : MonoBehaviour
     {
         m_avg = GetComponent<AvgEngine>();
     }
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

@@ -28,7 +28,6 @@ public class AvgEngine : MonoBehaviour
     private int speaker = -1;
     private string speaker_name = "";
 
-
     /*
 1 milk
 2 cola
