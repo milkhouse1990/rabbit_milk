@@ -4,104 +4,113 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvgEngine : MonoBehaviour {
+public class AvgEngine : MonoBehaviour
+{
 
     public Texture2D icon;
     public Texture2D icon_milk;
     public Texture2D frame;
     public Texture2D frame1;
     public Texture2D np;
-        
-        /*
-        0 nextscene
-        1 hime
-        */
+
+    /*
+    0 nextscene
+    1 hime
+    */
     public GameObject[] createid;
     private GameObject npc;
 
     private string[] text;
     private string dialogue_next = "";
-        //ifstream file;
+    //ifstream file;
     private string[] commands;
     private int i = 0;
     private int speaker = -1;
     private string speaker_name = "";
+
+
     /*
-    1 milk
-    2 cola
-    3 hime
-    4 strawberry
-    */
-    private string[] speakerid = { "0", "牛奶酱", "可乐炭", "公主殿下","草莓" };
+1 milk
+2 cola
+3 hime
+4 strawberry
+*/
+    private string[] speakerid = { "0", "牛奶酱", "可乐炭", "公主殿下", "草莓" };
     private string words = "";
     private bool pause = false;
     private bool wait = false;
-    private int alarm=-1;
+    private int alarm = -1;
 
     private const int FPS = 60;
     private const int BYTEPERLINE = 20;
 
-        //for debug
+    //for debug
     private string errmsg = "";
     private bool err = false;
 
-        //for button a
-    private int guialpha=20;
-    private bool al= true;
+    //for button a
+    private int guialpha = 20;
+    private bool al = true;
     public GUIStyle gs;
+    //for "warning"
+    private bool warning_logo;
     // Use this for initialization
-    void Start() {
-            System.Text.Encoding.GetEncoding("gb2312");
-        }
+    void Start()
+    {
+        System.Text.Encoding.GetEncoding("gb2312");
+        warning_logo = false;
+    }
 
     // Update is called once per frame
-    void Update() {
-            guialpha--;
-            if (guialpha ==0)
-            {
-                guialpha = 20;
-                al = !al;
-            }
-            /*if keyboard_check_pressed(global.my_START)
-            {
-            file_text_close(file);
-            file = -1;
-            avgend = true;
-            }
+    void Update()
+    {
+        guialpha--;
+        if (guialpha == 0)
+        {
+            guialpha = 20;
+            al = !al;
+        }
+        /*if keyboard_check_pressed(global.my_START)
+        {
+        file_text_close(file);
+        file = -1;
+        avgend = true;
+        }
 
-            if pause
+        if pause
+        {
+        if keyboard_check_pressed(global.my_A)
+        {
+        file_text_readln(file);
+        pause = false;
+        err = false;
+        }
+        }
+        else if wait
+        {
+        }
+        else*/
+        if (!pause && !wait)
+        {
+            //command load
+            if (i < commands.Length - 1 && !wait && !pause)
             {
-            if keyboard_check_pressed(global.my_A)
-            {
-            file_text_readln(file);
-            pause = false;
-            err = false;
-            }
-            }
-            else if wait
-            {
-            }
-            else*/
-            if (!pause && !wait)
-            {
-                //command load
-                if (i < commands.Length-1 && !wait && !pause)
-                {
-                commands[i] = commands[i].Substring(0, commands[i].Length-1);
+                //delete '\r'
+                commands[i] = commands[i].Substring(0, commands[i].Length - 1);
                 //Debug.Log(commands[i]);
-                    //command analysis
-                    //int i = 0;
-                    string[] para = commands[i].Split(' ');
-                    //command understanding
-                    switch(para[0])
-                    {
+                //command analysis
+                //int i = 0;
+                string[] para = commands[i].Split(' ');
+                //command understanding
+                switch (para[0])
+                {
                     //pause time(s)
                     case "pause":
                         wait = true;
                         int temp;
                         int.TryParse(para[1], out temp);
                         alarm = temp * FPS;
-                            break;
+                        break;
 
                     //create id x y
                     case "create":
@@ -109,7 +118,7 @@ public class AvgEngine : MonoBehaviour {
                         int.TryParse(para[1], out id);
                         int.TryParse(para[2], out x);
                         int.TryParse(para[3], out y);
-                        npc=Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
+                        npc = Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
                         i++;
                         break;
 
@@ -147,9 +156,9 @@ public class AvgEngine : MonoBehaviour {
                     //}
                     //charamove charaid vx vy
                     case "charamove":
-                        
-                            GetComponent<PlatformerCharacter2D>().Move(1, false, false,false);
-                            wait = true;
+
+                        GetComponent<PlatformerCharacter2D>().Move(1, false, false, false);
+                        wait = true;
                         //i--;
                         //chaid = real(para[1]);
                         //if instance_exists(chaid2obj[chaid])
@@ -172,7 +181,7 @@ public class AvgEngine : MonoBehaviour {
                         ef.GetComponent<EndingFastest>().EndFlagOn();
                         i++;
                         break;
-                    
+
                     //hp-1
                     case "hp-999":
                         GetComponent<Status>().HPChange(16);
@@ -187,7 +196,20 @@ public class AvgEngine : MonoBehaviour {
                         PlayerPrefs.SetInt(para[1], PlayerPrefs.GetInt(para[1]) + value);
                         i++;
                         break;
-                    //error
+
+                    //warning
+                    case "warning":
+                        CommandWarning();
+                        break;
+
+                    //boss
+                    case "boss":
+                        warning_logo = false;
+                        Transform.FindObjectOfType<Boss>().GetReady();
+                        i++;
+                        break;
+
+                    //line & error
                     default:
                         pause = true;
 
@@ -206,19 +228,16 @@ public class AvgEngine : MonoBehaviour {
                         break;
 
                         //Debug.Log("can't understand command: " + commands[i]);
-                    }
-                }
-                else
-                {
-                    GetComponent<Platformer2DUserControl>().enabled = true;
-                    //GetComponent<hp_gauge>().enabled = true;
-                    GetComponent<AvgEngineInput>().enabled = false;
-                    enabled = false;
                 }
             }
+            else
+            {
+                Exit();
+            }
         }
+    }
 
-        void FixedUpdate()
+    void FixedUpdate()
     {
         if (alarm == 0)
             Resume();
@@ -226,105 +245,126 @@ public class AvgEngine : MonoBehaviour {
             alarm--;
     }
 
-        void OnGUI()
+    void OnGUI()
+    {
+        const int xscreen = 1280, yscreen = 720, tile = 64;
+        if (err)
         {
-            const int xscreen = 1280, yscreen = 720, tile = 64;
-            if (err)
+            GUI.Label(new Rect(100, 0, 640, 320), errmsg);
+        }
+        else if (pause)
+        {
+
+            /*
+            //milk
+            if (speaker = "1")
             {
-                GUI.Label(new Rect(100, 0, 640, 320), errmsg);
+            //cos
+            draw_sprite(spr_avatar_milk, global.necklace, view_xview + 5, view_yview + 5)
+            //face
+            if health > 8
+            {
+            draw_sprite(spr_avatar_milkf, 0, view_xview + 5, view_yview + 5);
             }
-            else if (pause)
+            else
+            {
+            draw_sprite(spr_avatar_milkf, 2, view_xview + 5, view_yview + 5);
+            }
+            image_speed = 0;
+            }
+            //chara
+
+            else
+            {
+            draw_sprite(spr_avatar, real(speaker) - 2, view_xview + 635, view_yview + 5)
+            }
+
+            //dialogue
+            draw_sprite(spr_dialogue, 0, view_xview + pos, view_yview + 5)
+            draw_sprite_ext(spr_nextpage, 0, view_xview + 450 + pos, view_yview + 70, 1, 1, 1, c_white, al)
+
+            */
+
+
+            //TALK
+            //draw_text(0, 0, speaker);
+            //int i = 0;
+
+            /*if (words != "")
             {
 
-                /*
-                //milk
-                if (speaker = "1")
-                {
-                //cos
-                draw_sprite(spr_avatar_milk, global.necklace, view_xview + 5, view_yview + 5)
-                //face
-                if health > 8
-                {
-                draw_sprite(spr_avatar_milkf, 0, view_xview + 5, view_yview + 5);
-                }
-                else
-                {
-                draw_sprite(spr_avatar_milkf, 2, view_xview + 5, view_yview + 5);
-                }
-                image_speed = 0;
-                }
-                //chara
-
-                else
-                {
-                draw_sprite(spr_avatar, real(speaker) - 2, view_xview + 635, view_yview + 5)
-                }
-
-                //dialogue
-                draw_sprite(spr_dialogue, 0, view_xview + pos, view_yview + 5)
-                draw_sprite_ext(spr_nextpage, 0, view_xview + 450 + pos, view_yview + 70, 1, 1, 1, c_white, al)
-
-                */
-
-
-                //TALK
-                //draw_text(0, 0, speaker);
-                //int i = 0;
-
-                /*if (words != "")
-                {
-
-                words = "";
-                }*/
-                if (words != "")
-                {
+            words = "";
+            }*/
+            if (words != "")
+            {
                 //icon
-                if (speaker_name=="牛奶酱")
+                if (speaker_name == "牛奶酱")
                     GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
                 //frame
-                if (speaker_name=="牛奶酱")
-                        GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
-               else
-                        GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
+                if (speaker_name == "牛奶酱")
+                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
+                else
+                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
                 //nextpage
                 if (al)
-                        GUI.Label(new Rect(xscreen-4f*tile, yscreen-tile, tile, tile), np);
+                    GUI.Label(new Rect(xscreen - 4f * tile, yscreen - tile, tile, tile), np);
                 //name
                 GUI.Label(new Rect(3f * tile, yscreen - 2.5f * tile, xscreen - 6 * tile, 2 * tile), speaker_name, gs);
                 //words           
 
-                GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words,gs);
-                }
-
-            }
-
-            //else if para[0] == "charaset"
-            {
+                GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words, gs);
             }
 
         }
 
-        public void Open(string binid)
+        //else if para[0] == "charaset"
         {
+        }
+        if (warning_logo)
+            GUI.Label(new Rect(500, 250, 1280, 640), "WARNING", gs);
+    }
+
+    public void Open(string binid)
+    {
         TextAsset ta = Resources.Load("Text\\" + binid) as TextAsset;
-        if (ta!=null)
+        if (ta != null)
         {
             commands = ta.text.Split('\n');
             //Debug.Log(commands.Length);
         }
-            else
-                Debug.Log("plot load failed:"+ binid);
-            i = 0;
-        }
+        else
+            Debug.Log("plot load failed:" + binid);
+        i = 0;
+    }
 
-        public void NextPage()
+    public void NextPage()
+    {
+        if (pause)
         {
-            if (pause)
+            pause = false;
+            i++;
+        }
+    }
+
+    public void Skip()
+    {
+        if (!warning_logo)
+        {
+            pause = false;
+            i = commands.Length - 3;
+            //delete '\r'
+            commands[i] = commands[i].Substring(0, commands[i].Length - 1);
+            if (commands[i] == "warning")
             {
-                pause = false;
-                i++;
+                CommandWarning();
+            }
+            else
+            {
+                i += 2;
             }
         }
+        // Exit();
+    }
 
     public void Resume()
     {
@@ -332,5 +372,19 @@ public class AvgEngine : MonoBehaviour {
         i++;
     }
 
+    private void Exit()
+    {
+        GetComponent<Platformer2DUserControl>().enabled = true;
+        //GetComponent<hp_gauge>().enabled = true;
+        GetComponent<AvgEngineInput>().enabled = false;
+        enabled = false;
+    }
+
+    private void CommandWarning()
+    {
+        wait = true;
+        alarm = 60;
+        warning_logo = true;
+    }
 }
 

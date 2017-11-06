@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Aim.cs" />
+     <Compile Include="Assets\Boss.cs" />
      <Compile Include="Assets\Boss0Berry.cs" />
      <Compile Include="Assets\Boss0BerryArm.cs" />
      <Compile Include="Assets\BossHPGauge.cs" />
@@ -97,7 +98,6 @@
      <Compile Include="Assets\RealtimeAvgEngine.cs" />
      <Compile Include="Assets\RoadSign.cs" />
      <Compile Include="Assets\SaveLoad.cs" />
-     <Compile Include="Assets\Screen.cs" />
      <Compile Include="Assets\Scripts\AvgEngine.cs" />
      <Compile Include="Assets\Scripts\AvgEngineInput.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -108,7 +108,6 @@
      <Compile Include="Assets\Scripts\Platformer2DUserControl.cs" />
      <Compile Include="Assets\Scripts\Platformer2DUserControlMoon.cs" />
      <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
-     <Compile Include="Assets\Scripts\player_attack_enemy.cs" />
      <Compile Include="Assets\Scripts\RandomChoose.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\StatusDisplay.cs" />

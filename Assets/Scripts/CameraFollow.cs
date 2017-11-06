@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour
+{
     private float left_border;
     private float right_border;
     public float top_border;
@@ -14,44 +15,55 @@ public class CameraFollow : MonoBehaviour {
     private Transform target;
     public Transform airwall;
     public Transform warning;
-	// Use this for initialization
-	void Start () {
-        GameObject[] invisible_doorxs=GameObject.FindGameObjectsWithTag("InvisibleDoorx");
+
+    private Rect view_range;
+    // Use this for initialization
+    void Start()
+    {
+        view_range = new Rect(0, 0, 20, 11.25f);
+        GameObject[] invisible_doorxs = GameObject.FindGameObjectsWithTag("InvisibleDoorx");
         l_door = invisible_doorxs.Length;
         if (l_door != 0)
             scroll_door = new int[l_door];
         else
             scroll_door = new int[1] { 20 };
+        l_door = scroll_door.Length;
         foreach (GameObject invisible in invisible_doorxs)
             scroll_door[i++] = (int)invisible.transform.position.x;
-        for (i=0;i<l_door;i++)
-            for (int j=i;j<l_door;j++)
-                if (scroll_door[i]>scroll_door[j])
+
+        //对scroll_door里的元素进行升序排序
+        for (i = 0; i < l_door; i++)
+            for (int j = i; j < l_door; j++)
+                if (scroll_door[i] > scroll_door[j])
                 {
                     int temp = scroll_door[j];
                     scroll_door[j] = scroll_door[i];
                     scroll_door[i] = temp;
                 }
+
         i = 0;
-        left_border = 10;
-        right_border = scroll_door[i]-10;
+        view_range = new Rect(view_range.x, view_range.y, scroll_door[i] - view_range.x, view_range.height);
+        left_border = view_range.x + 10;
+        right_border = view_range.x + view_range.width - 10;
         target = GameObject.Find("milk").transform;
-        if (target!=null)
+        if (target != null)
         {
-            while (target.position.x > scroll_door[i])
+            while (target.position.x > right_border + 10)
             {
-                left_border = scroll_door[i] + 10;
                 i++;
-                right_border = scroll_door[i] - 10;
-                
+                view_range = new Rect(view_range.x + view_range.width, view_range.y, scroll_door[i] - view_range.x - view_range.width, view_range.height);
+                left_border = view_range.x + 10;
+                right_border = view_range.x + view_range.width - 10;
+
             }
-            if (i>0)
-            Instantiate(airwall, new Vector3(scroll_door[i-1],0,0) - new Vector3(1, 0, 0), Quaternion.identity);
+            if (i > 0)
+                Instantiate(airwall, new Vector3(view_range.x - 1, 0, 0), Quaternion.identity);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (b_moving)
         {
             if (transform.position.x >= left_border)
@@ -65,7 +77,7 @@ public class CameraFollow : MonoBehaviour {
         }
         else
         {
-            if (target!=null)
+            if (target != null)
             {
                 if (target.position.x < left_border)
                     transform.position = new Vector3(left_border, target.position.y, -20);
@@ -80,20 +92,22 @@ public class CameraFollow : MonoBehaviour {
                     transform.position = new Vector3(transform.position.x, bottom_border, -20);
                 else
                     transform.position = new Vector3(transform.position.x, target.position.y, -20);
-                if (i == scroll_door.Length - 1)
+                if (i == l_door - 1)
                 {
                     //Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
                     i++;
                 }
                 else
                 {
-                    if (i < scroll_door.Length - 1)
+                    if (i < l_door - 1)
                     {
-                        if (target.position.x > scroll_door[i])
+                        if (target.position.x > view_range.x + view_range.width)
                         {
-                            left_border = scroll_door[i] + 10;
                             i++;
-                            right_border = scroll_door[i] - 10;
+                            view_range = new Rect(view_range.x + view_range.width, view_range.y, scroll_door[i] - view_range.x - view_range.width, view_range.height);
+                            left_border = view_range.x + 10;
+                            right_border = view_range.x + view_range.width - 10;
+
                             Instantiate(airwall, target.position - new Vector3(1, 0, 0), Quaternion.identity);
                             b_moving = true;
                             target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
@@ -102,10 +116,10 @@ public class CameraFollow : MonoBehaviour {
                     }
 
                 }
-            }     
+            }
         }
-     
-        
+
+
 
 
     }

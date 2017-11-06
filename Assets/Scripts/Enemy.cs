@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Enemy : MonoBehaviour {
+[RequireComponent(typeof(Status))]
+[RequireComponent(typeof(BoxCollider2D))]
+public class Enemy : MonoBehaviour
+{
     public GameObject[] drop;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (GetComponent<Status>().GetDead())
         {
             Drop();
             GameObject.Destroy(gameObject);
         }
-            
-	}
+
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("get");
@@ -28,7 +32,7 @@ public class Enemy : MonoBehaviour {
                 GetComponent<Status>().GetDamage(other.gameObject.GetComponent<Status>());
                 other.GetComponent<Bullet>().Init();
                 break;
-            
+
         }
     }
     void Drop()
@@ -39,7 +43,8 @@ public class Enemy : MonoBehaviour {
         probs[2] = 100 - probs[0] - probs[1];
         RandomGroup rg = new RandomGroup(probs);
         int drop_item = rg.RandomChoose();
-        if (drop_item<2)
-        Instantiate(drop[drop_item],transform.position,Quaternion.identity);
-;    }
+        // if (drop_item < 2)
+        // Instantiate(drop[drop_item], transform.position, Quaternion.identity);
+        ;
+    }
 }
