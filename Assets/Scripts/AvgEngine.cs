@@ -53,11 +53,12 @@ public class AvgEngine : MonoBehaviour
     public GUIStyle gs;
     //for "warning"
     private bool warning_logo;
+    private bool can_skip;
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
-        System.Text.Encoding.GetEncoding("gb2312");
         warning_logo = false;
+        can_skip = true;
     }
 
     // Update is called once per frame
@@ -208,6 +209,13 @@ public class AvgEngine : MonoBehaviour
                         i++;
                         break;
 
+                    //plot plotno
+                    //执行PLOT[plotno].txt指定的脚本
+                    case "plot":
+                        GetComponent<Platformer2DUserControl>().EnterAVGMode("PLOT" + para[1]);
+                        can_skip = false;
+                        break;
+
                     //line & error
                     default:
                         pause = true;
@@ -347,19 +355,23 @@ public class AvgEngine : MonoBehaviour
 
     public void Skip()
     {
-        if (!warning_logo)
+        if (can_skip)
         {
             pause = false;
-            i = commands.Length - 3;
+            i = commands.Length - 2;
             //delete '\r'
             commands[i] = commands[i].Substring(0, commands[i].Length - 1);
-            if (commands[i] == "warning")
+            string[] para = commands[i].Split(' ');
+            if (para[0] == "plot")
             {
-                CommandWarning();
+                //add '\r' deleted before
+                commands[i] = commands[i] + "1";
+                Debug.Log(commands[i]);
+
             }
             else
             {
-                i += 2;
+                i += 1;
             }
         }
         // Exit();
