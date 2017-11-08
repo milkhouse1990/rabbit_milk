@@ -14,5 +14,5 @@
 公主殿下 那个…出口在这边…
 牛奶酱 我要先去洗个澡换个衣服！
 公主殿下 。
-create 0 20 4
-charamove
+charamove 19
+plot 002

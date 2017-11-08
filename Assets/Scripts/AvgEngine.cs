@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AvgEngine : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class AvgEngine : MonoBehaviour
     private string dialogue_next = "";
     //ifstream file;
     private string[] commands;
+    private string[] para;
     private int i = 0;
     private int speaker = -1;
     private string speaker_name = "";
@@ -100,7 +102,7 @@ public class AvgEngine : MonoBehaviour
                 //Debug.Log(commands[i]);
                 //command analysis
                 //int i = 0;
-                string[] para = commands[i].Split(' ');
+                para = commands[i].Split(' ');
                 //command understanding
                 switch (para[0])
                 {
@@ -114,11 +116,21 @@ public class AvgEngine : MonoBehaviour
 
                     //create id x y
                     case "create":
-                        int id, x, y;
+                        int id;
+                        float x, y;
                         int.TryParse(para[1], out id);
-                        int.TryParse(para[2], out x);
-                        int.TryParse(para[3], out y);
-                        npc = Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
+                        float.TryParse(para[2], out x);
+                        float.TryParse(para[3], out y);
+                        //check whether the npc exists
+                        npc = GameObject.Find(createid[id].name);
+                        if (npc == null)
+                        {
+                            npc = Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
+                            npc.name = createid[id].name;
+                        }
+                        else
+                            npc.transform.position = new Vector3(x, y, 0);
+
                         i++;
                         break;
 
@@ -136,17 +148,23 @@ public class AvgEngine : MonoBehaviour
                     //alarm[0]=time*room_speed;
                     //file_text_readln(file);
 
-                    //charascale charaid xscale yscale
-                    //else if (para[0] == "charascale")
-                    //{
-                    //charaid = real(para[1]);
-                    //charax = real(para[2]);
-                    //charay = real(para[3]);
-                    //chaid2obj[charaid].image_xscale = charax;
-                    //chaid2obj[charaid].image_yscale = charay;
+                    //charascale chara_name xscale yscale
+                    //将名为chara_name的角色放大到(xscale, yscale)倍
+                    case "charascale":
+                        npc = GameObject.Find(para[1]);
+                        if (npc == null)
+                            Debug.Log("cannot find a GameObject called: " + para[1]);
+                        else
+                        {
+                            //float x, y;
+                            float.TryParse(para[2], out x);
+                            float.TryParse(para[3], out y);
+                            npc.transform.localScale = new Vector3(x, y, 1);
+                        }
 
-                    //file_text_readln(file);
-                    //}
+                        i++;
+                        break;
+
                     //charaanime charaid index
                     //else if (para[0] == "charaanime")
                     //{
@@ -154,26 +172,13 @@ public class AvgEngine : MonoBehaviour
                     //chaid2obj[chaid].image_index=chaidind2spr[chaid,real(para[2])];
                     //file_text_readln(file);
                     //}
-                    //charamove charaid vx vy
+                    //charamove x
+                    //主角走到(x, *)处
                     case "charamove":
-
                         GetComponent<PlatformerCharacter2D>().Move(1, false, false, false);
                         wait = true;
-                        //i--;
-                        //chaid = real(para[1]);
-                        //if instance_exists(chaid2obj[chaid])
-                        //{
-                        //	chaid2obj[chaid].hspeed = real(para[2]);
-                        //	chaid2obj[chaid].vspeed = real(para[3]);
-                        //	file_text_readln(file);
-                        //}
-                        //else
-                        //{
-                        //	err = true;
-                        //	errmsg = "can't find object " + para[1];
-                        //	pause = true;
-                        //}
                         break;
+
                     case "EndingFastest":
                         GameObject ef = GameObject.Find("npc_ending_fastest");
                         if (ef == null)
@@ -216,6 +221,13 @@ public class AvgEngine : MonoBehaviour
                         can_skip = false;
                         break;
 
+                    //gotoscene scenename
+                    //进入名为scenename的scene
+                    case "gotoscene":
+                        SceneManager.LoadScene(para[1]);
+                        break;
+
+
                     //line & error
                     default:
                         pause = true;
@@ -240,6 +252,18 @@ public class AvgEngine : MonoBehaviour
             else
             {
                 Exit();
+            }
+        }
+        else if (wait)
+        {
+            switch (para[0])
+            {
+                case "charamove":
+                    int temp;
+                    int.TryParse(para[1], out temp);
+                    if (transform.position.x >= temp)
+                        Resume();
+                    break;
             }
         }
     }
@@ -358,15 +382,16 @@ public class AvgEngine : MonoBehaviour
         if (can_skip)
         {
             pause = false;
+            wait = false;
             i = commands.Length - 2;
             //delete '\r'
             commands[i] = commands[i].Substring(0, commands[i].Length - 1);
-            string[] para = commands[i].Split(' ');
+            para = commands[i].Split(' ');
             if (para[0] == "plot")
             {
                 //add '\r' deleted before
                 commands[i] = commands[i] + "1";
-                Debug.Log(commands[i]);
+                // Debug.Log(commands[i]);
 
             }
             else

@@ -123,6 +123,8 @@
      <Compile Include="Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\Warning.cs" />
      <Compile Include="Assets\XmlSaver.cs" />
+     <None Include="Assets\Resources\Text\PLOT001.txt" />
+     <None Include="Assets\Resources\Text\PLOT003.txt" />
      <None Include="Assets\Resources\Text\DIAG001.txt" />
      <None Include="Assets\Resources\Text\NPC001.txt" />
      <None Include="Assets\Resources\Text\NPC000.txt" />
