@@ -31,6 +31,8 @@ public class PlatformerCharacter2D : MonoBehaviour
     private Transform[] bullets = new Transform[3];
 
     public int costume;//0 majo 1 maid 2 idol 3 mermaid 4 hime 5 dress 6 bunny 7 bathtowel
+
+    //about jump
     private bool double_jump = false;
     private bool m_clothes = false;
 
@@ -41,6 +43,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool a_jump;
 
     private int counter_attack = -1;//FROM attack action start TO attack action end
+
+    //ability parameter
+    private float jump_velocity = 12;
     void Start()
     {
         CostumeChange(costume);
@@ -93,13 +98,13 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheckL.position, k_GroundedRadius, m_WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(m_GroundCheckL.position, m_GroundCheckL.position + new Vector3(0, -0.1f, 0), m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].name != "milkCollider")
                 m_GroundedL = true;
         }
-        colliders = Physics2D.OverlapCircleAll(m_GroundCheckR.position, k_GroundedRadius, m_WhatIsGround);
+        colliders = Physics2D.OverlapAreaAll(m_GroundCheckR.position, m_GroundCheckR.position + new Vector3(0, -0.1f, 0), m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].name != "milkCollider")
@@ -188,12 +193,12 @@ public class PlatformerCharacter2D : MonoBehaviour
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 12);
+                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, jump_velocity);
             }
             else if (a_doublejump)
                 if (!m_Grounded && jump && !double_jump)
                 {
-                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 12);
+                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, jump_velocity);
                     double_jump = true;
                 }
         if (jump_realise && m_Rigidbody2D.velocity.y > 0)

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Tank : MonoBehaviour {
-    private int counter = 60*2;
-    public int phase ;
+public class Tank : MonoBehaviour
+{
+    private int counter = 60 * 2;
+    public int phase;
     private int subphase = 0;
     public int ammunition;
     public GameObject bomb;
@@ -19,21 +20,23 @@ public class Tank : MonoBehaviour {
     private Vector3 milk_pos;
     private float theta = -2.5f;
     private float step = 0.1f;
-	// Use this for initialization
-	void Start () {
-        if ((milk = GameObject.Find("milk"))==null)
+    // Use this for initialization
+    void Start()
+    {
+        if ((milk = GameObject.Find("milk")) == null)
             Debug.Log("can't find milk.");
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (counter>0)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (counter > 0)
         {
             counter--;
-            switch(phase)
+            switch (phase)
             {
                 case 3:
-                    switch(subphase)
+                    switch (subphase)
                     {
                         case 1:
                             float dis = milk.transform.position.x - weapon.transform.position.x;
@@ -49,17 +52,17 @@ public class Tank : MonoBehaviour {
             }
 
         }
-        
+
         if (counter == -1)
             if (GameObject.FindWithTag("enemy") == null)
                 counter = 60;
 
-        if (counter==0)
+        if (counter == 0)
         {
-            switch(phase)
+            switch (phase)
             {
                 case 0:
-                    if (ammunition>0)
+                    if (ammunition > 0)
                     {
                         counter = -1;
                         GameObject bom = Instantiate(bomb, transform.position, Quaternion.identity);
@@ -74,7 +77,7 @@ public class Tank : MonoBehaviour {
                     }
                     break;
                 case 1:
-                    if (ammunition>0)
+                    if (ammunition > 0)
                     {
                         switch (subphase)
                         {
@@ -82,7 +85,7 @@ public class Tank : MonoBehaviour {
                                 counter = 60;
 
                                 milk_pos = milk.transform.position;
-                                weapon=Instantiate(aim, milk_pos, Quaternion.identity);
+                                weapon = Instantiate(aim, milk_pos, Quaternion.identity);
 
                                 subphase = 1;
                                 break;
@@ -92,7 +95,7 @@ public class Tank : MonoBehaviour {
                                 GameObject.Destroy(weapon);
                                 GameObject bom = Instantiate(missile, transform.position, Quaternion.identity);
                                 float theta = Mathf.Atan2(milk_pos.y - transform.position.y, milk_pos.x - transform.position.x);
-                                bom.GetComponent<Rigidbody2D>().velocity = new Vector2(10f*Mathf.Cos(theta), 10f*Mathf.Sin(theta));
+                                bom.GetComponent<Rigidbody2D>().velocity = new Vector2(10f * Mathf.Cos(theta), 10f * Mathf.Sin(theta));
 
                                 subphase = 0;
                                 ammunition--;
@@ -108,7 +111,7 @@ public class Tank : MonoBehaviour {
                     }
                     break;
                 case 2:
-                    if (ammunition>0)
+                    if (ammunition > 0)
                     {
                         counter = 10;
 
@@ -120,8 +123,8 @@ public class Tank : MonoBehaviour {
                             if (theta < -3.14f)
                                 step = 0.1f;
                         //float theta = Mathf.Atan2(milk_pos.y - transform.position.y, milk_pos.x - transform.position.x);
-                        
-                        for (int i=0;i<5;i++)
+
+                        for (int i = 0; i < 5; i++)
                         {
                             weapon = Instantiate(shot, transform.position, Quaternion.identity);
                             float theta2 = theta + (i - 2) * 15 / 57.3f;
@@ -139,7 +142,7 @@ public class Tank : MonoBehaviour {
                     }
                     break;
                 case 3:
-                    if (ammunition>0)
+                    if (ammunition > 0)
                     {
                         switch (subphase)
                         {
@@ -156,7 +159,7 @@ public class Tank : MonoBehaviour {
                             case 2://fall
                                 counter = 20;
                                 weapon.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 20f);
-                                
+
                                 subphase++;
                                 break;
                             case 3://rise
@@ -187,19 +190,19 @@ public class Tank : MonoBehaviour {
                     }
                     else
                     {
-                        counter = 60*1000;
+                        counter = 60 * 1000;
                         ammunition = 3;
-                        SceneManager.LoadScene("Title");
+                        SceneManager.LoadScene("3Stadium");
                         phase++;
                     }
                     break;
                 case 5:
-                    
+
                     break;
             }
-            
+
         }
 
-		
-	}
+
+    }
 }

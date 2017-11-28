@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plotno: 0000
+  plotno: 000

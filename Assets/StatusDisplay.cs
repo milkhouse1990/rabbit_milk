@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusDisplay : MonoBehaviour {
+public class StatusDisplay : MonoBehaviour
+{
     //private Status c_Status;
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         string player_name = "milkMoon";
-        GameObject milk = GameObject.Find("milkMoon");
+        GameObject milk = GameObject.Find(player_name);
         if (milk != null)
         {
             Status c_status = milk.GetComponent<Status>();
@@ -27,6 +30,6 @@ public class StatusDisplay : MonoBehaviour {
             dis += "NEXT " + "10" + "\n";
             GetComponent<Text>().text = dis;
         }
-        
+
     }
 }

@@ -13,10 +13,11 @@ public class fairy
     {
         name = "???";
         lv = 5;
-        next = new int[]{ 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 } ;
+        next = new int[] { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 };
     }
 }
-public class FairySystem : MonoBehaviour {
+public class FairySystem : MonoBehaviour
+{
     //list
     public ListTool list_tool;
     private ListTool fairy_list;
@@ -25,10 +26,10 @@ public class FairySystem : MonoBehaviour {
     public Rect crystal_pos;
 
     private int[] lvs = new int[2 * 2] { 0, 0, 0, 0 };
-    private int crystal=0;
+    private int crystal = 0;
     private int equip = -1;
     private int feed = 0;
-    private string[] name;
+    private string[] fairy_names;
     private string[] info;
     private fairy[] fys;
 
@@ -43,31 +44,32 @@ public class FairySystem : MonoBehaviour {
 
     public GameObject diag;
     private GameObject feed_confirm;
-    private bool pause=false;
+    private bool pause = false;
 
     public Transform picture_e;
     private Transform e;
 
     private bool[] fairy_collection;
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         string binid = "MENU0004";
         rl = new ReadList(binid);
         int a_fairy = rl.items.Length;
 
-        name = new string[a_fairy];
+        fairy_names = new string[a_fairy];
         info = new string[a_fairy];
-        for(int i=0;i<a_fairy;i++)
+        for (int i = 0; i < a_fairy; i++)
         {
-            name[i] = rl.items[i];
+            fairy_names[i] = rl.items[i];
             info[i] = rl.infos[i];
         }
-            
+
 
         fys = new fairy[a_fairy];
 
         fairy_collection = new bool[a_fairy];
-        
+
         fairy_list = Instantiate(list_tool, transform);
         fairy_list.SetListPos(list_pos);
         fairy_list.SetInfoPos(info_pos);
@@ -86,14 +88,14 @@ public class FairySystem : MonoBehaviour {
             fairy_lv_status[i].name = "lv_status_" + i.ToString();
             TextSetPos(fairy_lv_status[i], new Rect(list_pos.x + 300, list_pos.y + i * 30, list_pos.width, list_pos.height));
             fys[i] = new fairy();
-        }          
+        }
 
         //crystals
         crystal_amount = Instantiate(text, transform);
         crystal_amount.name = "CrystalAmount";
         TextSetPos(crystal_amount, crystal_pos);
-        
-        feed_confirm = Instantiate(diag,transform);
+
+        feed_confirm = Instantiate(diag, transform);
         feed_confirm.SetActive(false);
 
         //instructions
@@ -107,13 +109,14 @@ public class FairySystem : MonoBehaviour {
         FairyEquipUpdate();
 
     }
-	void OnEnable()
+    void OnEnable()
     {
         FairyCollectionUpdate();
         CrystalUpdate();
     }
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         int current = fairy_list.GetFocus();
         if (!pause)
         {
@@ -165,7 +168,7 @@ public class FairySystem : MonoBehaviour {
                             feed_confirm.SetActive(true);
                         }
                 }
-            }        
+            }
         }
         else
         {
@@ -194,7 +197,7 @@ public class FairySystem : MonoBehaviour {
         int lvb = lvs[i * 2 + 1];
         //effect A
         //space
-        for (int j = -5; j < lva && j<0; j++)
+        for (int j = -5; j < lva && j < 0; j++)
             lv_info += " ";
         if (lva < 0)
         {
@@ -245,12 +248,12 @@ public class FairySystem : MonoBehaviour {
     }
     public int GetLvB(int fairyno)
     {
-        return lvs[fairyno * 2+1];
+        return lvs[fairyno * 2 + 1];
     }
     public void CrystalUpdate()
     {
         crystal = PlayerPrefs.GetInt("Crystal", 0);
-        crystal_amount.text="Crystal: " + crystal.ToString();
+        crystal_amount.text = "Crystal: " + crystal.ToString();
         //Debug.Log("update");
     }
     private void FairyUpdate(int i)
@@ -274,9 +277,9 @@ public class FairySystem : MonoBehaviour {
     {
         if (fairy_collection[i])
         {
-            rl.items[i] = name[i];
+            rl.items[i] = fairy_names[i];
             rl.infos[i] = info[i] + "(" + lvs[i * 2].ToString() + " + " + lvs[i * 2 + 1].ToString() + ") / " + fys[i].lv.ToString();
-        }          
+        }
         else
         {
             rl.items[i] = "???";
@@ -284,7 +287,7 @@ public class FairySystem : MonoBehaviour {
         }
         fairy_list.GetComponent<ListTool>().InitText(rl);
     }
-    private void TextSetPos(Text txt,Rect pos)
+    private void TextSetPos(Text txt, Rect pos)
     {
         RectTransform rt = txt.GetComponent<RectTransform>();
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, pos.x, pos.width);

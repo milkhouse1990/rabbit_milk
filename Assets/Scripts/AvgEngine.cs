@@ -179,6 +179,11 @@ public class AvgEngine : MonoBehaviour
                         wait = true;
                         break;
 
+                    case "vibration":
+                        wait = true;
+                        alarm = 2 * FPS;
+                        break;
+
                     case "EndingFastest":
                         GameObject ef = GameObject.Find("npc_ending_fastest");
                         if (ef == null)
@@ -263,6 +268,9 @@ public class AvgEngine : MonoBehaviour
                     int.TryParse(para[1], out temp);
                     if (transform.position.x >= temp)
                         Resume();
+                    break;
+                case "vibration":
+                    Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 0.25f * Mathf.Sin(6 * 3.14f / FPS * (2 * FPS - alarm)), Camera.main.transform.position.z);
                     break;
             }
         }
