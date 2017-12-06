@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Aim.cs" />
+     <Compile Include="Assets\Balloon.cs" />
      <Compile Include="Assets\Boss.cs" />
      <Compile Include="Assets\Boss0Berry.cs" />
      <Compile Include="Assets\Boss0BerryArm.cs" />
@@ -88,6 +89,7 @@
      <Compile Include="Assets\MilkDie.cs" />
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\MovingLeft.cs" />
+     <Compile Include="Assets\MovingPlatformVertical.cs" />
      <Compile Include="Assets\MovingRandom.cs" />
      <Compile Include="Assets\Npc.cs" />
      <Compile Include="Assets\Palace.cs" />
@@ -111,6 +113,7 @@
      <Compile Include="Assets\Scripts\RandomChoose.cs" />
      <Compile Include="Assets\Scripts\Status.cs" />
      <Compile Include="Assets\SetVelocit.cs" />
+     <Compile Include="Assets\ShakyStep.cs" />
      <Compile Include="Assets\StatusDisplay.cs" />
      <Compile Include="Assets\Switch.cs" />
      <Compile Include="Assets\SystemDataManager.cs" />
@@ -118,9 +121,11 @@
      <Compile Include="Assets\TankArm.cs" />
      <Compile Include="Assets\test.cs" />
      <Compile Include="Assets\TextSetPos.cs" />
+     <Compile Include="Assets\Timer.cs" />
      <Compile Include="Assets\TitleMenu.cs" />
      <Compile Include="Assets\TitleMenuMoon.cs" />
      <Compile Include="Assets\UI_ACT_time.cs" />
+     <Compile Include="Assets\UpTest.cs" />
      <Compile Include="Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\Warning.cs" />
      <Compile Include="Assets\XmlSaver.cs" />
