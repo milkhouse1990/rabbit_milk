@@ -66,10 +66,10 @@ public class XmlSaver
     //创建XML文件
     public void CreateXML(string fileName, string thisData)
     {
-        string xxx = Encrypt(thisData);
+        // string xxx = Encrypt(thisData);
         StreamWriter writer;
         writer = File.CreateText(fileName);
-        writer.Write(xxx);
+        writer.Write(thisData);
         writer.Close();
     }
 
@@ -79,8 +79,8 @@ public class XmlSaver
         StreamReader sReader = File.OpenText(fileName);
         string dataString = sReader.ReadToEnd();
         sReader.Close();
-        string xxx = Decrypt(dataString);
-        return xxx;
+        // string xxx = Decrypt(dataString);
+        return dataString;
     }
 
     //判断是否存在文件
