@@ -6,7 +6,7 @@ public class LvInitiate : MonoBehaviour
 {
     private string scenename;
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         scenename = "0Castle1Outside";
         // Load Map
@@ -26,6 +26,8 @@ public class LvInitiate : MonoBehaviour
         {
             string datastring = xs.LoadXML(path);
             LevelInfo levelinfo = xs.DeserializeObject(datastring, typeof(LevelInfo)) as LevelInfo;
+
+            Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
 
             foreach (LevelItem li in levelinfo.items)
             {
