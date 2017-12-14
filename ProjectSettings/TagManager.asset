@@ -5,10 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - weapon
-  - enemy
   - clothes
   - npc
   - InvisibleDoorx
+  - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

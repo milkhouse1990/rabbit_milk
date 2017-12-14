@@ -74,6 +74,7 @@
      <Compile Include="Assets\GotoCrossRoad.cs" />
      <Compile Include="Assets\GotoPlot.cs" />
      <Compile Include="Assets\GotoScene.cs" />
+     <Compile Include="Assets\Grid.cs" />
      <Compile Include="Assets\HPMP.cs" />
      <Compile Include="Assets\InsideOutsideTree.cs" />
      <Compile Include="Assets\ItemCrystal.cs" />
@@ -81,8 +82,11 @@
      <Compile Include="Assets\ItemList_name.cs" />
      <Compile Include="Assets\ItemListCursor.cs" />
      <Compile Include="Assets\KillingZone.cs" />
+     <Compile Include="Assets\LevelInfo.cs" />
+     <Compile Include="Assets\LevelItem.cs" />
      <Compile Include="Assets\List.cs" />
      <Compile Include="Assets\ListTool.cs" />
+     <Compile Include="Assets\LvInitiate.cs" />
      <Compile Include="Assets\MakeBin.cs" />
      <Compile Include="Assets\MapMove.cs" />
      <Compile Include="Assets\Menu.cs" />
