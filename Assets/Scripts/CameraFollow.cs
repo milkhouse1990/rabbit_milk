@@ -1,130 +1,164 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+enum through { None, Right, Left, Up, Down }
+public class Rect4
+{
+    public float left;
+    public float right;
+    public float up;
+    public float down;
+    public Rect4(float p_up, float p_down, float p_left, float p_right)
+    {
+        up = p_up;
+        down = p_down;
+        left = p_left;
+        right = p_right;
+    }
+    public Rect4(Rect room)
+    {
+        left = room.x;
+        right = room.x + room.width;
+        up = room.y;
+        down = room.y - room.height;
+    }
+}
 public class CameraFollow : MonoBehaviour
 {
+    // some constants
+    static float tiles = 64f;
+    static float xtiles = 1280f / tiles;
+    static float ytiles = 720f / tiles;
+    public Rect[] Rooms;
+    private Rect4 CurrentRoom;
     private float left_border;
     private float right_border;
-    public float top_border;
-    public float bottom_border;
     private int[] scroll_door;
     private int l_door;
     private int i = 0;
+    private through b_through = through.None;
     private bool b_moving = false;
-    private Transform target;
-    public Transform airwall;
-    public Transform warning;
+    private Transform target = null;
 
     private Rect view_range;
     // Use this for initialization
     void Start()
     {
-        view_range = new Rect(0, 0, 20, 11.25f);
-        GameObject[] invisible_doorxs = GameObject.FindGameObjectsWithTag("InvisibleDoorx");
-        l_door = invisible_doorxs.Length;
-        if (l_door != 0)
-            scroll_door = new int[l_door];
-        else
-            scroll_door = new int[1] { 20 };
-        l_door = scroll_door.Length;
-        foreach (GameObject invisible in invisible_doorxs)
-            scroll_door[i++] = (int)invisible.transform.position.x;
-
-        //对scroll_door里的元素进行升序排序
-        for (i = 0; i < l_door; i++)
-            for (int j = i; j < l_door; j++)
-                if (scroll_door[i] > scroll_door[j])
-                {
-                    int temp = scroll_door[j];
-                    scroll_door[j] = scroll_door[i];
-                    scroll_door[i] = temp;
-                }
-
-        i = 0;
-        view_range = new Rect(view_range.x, view_range.y, scroll_door[i] - view_range.x, view_range.height);
-        left_border = view_range.x + 10;
-        right_border = view_range.x + view_range.width - 10;
         target = GameObject.Find("milk").transform;
         if (target != null)
         {
-            while (target.position.x > right_border + 10)
-            {
-                i++;
-                view_range = new Rect(view_range.x + view_range.width, view_range.y, scroll_door[i] - view_range.x - view_range.width, view_range.height);
-                left_border = view_range.x + 10;
-                right_border = view_range.x + view_range.width - 10;
-
-            }
-            if (i > 0)
-                Instantiate(airwall, new Vector3(view_range.x - 1, 0, 0), Quaternion.identity);
+            // find current room
+            CurrentRoom = FindCurrentRoom();
         }
+        else
+            Debug.Log("cannot find milk.");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (b_moving)
+        switch (b_through)
         {
-            if (transform.position.x >= left_border)
-            {
-                b_moving = false;
-                target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
-            }
-
-            else
-                transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-        }
-        else
-        {
-            if (target != null)
-            {
-                if (target.position.x < left_border)
-                    transform.position = new Vector3(left_border, target.position.y, -20);
-                else if (target.position.x > right_border)
-                    transform.position = new Vector3(right_border, target.position.y, -20);
-                else
-                    transform.position = new Vector3(target.position.x, target.position.y, -20);
-
-                if (target.position.y > top_border)
-                    transform.position = new Vector3(transform.position.x, top_border, -20);
-                else if (target.position.y < bottom_border)
-                    transform.position = new Vector3(transform.position.x, bottom_border, -20);
-                else
-                    transform.position = new Vector3(transform.position.x, target.position.y, -20);
-                if (i == l_door - 1)
+            case through.Right:
+                if (transform.position.x >= CurrentRoom.left + xtiles / 2)
                 {
-                    //Instantiate(warning, new Vector3(0, 0, 0), Quaternion.identity);
-                    i++;
+                    b_through = through.None;
+                    target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
                 }
                 else
+                    transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+                break;
+            case through.Left:
+                if (transform.position.x <= CurrentRoom.right - xtiles / 2)
                 {
-                    if (i < l_door - 1)
+                    b_through = through.None;
+                    target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
+                }
+                else
+                    transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
+                break;
+            case through.None:
+                if (target != null)
+                {
+                    // player view
+                    // left
+                    float PlayerViewLeft = target.position.x - 10f;
+                    float RoomLeft = CurrentRoom.left;
+                    if (PlayerViewLeft < RoomLeft)
                     {
-                        if (target.position.x > view_range.x + view_range.width)
+                        PlayerViewLeft = RoomLeft;
+                    }
+                    else
+                    {
+                        // right
+                        float PlayerViewRight = target.position.x + 10f;
+                        float RoomRight = CurrentRoom.right;
+                        if (PlayerViewRight > RoomRight)
                         {
-                            i++;
-                            view_range = new Rect(view_range.x + view_range.width, view_range.y, scroll_door[i] - view_range.x - view_range.width, view_range.height);
-                            left_border = view_range.x + 10;
-                            right_border = view_range.x + view_range.width - 10;
-
-                            Instantiate(airwall, target.position - new Vector3(1, 0, 0), Quaternion.identity);
-                            b_moving = true;
-                            target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                            target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                            PlayerViewRight = RoomRight;
+                            PlayerViewLeft = PlayerViewRight - 20f;
                         }
                     }
 
+                    // up
+                    float PlayerViewUp = target.position.y + ytiles / 2;
+                    float RoomUp = CurrentRoom.up;
+                    if (PlayerViewUp > RoomUp)
+                    {
+                        PlayerViewUp = RoomUp;
+                    }
+                    else
+                    {
+                        // down
+                        float PlayerViewDown = target.position.y - ytiles / 2;
+                        float RoomDown = CurrentRoom.down;
+                        if (PlayerViewDown < RoomDown)
+                        {
+                            PlayerViewDown = RoomDown;
+                            PlayerViewUp = PlayerViewDown + ytiles;
+                        }
+                    }
+
+                    transform.position = new Vector3(PlayerViewLeft + 10f, PlayerViewUp - ytiles / 2, -20);
+
+                    // walk through right
+                    if (target.position.x > CurrentRoom.right)
+                    {
+                        b_through = through.Right;
+                        CurrentRoom = FindCurrentRoom();
+                        target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                        target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                    }
+                    // walk through left
+                    if (target.position.x < CurrentRoom.left)
+                    {
+                        b_through = through.Left;
+                        CurrentRoom = FindCurrentRoom();
+                        target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                        target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                    }
                 }
-            }
+                break;
         }
-
-
-
-
     }
     public bool GetMoving()
     {
         return b_moving;
+    }
+    Rect4 FindCurrentRoom()
+    {
+        foreach (Rect room in Rooms)
+        {
+            Rect4 room4 = new Rect4(room);
+
+            if (target.position.y < room4.up)
+                if (target.position.y > room4.down)
+                    if (target.position.x > room4.left)
+                        if (target.position.x < room4.right)
+                        {
+                            return room4;
+                        }
+        }
+        return null;
     }
 }

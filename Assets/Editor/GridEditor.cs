@@ -122,8 +122,13 @@ public class GridEditor : Editor
                     GameObject[] AllGameObjects = FindObjectsOfType(typeof(GameObject)) as GameObject[];
                     foreach (GameObject go in AllGameObjects)
                     {
-                        if (go.name == "grid" || go.name == "Main Camera")
+                        if (go.name == "grid")
                             continue;
+                        if (go.name == "Main Camera")
+                        {
+                            levelinfo.Rooms = go.GetComponent<CameraFollow>().Rooms;
+                            continue;
+                        }
                         if (go.transform.parent != null)
                             continue;
                         LevelItem li = new LevelItem();
