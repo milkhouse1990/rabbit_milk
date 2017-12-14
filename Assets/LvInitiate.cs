@@ -29,12 +29,15 @@ public class LvInitiate : MonoBehaviour
 
             foreach (LevelItem li in levelinfo.items)
             {
+                string tag = li.tag;
                 string name = li.name;
                 float x = li.x + 1;
                 float y = li.y;
 
-                Debug.Log("tile name: " + name);
-                GameObject pre = Resources.Load("Prefabs\\" + name, typeof(GameObject)) as GameObject;
+                GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
+                if (!pre)
+                    Debug.Log("tile " + name + " load failed.");
+
                 pre = Instantiate(pre, new Vector3(x, y, 0), Quaternion.identity);
                 pre.name = name;
             }

@@ -8,6 +8,7 @@ using UnityEditor;
 public class GridEditor : Editor
 {
     Grid grid;
+    int focus;
     int[] focus_tile;
     Texture2D[][] TileTextures = new Texture2D[2][];
     string[][] TileNames = new string[2][];
@@ -17,6 +18,8 @@ public class GridEditor : Editor
     {
         grid = (Grid)target;
 
+        // toolbar init
+        focus = 0;
         focus_tile = new int[2] { 0, 0 };
         catecory = new string[2] { "Wall", "Enemy" };
         // load tiles
