@@ -8,41 +8,33 @@ using UnityEditor;
 public class GridEditor : Editor
 {
     Grid grid;
-    int focus = 1;
-    int focus_tile = 0;
-    Texture2D[] tilelist;
-    Texture2D[] WallTileTextures;
-    string[] tilename = { "npc0", "enemy" };
-    string[] WallTileNames;
+    int[] focus_tile;
+    Texture2D[][] TileTextures = new Texture2D[2][];
+    string[][] TileNames = new string[2][];
+    string[] catecory;
 
     public void OnEnable()
     {
         grid = (Grid)target;
 
-        //wall tiles
-        Object[] WallTiles = Resources.LoadAll("Prefabs\\Walls");// as GameObject[];
-        Debug.Log(WallTiles.Length);
-        int l_WallTiles = WallTiles.Length;
-        WallTileTextures = new Texture2D[l_WallTiles];
-        WallTileNames = new string[l_WallTiles];
-        int i = 0;
-        foreach (Object tile in WallTiles)
+        focus_tile = new int[2] { 0, 0 };
+        catecory = new string[2] { "Wall", "Enemy" };
+        // load tiles
+        for (int i = 0; i < 2; i++)
         {
-            GameObject gotile = tile as GameObject;
-            WallTileTextures[i] = gotile.GetComponent<SpriteRenderer>().sprite.texture;
-            WallTileNames[i] = gotile.name;
-            i++;
+            Object[] WallTiles = Resources.LoadAll("Prefabs\\" + catecory[i]);// as GameObject[];
+            int l_WallTiles = WallTiles.Length;
+            TileTextures[i] = new Texture2D[l_WallTiles];
+            TileNames[i] = new string[l_WallTiles];
+            int j = 0;
+            foreach (Object tile in WallTiles)
+            {
+                GameObject gotile = tile as GameObject;
+                TileTextures[i][j] = gotile.GetComponent<SpriteRenderer>().sprite.texture;
+                TileNames[i][j] = gotile.name;
+                j++;
+            }
         }
-
-
-
-        tilelist = new Texture2D[2];
-        GameObject pre = Resources.Load("Prefabs\\Enemies\\" + "npc0") as GameObject;
-        Texture2D texture = pre.GetComponent<SpriteRenderer>().sprite.texture;
-        tilelist[0] = texture;
-        pre = Resources.Load("Prefabs\\Enemies\\" + "enemy") as GameObject;
-        texture = pre.GetComponent<SpriteRenderer>().sprite.texture;
-        tilelist[1] = texture;
 
         SceneView.onSceneGUIDelegate = GridUpdate;
     }
@@ -82,13 +74,11 @@ public class GridEditor : Editor
         GUILayout.BeginArea(new Rect(0, 0, 1000, 640));
         // GUILayout.BeginHorizontal();
 
-        string[] toolbar_text = { "Wall", "Enemy" };
-        focus = GUILayout.Toolbar(focus, toolbar_text, GUILayout.Width(100));
-        if (focus == 0)
-            focus_tile = GUILayout.Toolbar(focus_tile, WallTileTextures, GUILayout.Width(64 * WallTileTextures.Length), GUILayout.Height(64));
-        else
-            focus_tile = GUILayout.Toolbar(focus_tile, tilelist, GUILayout.Width(128), GUILayout.Height(64));
+        focus = GUILayout.Toolbar(focus, catecory, GUILayout.Width(64 * catecory.Length));
+
+        focus_tile[focus] = GUILayout.Toolbar(focus_tile[focus], TileTextures[focus], GUILayout.Width(64 * TileTextures[focus].Length), GUILayout.Height(64));
         // GUILayout.EndHorizontal();
+        GUILayout.Label("press a to add, s to save,\nwhen the scene window is activated.");
 
         GUILayout.EndArea();
         Handles.EndGUI();
@@ -103,10 +93,9 @@ public class GridEditor : Editor
             switch (e.character)
             {
                 case 'a':
-                    string name = WallTileNames[focus_tile];
-                    string catecory = "Walls";
-                    GameObject pre = Resources.Load("Prefabs\\" + catecory + "\\" + name, typeof(GameObject)) as GameObject;
-                    pre = Instantiate(pre);
+                    string name = TileNames[focus][focus_tile[focus]];
+                    Object loaded = Resources.Load("Prefabs\\" + catecory[focus] + "\\" + name, typeof(GameObject));
+                    GameObject pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
                     pre.name = name;
 
                     Vector3 aligned = new Vector3(Mathf.Floor(mousePos.x / grid.width) * grid.width + grid.width / 2, Mathf.Floor(mousePos.y / grid.height) * grid.height + grid.height / 2, 0);
@@ -135,6 +124,7 @@ public class GridEditor : Editor
                         if (go.transform.parent != null)
                             continue;
                         LevelItem li = new LevelItem();
+                        li.tag = go.tag;
                         li.name = go.name;
                         li.x = go.transform.position.x;
                         li.y = go.transform.position.y;
