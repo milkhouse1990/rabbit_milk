@@ -28,29 +28,13 @@ public class AvgEngine : MonoBehaviour
     private int i = 0;
     private string speaker_name = "";
 
-    /*
-1 milk
-2 cola
-3 hime
-4 strawberry
-*/
-    private string[] speakerid = { "0", "牛奶酱", "可乐炭", "公主殿下", "草莓" };
     private string words = "";
     private bool pause = false;
     private bool wait = false;
     private int alarm = -1;
 
     private const int FPS = 60;
-    private const int BYTEPERLINE = 20;
 
-    //for debug
-    private string errmsg = "";
-    private bool err = false;
-
-    //for button a
-    private int guialpha = 20;
-    private bool al = true;
-    public GUIStyle gs;
     //for "warning"
     private bool warning_logo;
     private bool can_skip;
@@ -70,12 +54,6 @@ public class AvgEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        guialpha--;
-        if (guialpha == 0)
-        {
-            guialpha = 20;
-            al = !al;
-        }
         if (!pause && !wait)
         {
             //command load

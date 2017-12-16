@@ -132,7 +132,7 @@ public class GridEditor : Editor
                     GameObject[] AllGameObjects = FindObjectsOfType(typeof(GameObject)) as GameObject[];
                     foreach (GameObject go in AllGameObjects)
                     {
-                        if (go.name == "grid")
+                        if (go.name == "grid" || go.name == "scenario")
                             continue;
                         if (go.name == "Main Camera")
                         {

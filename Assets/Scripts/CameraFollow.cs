@@ -29,6 +29,7 @@ public class CameraFollow : MonoBehaviour
     static float tiles = 64f;
     static float xtiles = 1280f / tiles;
     static float ytiles = 720f / tiles;
+    public int CameraMode = 0;
     public Rect[] Rooms;
     private Rect4 CurrentRoom;
     private float left_border;
@@ -44,99 +45,110 @@ public class CameraFollow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        target = GameObject.Find("milk").transform;
-        if (target != null)
+        switch (CameraMode)
         {
-            // find current room
-            CurrentRoom = FindCurrentRoom();
+            case 0:
+                target = GameObject.Find("milk").transform;
+                if (target != null)
+                {
+                    // find current room
+                    CurrentRoom = FindCurrentRoom();
+                }
+                else
+                    Debug.Log("cannot find milk.");
+                break;
         }
-        else
-            Debug.Log("cannot find milk.");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (b_through)
+        switch (CameraMode)
         {
-            case through.Right:
-                if (transform.position.x >= CurrentRoom.left + xtiles / 2)
+            case 0:
+                switch (b_through)
                 {
-                    b_through = through.None;
-                    target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
-                }
-                else
-                    transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                break;
-            case through.Left:
-                if (transform.position.x <= CurrentRoom.right - xtiles / 2)
-                {
-                    b_through = through.None;
-                    target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
-                }
-                else
-                    transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
-                break;
-            case through.None:
-                if (target != null)
-                {
-                    // player view
-                    // left
-                    float PlayerViewLeft = target.position.x - 10f;
-                    float RoomLeft = CurrentRoom.left;
-                    if (PlayerViewLeft < RoomLeft)
-                    {
-                        PlayerViewLeft = RoomLeft;
-                    }
-                    else
-                    {
-                        // right
-                        float PlayerViewRight = target.position.x + 10f;
-                        float RoomRight = CurrentRoom.right;
-                        if (PlayerViewRight > RoomRight)
+                    case through.Right:
+                        if (transform.position.x >= CurrentRoom.left + xtiles / 2)
                         {
-                            PlayerViewRight = RoomRight;
-                            PlayerViewLeft = PlayerViewRight - 20f;
+                            b_through = through.None;
+                            target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
                         }
-                    }
-
-                    // up
-                    float PlayerViewUp = target.position.y + ytiles / 2;
-                    float RoomUp = CurrentRoom.up;
-                    if (PlayerViewUp > RoomUp)
-                    {
-                        PlayerViewUp = RoomUp;
-                    }
-                    else
-                    {
-                        // down
-                        float PlayerViewDown = target.position.y - ytiles / 2;
-                        float RoomDown = CurrentRoom.down;
-                        if (PlayerViewDown < RoomDown)
+                        else
+                            transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
+                        break;
+                    case through.Left:
+                        if (transform.position.x <= CurrentRoom.right - xtiles / 2)
                         {
-                            PlayerViewDown = RoomDown;
-                            PlayerViewUp = PlayerViewDown + ytiles;
+                            b_through = through.None;
+                            target.gameObject.GetComponent<Platformer2DUserControl>().enabled = true;
                         }
-                    }
+                        else
+                            transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
+                        break;
+                    case through.None:
+                        if (target != null)
+                        {
+                            // player view
+                            // left
+                            float PlayerViewLeft = target.position.x - 10f;
+                            float RoomLeft = CurrentRoom.left;
+                            if (PlayerViewLeft < RoomLeft)
+                            {
+                                PlayerViewLeft = RoomLeft;
+                            }
+                            else
+                            {
+                                // right
+                                float PlayerViewRight = target.position.x + 10f;
+                                float RoomRight = CurrentRoom.right;
+                                if (PlayerViewRight > RoomRight)
+                                {
+                                    PlayerViewRight = RoomRight;
+                                    PlayerViewLeft = PlayerViewRight - 20f;
+                                }
+                            }
 
-                    transform.position = new Vector3(PlayerViewLeft + 10f, PlayerViewUp - ytiles / 2, -20);
+                            // up
+                            float PlayerViewUp = target.position.y + ytiles / 2;
+                            float RoomUp = CurrentRoom.up;
+                            if (PlayerViewUp > RoomUp)
+                            {
+                                PlayerViewUp = RoomUp;
+                            }
+                            else
+                            {
+                                // down
+                                float PlayerViewDown = target.position.y - ytiles / 2;
+                                float RoomDown = CurrentRoom.down;
+                                if (PlayerViewDown < RoomDown)
+                                {
+                                    PlayerViewDown = RoomDown;
+                                    PlayerViewUp = PlayerViewDown + ytiles;
+                                }
+                            }
 
-                    // walk through right
-                    if (target.position.x > CurrentRoom.right)
-                    {
-                        b_through = through.Right;
-                        CurrentRoom = FindCurrentRoom();
-                        target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                        target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
-                    }
-                    // walk through left
-                    if (target.position.x < CurrentRoom.left)
-                    {
-                        b_through = through.Left;
-                        CurrentRoom = FindCurrentRoom();
-                        target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                        target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
-                    }
+                            transform.position = new Vector3(PlayerViewLeft + 10f, PlayerViewUp - ytiles / 2, -20);
+
+                            // walk through right
+                            if (target.position.x > CurrentRoom.right)
+                            {
+                                b_through = through.Right;
+                                CurrentRoom = FindCurrentRoom();
+                                target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                                target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                            }
+                            // walk through left
+                            if (target.position.x < CurrentRoom.left)
+                            {
+                                b_through = through.Left;
+                                CurrentRoom = FindCurrentRoom();
+                                target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
+                                target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                            }
+                        }
+                        break;
                 }
                 break;
         }

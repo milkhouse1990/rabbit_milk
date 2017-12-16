@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1014857682835502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2083535, y: 1.8660835, z: 0}
+  m_LocalPosition: {x: 78.6886, y: 4.4426537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,4 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728741132f32184b8c7ed4fe8769ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pre_act_init: {fileID: 1356184392156454, guid: bf02589939cec174cac05f822dd7147a,
+    type: 2}
   scenename: 0Castle1Outside
