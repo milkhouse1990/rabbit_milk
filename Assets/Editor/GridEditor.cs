@@ -10,8 +10,8 @@ public class GridEditor : Editor
     Grid grid;
     int focus;
     int[] focus_tile;
-    Texture2D[][] TileTextures = new Texture2D[2][];
-    string[][] TileNames = new string[2][];
+    Texture2D[][] TileTextures;
+    string[][] TileNames;
     string[] catecory;
 
     public void OnEnable()
@@ -20,10 +20,16 @@ public class GridEditor : Editor
 
         // toolbar init
         focus = 0;
-        focus_tile = new int[2] { 0, 0 };
-        catecory = new string[2] { "Wall", "Enemy" };
+        catecory = new string[] { "Wall", "Enemy", "Npc", "Event" };
+        int l_catecory = catecory.Length;
+        focus_tile = new int[l_catecory];
+        for (int i = 0; i < l_catecory; i++)
+            focus_tile[i] = 0;
+        TileTextures = new Texture2D[l_catecory][];
+        TileNames = new string[l_catecory][];
+
         // load tiles
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < l_catecory; i++)
         {
             Object[] WallTiles = Resources.LoadAll("Prefabs\\" + catecory[i]);// as GameObject[];
             int l_WallTiles = WallTiles.Length;
@@ -33,7 +39,11 @@ public class GridEditor : Editor
             foreach (Object tile in WallTiles)
             {
                 GameObject gotile = tile as GameObject;
-                TileTextures[i][j] = gotile.GetComponent<SpriteRenderer>().sprite.texture;
+                SpriteRenderer sr = gotile.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                    TileTextures[i][j] = gotile.GetComponent<SpriteRenderer>().sprite.texture;
+                else
+                    TileTextures[i][j] = null;
                 TileNames[i][j] = gotile.name;
                 j++;
             }

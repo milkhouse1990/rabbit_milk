@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472702091474996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.12, y: 3.28, z: -1}
+  m_LocalPosition: {x: 60.98, y: 2.6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428265104886328}
@@ -295,14 +295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbbc44562d12f0d4f8149d7b2de48957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1498291320931890, guid: 0b23795da1b7eeb49b2719fd40951e23, type: 2}
   icon: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
   icon_milk: {fileID: 2800000, guid: 990f2d71993903647854f77d8145309f, type: 3}
   frame: {fileID: 2800000, guid: 4fa4023704bd3944c9fea34e60224327, type: 3}
   frame1: {fileID: 2800000, guid: c135e1165477f5742810167e35c66b47, type: 3}
   np: {fileID: 2800000, guid: 5b52f4494d6851749afa6145d27866c6, type: 3}
-  createid:
-  - {fileID: 1014857682835502, guid: bbb363d29d57c5f42a5335947bcd0333, type: 2}
-  - {fileID: 1693564676118678, guid: 2a7d95bb7a3fe97499c24948ed89b1ea, type: 2}
   gs:
     m_Name: 
     m_Normal:

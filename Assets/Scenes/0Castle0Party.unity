@@ -464,6 +464,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114632425427069938, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
         type: 2}
+      propertyPath: Rooms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114632425427069938, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
+        type: 2}
       propertyPath: scroll_door.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -533,6 +538,11 @@ Prefab:
         type: 2}
       propertyPath: m_AllowMSAA
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114632425427069938, guid: 2bdc5a8ed1d32a141be2b78569d334c5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bdc5a8ed1d32a141be2b78569d334c5, type: 2}

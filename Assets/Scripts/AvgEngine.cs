@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class AvgEngine : MonoBehaviour
 {
 
+    public GameObject canvas;
+    private GameObject co_canvas;
     public Texture2D icon;
     public Texture2D icon_milk;
     public Texture2D frame;
@@ -18,16 +20,12 @@ public class AvgEngine : MonoBehaviour
     0 nextscene
     1 hime
     */
-    public GameObject[] createid;
     private GameObject npc;
 
-    private string[] text;
-    private string dialogue_next = "";
     //ifstream file;
     private string[] commands;
     private string[] para;
     private int i = 0;
-    private int speaker = -1;
     private string speaker_name = "";
 
     /*
@@ -61,6 +59,12 @@ public class AvgEngine : MonoBehaviour
     {
         warning_logo = false;
         can_skip = true;
+        co_canvas.SetActive(true);
+    }
+    void Awake()
+    {
+        co_canvas = Instantiate(canvas);
+        co_canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -72,26 +76,6 @@ public class AvgEngine : MonoBehaviour
             guialpha = 20;
             al = !al;
         }
-        /*if keyboard_check_pressed(global.my_START)
-        {
-        file_text_close(file);
-        file = -1;
-        avgend = true;
-        }
-
-        if pause
-        {
-        if keyboard_check_pressed(global.my_A)
-        {
-        file_text_readln(file);
-        pause = false;
-        err = false;
-        }
-        }
-        else if wait
-        {
-        }
-        else*/
         if (!pause && !wait)
         {
             //command load
@@ -114,19 +98,20 @@ public class AvgEngine : MonoBehaviour
                         alarm = temp * FPS;
                         break;
 
-                    //create id x y
+                    //create category name x y
                     case "create":
-                        int id;
+                        string category = para[1];
+                        string name = para[2];
                         float x, y;
-                        int.TryParse(para[1], out id);
-                        float.TryParse(para[2], out x);
-                        float.TryParse(para[3], out y);
+                        float.TryParse(para[3], out x);
+                        float.TryParse(para[4], out y);
                         //check whether the npc exists
-                        npc = GameObject.Find(createid[id].name);
+                        npc = GameObject.Find(name);
                         if (npc == null)
                         {
-                            npc = Instantiate(createid[id], new Vector3(x, y, 0), Quaternion.identity);
-                            npc.name = createid[id].name;
+                            GameObject go = Resources.Load("Prefabs\\" + category + "\\" + name, typeof(GameObject)) as GameObject;
+                            npc = Instantiate(go, new Vector3(x, y, 0), Quaternion.identity);
+                            npc.name = name;
                         }
                         else
                             npc.transform.position = new Vector3(x, y, 0);
@@ -249,7 +234,11 @@ public class AvgEngine : MonoBehaviour
                         //text color
                         if (speaker_name == "牛奶酱")
                             words = "<color=magenta>" + words + "</color>";
+                        co_canvas.GetComponent<AVGUI>().Say(speaker_name, words);
                         break;
+
+
+
 
                         //Debug.Log("can't understand command: " + commands[i]);
                 }
@@ -282,85 +271,6 @@ public class AvgEngine : MonoBehaviour
             Resume();
         if (alarm > -1)
             alarm--;
-    }
-
-    void OnGUI()
-    {
-        const int xscreen = 1280, yscreen = 720, tile = 64;
-        if (err)
-        {
-            GUI.Label(new Rect(100, 0, 640, 320), errmsg);
-        }
-        else if (pause)
-        {
-
-            /*
-            //milk
-            if (speaker = "1")
-            {
-            //cos
-            draw_sprite(spr_avatar_milk, global.necklace, view_xview + 5, view_yview + 5)
-            //face
-            if health > 8
-            {
-            draw_sprite(spr_avatar_milkf, 0, view_xview + 5, view_yview + 5);
-            }
-            else
-            {
-            draw_sprite(spr_avatar_milkf, 2, view_xview + 5, view_yview + 5);
-            }
-            image_speed = 0;
-            }
-            //chara
-
-            else
-            {
-            draw_sprite(spr_avatar, real(speaker) - 2, view_xview + 635, view_yview + 5)
-            }
-
-            //dialogue
-            draw_sprite(spr_dialogue, 0, view_xview + pos, view_yview + 5)
-            draw_sprite_ext(spr_nextpage, 0, view_xview + 450 + pos, view_yview + 70, 1, 1, 1, c_white, al)
-
-            */
-
-
-            //TALK
-            //draw_text(0, 0, speaker);
-            //int i = 0;
-
-            /*if (words != "")
-            {
-
-            words = "";
-            }*/
-            if (words != "")
-            {
-                //icon
-                if (speaker_name == "牛奶酱")
-                    GUI.DrawTexture(new Rect(0, 720 - 196, 128, 196), icon_milk);
-                //frame
-                if (speaker_name == "牛奶酱")
-                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame1);
-                else
-                    GUI.Label(new Rect(2 * tile, yscreen - 2 * tile, xscreen - 4 * tile, 2 * tile), frame);
-                //nextpage
-                if (al)
-                    GUI.Label(new Rect(xscreen - 4f * tile, yscreen - tile, tile, tile), np);
-                //name
-                GUI.Label(new Rect(3f * tile, yscreen - 2.5f * tile, xscreen - 6 * tile, 2 * tile), speaker_name, gs);
-                //words           
-
-                GUI.Label(new Rect(3f * tile, yscreen - 1.5f * tile, xscreen - 6 * tile, 2 * tile), words, gs);
-            }
-
-        }
-
-        //else if para[0] == "charaset"
-        {
-        }
-        if (warning_logo)
-            GUI.Label(new Rect(500, 250, 1280, 640), "WARNING", gs);
     }
 
     public void Open(string binid)
@@ -421,6 +331,7 @@ public class AvgEngine : MonoBehaviour
         GetComponent<Platformer2DUserControl>().enabled = true;
         //GetComponent<hp_gauge>().enabled = true;
         GetComponent<AvgEngineInput>().enabled = false;
+        co_canvas.SetActive(false);
         enabled = false;
     }
 

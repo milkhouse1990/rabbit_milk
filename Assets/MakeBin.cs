@@ -14,8 +14,9 @@ public class MakeBin : MonoBehaviour
         string scene = "x";
         string cut = "x";
         string filename = "xxx";
+        string ext = ".sce";
         //read .txt
-        string path = "Scenario\\world" + MakeWorld + ".script";
+        string path = "Scenario\\world" + MakeWorld + ext;
         string[] readins = File.ReadAllLines(path);
 
         path = "Assets\\Resources\\Text\\PLOT" + world + scene + cut + ".txt";

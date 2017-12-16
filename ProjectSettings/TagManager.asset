@@ -10,6 +10,8 @@ TagManager:
   - InvisibleDoorx
   - Wall
   - Enemy
+  - enemy
+  - Event
   layers:
   - Default
   - TransparentFX

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 61925992733991936}
   - component: {fileID: 50484482987874922}
   - component: {fileID: 114439839803593034}
+  - component: {fileID: 114358567190815672}
   m_Layer: 0
   m_Name: boss1
   m_TagString: enemy
@@ -118,7 +119,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!61 &61658539763862704
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -169,13 +170,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.91716, y: 3.9769135}
   m_EdgeRadius: 0
---- !u!114 &114439839803593034
+--- !u!114 &114358567190815672
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1695261289888076}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6dda9ab8721f846a1a48284afe382e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss_hp_guage: {fileID: 1456377022075218, guid: ab976f1ecf19d7c4f9265d7141333ef5,
+    type: 2}
+--- !u!114 &114439839803593034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695261289888076}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36069a57fc176f540b66be86d48aacc6, type: 3}
   m_Name: 
@@ -193,9 +207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpmax: 16
+  mpmax: 0
   atk: 1
   def: 0
-  milk_die: {fileID: 0}
   b_autorecover: 0
 --- !u!114 &114800365569411516
 MonoBehaviour:
@@ -208,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70130a648518e44f959c0a9bcce9b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drop: []
 --- !u!114 &114867197098230988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,9 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpmax: 64
+  mpmax: 0
   atk: 1
   def: 0
-  milk_die: {fileID: 0}
   b_autorecover: 0
 --- !u!212 &212166937020855856
 SpriteRenderer:
@@ -275,6 +290,8 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212701875940150868
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -315,3 +332,5 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
