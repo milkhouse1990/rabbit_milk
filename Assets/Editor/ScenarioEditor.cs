@@ -1,14 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using UnityEngine;
+using UnityEditor;
 
-public class MakeBin : MonoBehaviour
+[CustomEditor(typeof(Scenario))]
+public class ScenarioEditor : Editor
 {
-    public string MakeWorld;
-    // Use this for initialization
-    void Start()
+    private Scenario scenario;
+    void OnEnable()
+    {
+        scenario = (Scenario)target;
+        SceneView.onSceneGUIDelegate = ScenarioUpdate;
+    }
+    void ScenarioUpdate(SceneView scenview)
+    {
+        // text instruction
+        Handles.BeginGUI();
+        GUILayout.Label("press c to convert .sce files,\nwhen the scene window is activated");
+        Handles.EndGUI();
+
+        // key process
+        Event e = Event.current;
+
+        if (e.isKey)
+        {
+            if (e.character == 'c')
+            {
+                MakeBin(scenario.world);
+            }
+        }
+    }
+
+    void MakeBin(string MakeWorld)
     {
         string world = "x";
         string scene = "x";

@@ -264,7 +264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5154\u8033\u9B54\u5973\u725B\u5976\u9171 Ver. Alpha"
+  m_Text: "\u5154\u8033\u9B54\u5973\u725B\u5976\u9171 2017"
 --- !u!222 &1084373929
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class Boss : MonoBehaviour
     public void GetReady()
     {
         // ready = true;
-        GetComponent<Enemy1>().enabled = true;
+        // GetComponent<Enemy1>().enabled = true;
         Instantiate(boss_hp_guage);
     }
 }

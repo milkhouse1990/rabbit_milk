@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LvInitiate : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class LvInitiate : MonoBehaviour
             string datastring = xs.LoadXML(path);
             LevelInfo levelinfo = xs.DeserializeObject(datastring, typeof(LevelInfo)) as LevelInfo;
 
+            Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
             Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
 
             foreach (LevelItem li in levelinfo.items)
@@ -46,5 +48,20 @@ public class LvInitiate : MonoBehaviour
 
 
         }
+    }
+    public void ReloadMap(string MapName)
+    {
+        GameObject[] AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject go in AllGameObjects)
+        {
+            if (go == gameObject)
+                continue;
+            if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario")
+                continue;
+            if (go.transform.parent != null)
+                continue;
+            GameObject.Destroy(go);
+        }
+        LoadMap(MapName);
     }
 }

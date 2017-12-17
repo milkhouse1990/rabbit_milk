@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.SceneManagement;
 
-public class TitleMenu : MonoBehaviour {
+public class TitleMenu : MonoBehaviour
+{
 
     private List page;
     //private GameObject title_menu;
@@ -21,7 +22,8 @@ public class TitleMenu : MonoBehaviour {
     public Rect info_pos;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         PlayerPrefs.DeleteAll();
 
         farm_menu = Instantiate(data_canvas);
@@ -30,9 +32,9 @@ public class TitleMenu : MonoBehaviour {
 
         //list
         string binid = "MENU0000";
-        ReadList rl = new ReadList(binid); 
+        ReadList rl = new ReadList(binid);
 
-        main_menu = Instantiate(list_tool,transform);
+        main_menu = Instantiate(list_tool, transform);
         main_menu.SetListPos(list_pos);
         main_menu.SetInfoPos(info_pos);
         main_menu.GetComponent<ListTool>().InitText(rl);
@@ -40,7 +42,8 @@ public class TitleMenu : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         //deactive
         if (pause)
         {
@@ -60,8 +63,13 @@ public class TitleMenu : MonoBehaviour {
                 switch (main_menu.GetComponent<ListTool>().GetFocus())
                 {
                     case 0:
-                        DataInit();
-                        SceneManager.LoadScene("0Castle0Party");
+                        if (Input.GetButton("L"))
+                            SceneManager.LoadScene("School");
+                        else
+                        {
+                            DataInit();
+                            SceneManager.LoadScene("0Castle0Party");
+                        }
                         break;
                     case 2:
                         SceneManager.LoadScene("database");
