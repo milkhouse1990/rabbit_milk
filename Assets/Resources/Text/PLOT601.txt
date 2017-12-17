@@ -1,2 +1,1 @@
-0 什么？
-create 2 -1 -3
+create npc bear -1 -3

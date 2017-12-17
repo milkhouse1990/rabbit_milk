@@ -10,6 +10,6 @@
 牛奶酱 真是拿你没办法。
 恰亚 是我拿你没办法才对好吗，我为什么要听你的？
 vibration
-create 2 -1 -3
+create npc bear -1 -3
 牛奶酱 这…这什么啊？
 plot 601

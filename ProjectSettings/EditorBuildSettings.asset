@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/1Forest.unity
     guid: e49dd4a711c988e4490dd621ee53f3c0
+  - enabled: 1
+    path: Assets/Scenes/School.unity
+    guid: fe6c3ed44148858489cdd6cf3d884615
