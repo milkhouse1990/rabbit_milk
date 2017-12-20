@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(Grid))]
 public class GridEditor : Editor
@@ -87,11 +88,15 @@ public class GridEditor : Editor
         GUILayout.BeginArea(new Rect(0, 0, 1000, 640));
         // GUILayout.BeginHorizontal();
 
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Scene Name: ", GUILayout.Width(128));
+        grid.scenename = GUILayout.TextField(grid.scenename, GUILayout.Width(128));
+        GUILayout.EndHorizontal();
         focus = GUILayout.Toolbar(focus, catecory, GUILayout.Width(64 * catecory.Length));
 
         focus_tile[focus] = GUILayout.Toolbar(focus_tile[focus], TileTextures[focus], GUILayout.Width(64 * TileTextures[focus].Length), GUILayout.Height(64));
         // GUILayout.EndHorizontal();
-        GUILayout.Label("press a to add, s to save,\nwhen the scene window is activated.");
+        GUILayout.Label("press a to add, s to save, d to load,\nwhen the scene window is activated.");
 
         GUILayout.EndArea();
         Handles.EndGUI();
@@ -110,6 +115,7 @@ public class GridEditor : Editor
                     Object loaded = Resources.Load("Prefabs\\" + catecory[focus] + "\\" + name, typeof(GameObject));
                     GameObject pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
                     pre.name = name;
+                    pre.tag = catecory[focus];
 
                     Vector3 aligned = new Vector3(Mathf.Floor(mousePos.x / grid.width) * grid.width + grid.width / 2, Mathf.Floor(mousePos.y / grid.height) * grid.height + grid.height / 2, 0);
                     pre.transform.position = aligned;
@@ -154,6 +160,45 @@ public class GridEditor : Editor
                     xs.CreateXML(path, datastring);
 
                     Debug.Log("save map success!");
+                    break;
+                // load the map
+                case 'd':
+                    // clear the map
+                    AllGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+                    foreach (GameObject go in AllGameObjects)
+                    {
+                        if (go.name == "grid" || go.name == "Main Camera" || go.name == "scenario")
+                            continue;
+                        if (go.transform.parent != null)
+                            continue;
+                        GameObject.DestroyImmediate(go);
+                    }
+                    // load the map
+                    xs = new XmlSaver();
+                    path = "Level/" + grid.scenename + ".lv";
+                    if (xs.hasFile(path))
+                    {
+                        datastring = xs.LoadXML(path);
+                        levelinfo = xs.DeserializeObject(datastring, typeof(LevelInfo)) as LevelInfo;
+
+                        Camera.main.GetComponent<CameraFollow>().CameraMode = 0;
+                        Camera.main.GetComponent<CameraFollow>().Rooms = levelinfo.Rooms;
+
+                        foreach (LevelItem li in levelinfo.items)
+                        {
+                            string tag = li.tag;
+                            name = li.name;
+                            float x = li.x;
+                            float y = li.y;
+
+                            loaded = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject));
+                            pre = PrefabUtility.InstantiatePrefab(loaded) as GameObject;
+                            pre.name = name;
+                            pre.transform.position = new Vector3(x, y, 0);
+                        }
+                    }
+                    else
+                        Debug.Log("the level data does not exist.");
                     break;
             }
         }

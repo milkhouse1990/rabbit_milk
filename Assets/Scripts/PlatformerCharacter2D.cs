@@ -12,6 +12,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+    private Vector3 OldPosition;
 
     private Transform m_GroundCheckL;    // A position marking where to check if the player is grounded.
     private Transform m_GroundCheckR;
@@ -36,6 +37,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool double_jump = false;
     private bool m_clothes = false;
 
+    // about ramp
+    private bool OnRamp = false;
+
     //ability
     private bool a_doublejump;
 
@@ -48,6 +52,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private float jump_velocity = 12;
     void Start()
     {
+        OldPosition = transform.position;
         CostumeChange(costume);
         m_Anim.SetInteger("Costume", costume);
         for (int i = 0; i < 3; i++)
@@ -116,9 +121,10 @@ public class PlatformerCharacter2D : MonoBehaviour
             double_jump = false;
         }
         m_Anim.SetBool("Ground", m_Grounded);
-
-        // Set the vertical animation
-        m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+        if (OnRamp)
+            // transform.position = new Vector3(transform.position.x, transform.position.x + 10, transform.position.z);
+            // Set the vertical animation
+            m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
         /*
         colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(100, 100), 0);
         for (int i=0;i<colliders.Length;i++)
@@ -130,11 +136,35 @@ public class PlatformerCharacter2D : MonoBehaviour
             m_Anim.SetBool("Attack", false);
         if (counter_attack >= 0)
             counter_attack--;
+
+        OldPosition = transform.position;
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.name == "rampright")
+        {
+            OnRamp = true;
+            GetComponent<Rigidbody2D>().gravityScale = 0f;
+            m_Rigidbody2D.velocity = new Vector2(0, 0)
+            ;
+            m_Grounded = true;
+            if (transform.position.x < OldPosition.x)
+            {
+                transform.position = new Vector3(OldPosition.x, transform.position.y + OldPosition.x - transform.position.x, transform.position.z);
+            }
+        }
 
+    }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.name == "rampright")
+        {
+            OnRamp = false;
+            GetComponent<Rigidbody2D>().gravityScale = 3f;
+        }
 
-
+    }
 
     public void Move(float move, bool crouch, bool jump, bool jump_realise)
     {
@@ -171,7 +201,18 @@ public class PlatformerCharacter2D : MonoBehaviour
                 move = -1;
                 */
             // Move the character
-            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
+            if (OnRamp)
+            {
+                // move = move / 2;
+                if (move > 0)
+                    m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, 0);
+                else
+                    m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, move * m_MaxSpeed);
+                // transform.position = new Vector3(transform.position.x, transform.position.x + 8.5f, transform.position.z);
+
+            }
+            else
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -193,6 +234,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
+                OnRamp = false;
                 m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, jump_velocity);
             }
             else if (a_doublejump)
@@ -320,6 +362,11 @@ public class PlatformerCharacter2D : MonoBehaviour
     public bool GetCrouch()
     {
         return m_Crouch;
+    }
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0, 300, 640, 360), "Physics Test:");
+        GUI.Label(new Rect(0, 320, 640, 360), m_Rigidbody2D.velocity.ToString());
     }
 }
 //}

@@ -35,7 +35,7 @@ public class LvInitiate : MonoBehaviour
             {
                 string tag = li.tag;
                 string name = li.name;
-                float x = li.x + 1;
+                float x = li.x;
                 float y = li.y;
 
                 GameObject pre = Resources.Load("Prefabs\\" + tag + "\\" + name, typeof(GameObject)) as GameObject;
@@ -45,9 +45,9 @@ public class LvInitiate : MonoBehaviour
                 pre = Instantiate(pre, new Vector3(x, y, 0), Quaternion.identity);
                 pre.name = name;
             }
-
-
         }
+        else
+            Debug.Log("the level data does not exist.");
     }
     public void ReloadMap(string MapName)
     {

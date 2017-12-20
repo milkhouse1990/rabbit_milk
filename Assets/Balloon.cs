@@ -14,6 +14,7 @@ public class Balloon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.position.y < -2)
+            transform.position = new Vector2(transform.position.x, 13);
     }
 }
