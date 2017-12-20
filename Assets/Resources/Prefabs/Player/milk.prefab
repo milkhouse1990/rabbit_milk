@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 4182167151313964}
   - component: {fileID: 212366006548349122}
   - component: {fileID: 95732151647025228}
-  - component: {fileID: 50628607197001792}
   - component: {fileID: 114943859579710288}
   - component: {fileID: 114607095318689216}
   - component: {fileID: 114770561150256942}
@@ -90,6 +89,8 @@ GameObject:
   - component: {fileID: 114539085392554898}
   - component: {fileID: 114608835991581718}
   - component: {fileID: 114907220987858546}
+  - component: {fileID: 114730164971383256}
+  - component: {fileID: 114449347682113662}
   m_Layer: 0
   m_Name: milk
   m_TagString: Player
@@ -166,26 +167,6 @@ Transform:
   m_Father: {fileID: 4182167151313964}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50628607197001792
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1472702091474996}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!61 &61692020921255078
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -239,6 +220,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d093d5dd248c02e46a18862a365da224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114449347682113662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472702091474996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f8808cceff92746b518378e004811f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    serializedVersion: 2
+    x: -0.5
+    y: -1.5
+    width: 1
+    height: 3
 --- !u!114 &114539085392554898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,6 +282,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee422004eff1d44cbdf3b1e30c3fc2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114730164971383256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472702091474996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97411969c8248054f8c89a3ee664f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: 0}
+  mGrounded: 0
 --- !u!114 &114770561150256942
 MonoBehaviour:
   m_ObjectHideFlags: 1
