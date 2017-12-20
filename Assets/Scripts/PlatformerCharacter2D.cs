@@ -15,15 +15,12 @@ public class PlatformerCharacter2D : MonoBehaviour
 
     private Transform m_GroundCheckL;    // A position marking where to check if the player is grounded.
     private Transform m_GroundCheckR;
-    const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
-    private bool m_GroundedL;
-    private bool m_GroundedR;
     private bool m_Crouch;
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Animator m_Anim;            // Reference to the player's animator component.
-    private Rigidbody2D m_Rigidbody2D;
+    private Physics2DM mp2;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     private BoxCollider2D c_BoxCollider2D;
@@ -57,13 +54,10 @@ public class PlatformerCharacter2D : MonoBehaviour
     private void Awake()
     {
         // Setting up references.
-        m_GroundCheckL = transform.Find("GroundCheckL");
-        m_GroundCheckR = transform.Find("GroundCheckR");
         m_CeilingCheck = transform.Find("CeilingCheck");
         m_Anim = GetComponent<Animator>();
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
         c_BoxCollider2D = transform.Find("milkCollider").GetComponent<BoxCollider2D>();
-
+        mp2 = GetComponent<Physics2DM>();
     }
 
 
@@ -90,35 +84,12 @@ public class PlatformerCharacter2D : MonoBehaviour
 
             invincible--;
 
-
-
-        m_Grounded = false;
-        m_GroundedL = false;
-        m_GroundedR = false;
-
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(m_GroundCheckL.position, m_GroundCheckL.position + new Vector3(0, -0.1f, 0), m_WhatIsGround);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].name != "milkCollider")
-                m_GroundedL = true;
-        }
-        colliders = Physics2D.OverlapAreaAll(m_GroundCheckR.position, m_GroundCheckR.position + new Vector3(0, -0.1f, 0), m_WhatIsGround);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].name != "milkCollider")
-                m_GroundedR = true;
-        }
-        if (m_GroundedL || m_GroundedR)
-        {
-            m_Grounded = true;
+        if (mp2.mGrounded)
             double_jump = false;
-        }
         m_Anim.SetBool("Ground", m_Grounded);
 
         // Set the vertical animation
-        m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+        m_Anim.SetFloat("vSpeed", mp2.velocity.y);
         /*
         colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(100, 100), 0);
         for (int i=0;i<colliders.Length;i++)
@@ -131,10 +102,6 @@ public class PlatformerCharacter2D : MonoBehaviour
         if (counter_attack >= 0)
             counter_attack--;
     }
-
-
-
-
 
     public void Move(float move, bool crouch, bool jump, bool jump_realise)
     {
@@ -157,7 +124,7 @@ public class PlatformerCharacter2D : MonoBehaviour
         m_Crouch = crouch;
 
         //only control the player if grounded or airControl is turned on
-        if (m_Grounded || m_AirControl)
+        // if (m_Grounded || m_AirControl)
         {
             // Reduce the speed if crouching by the crouchSpeed multiplier
             move = (crouch ? move * m_CrouchSpeed : move);
@@ -171,7 +138,7 @@ public class PlatformerCharacter2D : MonoBehaviour
                 move = -1;
                 */
             // Move the character
-            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
+            mp2.velocity = new Vector2(move * m_MaxSpeed, mp2.velocity.y);
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -188,21 +155,21 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
         // If the player should jump...
         if (a_jump)
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+            if (mp2.mGrounded && jump)// && m_Anim.GetBool("Ground"))
             {
                 // Add a vertical force to the player.
-                m_Grounded = false;
+                mp2.mGrounded = false;
                 m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, jump_velocity);
+                mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
             }
             else if (a_doublejump)
-                if (!m_Grounded && jump && !double_jump)
+                if (!mp2.mGrounded && jump && !double_jump)
                 {
-                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, jump_velocity);
+                    mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
                     double_jump = true;
                 }
-        if (jump_realise && m_Rigidbody2D.velocity.y > 0)
-            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+        if (jump_realise && mp2.velocity.y > 0)
+            mp2.velocity = new Vector2(mp2.velocity.x, 0);
 
     }
 

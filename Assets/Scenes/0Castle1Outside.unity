@@ -159,11 +159,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4182167151313964, guid: 7533d006226713a4fae79c1a95ea0bb6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 60.98
+      value: 53.56
       objectReference: {fileID: 0}
     - target: {fileID: 4182167151313964, guid: 7533d006226713a4fae79c1a95ea0bb6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 4.62
       objectReference: {fileID: 0}
     - target: {fileID: 4182167151313964, guid: 7533d006226713a4fae79c1a95ea0bb6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -189,7 +189,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 89
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 50628607197001792, guid: 7533d006226713a4fae79c1a95ea0bb6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7533d006226713a4fae79c1a95ea0bb6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &30918463
@@ -2464,6 +2465,41 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26b73dbc2fd580d4c9709567c5bf076c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1378158630 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1472702091474996, guid: 7533d006226713a4fae79c1a95ea0bb6,
+    type: 2}
+  m_PrefabInternal: {fileID: 13943382}
+--- !u!114 &1378158638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1378158630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97411969c8248054f8c89a3ee664f8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: 0}
+  mGrounded: 0
+--- !u!114 &1378158642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1378158630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f8808cceff92746b518378e004811f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    serializedVersion: 2
+    x: -0.5
+    y: 1.5
+    width: 1
+    height: 2.5
 --- !u!1 &1383016731
 GameObject:
   m_ObjectHideFlags: 0

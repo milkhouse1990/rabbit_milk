@@ -194,6 +194,7 @@ public class Platformer2DUserControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Debug.Log("control");
         if (!change)
         {
             if (c_stun == 0)

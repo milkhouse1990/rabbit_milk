@@ -61,6 +61,7 @@
      <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\CameraForcedRoll.cs" />
      <Compile Include="Assets\Car.cs" />
+     <Compile Include="Assets\ColliderBox.cs" />
      <Compile Include="Assets\Counter.cs" />
      <Compile Include="Assets\DataBase.cs" />
      <Compile Include="Assets\Diag.cs" />
@@ -98,6 +99,7 @@
      <Compile Include="Assets\MovingRandom.cs" />
      <Compile Include="Assets\Npc.cs" />
      <Compile Include="Assets\Palace.cs" />
+     <Compile Include="Assets\Physics2DM.cs" />
      <Compile Include="Assets\PlayerPrefsClear.cs" />
      <Compile Include="Assets\Plot.cs" />
      <Compile Include="Assets\ReadList.cs" />
