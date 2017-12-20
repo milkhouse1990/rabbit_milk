@@ -12,6 +12,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+    private Vector3 OldPosition;
 
     private Transform m_GroundCheckL;    // A position marking where to check if the player is grounded.
     private Transform m_GroundCheckR;
@@ -33,6 +34,9 @@ public class PlatformerCharacter2D : MonoBehaviour
     private bool double_jump = false;
     private bool m_clothes = false;
 
+    // about ramp
+    private bool OnRamp = false;
+
     //ability
     private bool a_doublejump;
 
@@ -45,6 +49,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private float jump_velocity = 12;
     void Start()
     {
+        OldPosition = transform.position;
         CostumeChange(costume);
         m_Anim.SetInteger("Costume", costume);
         for (int i = 0; i < 3; i++)
@@ -101,192 +106,196 @@ public class PlatformerCharacter2D : MonoBehaviour
             m_Anim.SetBool("Attack", false);
         if (counter_attack >= 0)
             counter_attack--;
-    }
 
-    public void Move(float move, bool crouch, bool jump, bool jump_realise)
-    {
-
-
-        if (costume == 6)
-            crouch = false;
-        // If crouching, check to see if the character can stand up
-        if (!crouch && m_Anim.GetBool("Crouch"))
+        public void Move(float move, bool crouch, bool jump, bool jump_realise)
         {
-            // If the character has a ceiling preventing them from standing up, keep them crouching
-            if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-            {
-                crouch = true;
-            }
-        }
 
-        // Set whether or not the character is crouching in the animator
-        m_Anim.SetBool("Crouch", crouch);
-        m_Crouch = crouch;
 
-        //only control the player if grounded or airControl is turned on
-        // if (m_Grounded || m_AirControl)
-        {
-            // Reduce the speed if crouching by the crouchSpeed multiplier
-            move = (crouch ? move * m_CrouchSpeed : move);
-
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
-            m_Anim.SetFloat("Speed", Mathf.Abs(move));
-            /*
-            if (move > 0)
-                move = 1;
-            else if (move < 0)
-                move = -1;
-                */
-            // Move the character
-            mp2.velocity = new Vector2(move * m_MaxSpeed, mp2.velocity.y);
-
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !m_FacingRight)
+            if (costume == 6)
+                crouch = false;
+            // If crouching, check to see if the character can stand up
+            if (!crouch && m_Anim.GetBool("Crouch"))
             {
-                // ... flip the player.
-                Flip();
-            }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && m_FacingRight)
-            {
-                // ... flip the player.
-                Flip();
-            }
-        }
-        // If the player should jump...
-        if (a_jump)
-            if (mp2.mGrounded && jump)// && m_Anim.GetBool("Ground"))
-            {
-                // Add a vertical force to the player.
-                mp2.mGrounded = false;
-                m_Anim.SetBool("Ground", false);
-                mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
-            }
-            else if (a_doublejump)
-                if (!mp2.mGrounded && jump && !double_jump)
+                // If the character has a ceiling preventing them from standing up, keep them crouching
+                if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
                 {
+                    crouch = true;
+                }
+            }
+
+            // Set whether or not the character is crouching in the animator
+            m_Anim.SetBool("Crouch", crouch);
+            m_Crouch = crouch;
+
+            //only control the player if grounded or airControl is turned on
+            // if (m_Grounded || m_AirControl)
+            {
+                // Reduce the speed if crouching by the crouchSpeed multiplier
+                move = (crouch ? move * m_CrouchSpeed : move);
+
+                // The Speed animator parameter is set to the absolute value of the horizontal input.
+                m_Anim.SetFloat("Speed", Mathf.Abs(move));
+                /*
+                if (move > 0)
+                    move = 1;
+                else if (move < 0)
+                    move = -1;
+                    */
+                // Move the character
+                mp2.velocity = new Vector2(move * m_MaxSpeed, mp2.velocity.y);
+
+                // If the input is moving the player right and the player is facing left...
+                if (move > 0 && !m_FacingRight)
+                {
+                    // ... flip the player.
+                    Flip();
+                }
+                // Otherwise if the input is moving the player left and the player is facing right...
+                else if (move < 0 && m_FacingRight)
+                {
+                    // ... flip the player.
+                    Flip();
+                }
+            }
+            // If the player should jump...
+            if (a_jump)
+                if (mp2.mGrounded && jump)// && m_Anim.GetBool("Ground"))
+                {
+                    // Add a vertical force to the player.
+                    mp2.mGrounded = false;
+                    m_Anim.SetBool("Ground", false);
                     mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
-                    double_jump = true;
                 }
-        if (jump_realise && mp2.velocity.y > 0)
-            mp2.velocity = new Vector2(mp2.velocity.x, 0);
+                else if (a_doublejump)
+                    if (!mp2.mGrounded && jump && !double_jump)
+                    {
+                        mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
+                        double_jump = true;
+                    }
+            if (jump_realise && mp2.velocity.y > 0)
+                mp2.velocity = new Vector2(mp2.velocity.x, 0);
 
-    }
-
-    private void Flip()
-    {
-        // Switch the way the player is labelled as facing.
-        m_FacingRight = !m_FacingRight;
-
-        // Multiply the player's x local scale by -1.
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
-
-    public void CostumeChange(int cos)
-    {
-        costume = cos;
-        m_Anim.SetInteger("Costume", cos);
-        switch (cos)
-        {
-            case 0:
-                m_MaxSpeed = 10f;
-                a_jump = true;
-                a_doublejump = true;
-                //print(a_jump);
-                break;
-            case 1:
-                a_jump = true;
-                a_doublejump = false;
-                break;
-            case 5:
-                a_jump = false;
-                a_doublejump = false;
-                break;
-            case 6:
-                //if (m_Crouch)
-                //{
-                m_MaxSpeed = 15f;
-                //speed = 16;
-                //motion = 0;
-                a_jump = true;
-                a_doublejump = true;
-
-                Instantiate(clothes, transform.position, transform.rotation);
-                //}
-
-                break;
-        }
-        //collider set
-        float pic_height, col_height, rad = 0.1f;
-        if (cos == 6)
-        {
-            pic_height = 0.5f; col_height = 0.5f;
-        }
-        else
-        {
-            pic_height = 3f; col_height = 2.5f;
         }
 
-        c_BoxCollider2D.offset = new Vector2(0, (col_height - pic_height) / 2);
-        c_BoxCollider2D.size = new Vector2(0.8f, col_height - 2 * rad);
-        m_GroundCheckL.transform.localPosition = new Vector3(-0.4f, -pic_height / 2, 0);
-        m_GroundCheckR.transform.localPosition = new Vector3(0.4f, -pic_height / 2, 0);
-
-    }
-
-    public void Shoot()
-    {
-        if (costume == 0)
+        private void Flip()
         {
-            m_Anim.SetBool("Attack", true);
-            counter_attack = 10;
+            // Switch the way the player is labelled as facing.
+            m_FacingRight = !m_FacingRight;
 
-            for (int i = 0; i < 3; i++)
-                if (!bullets[i].GetComponent<Bullet>().GetWorking())
-                {
-                    bullets[i].GetComponent<Bullet>().SetWorking(true);
-                    bullets[i].position = new Vector3(transform.position.x + transform.localScale.x, transform.position.y, 0);
-                    bullets[i].GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
-                    bullets[i].localScale = transform.localScale;
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+
+        public void CostumeChange(int cos)
+        {
+            costume = cos;
+            m_Anim.SetInteger("Costume", cos);
+            switch (cos)
+            {
+                case 0:
+                    m_MaxSpeed = 10f;
+                    a_jump = true;
+                    a_doublejump = true;
+                    //print(a_jump);
                     break;
-                }
+                case 1:
+                    a_jump = true;
+                    a_doublejump = false;
+                    break;
+                case 5:
+                    a_jump = false;
+                    a_doublejump = false;
+                    break;
+                case 6:
+                    //if (m_Crouch)
+                    //{
+                    m_MaxSpeed = 15f;
+                    //speed = 16;
+                    //motion = 0;
+                    a_jump = true;
+                    a_doublejump = true;
 
+                    Instantiate(clothes, transform.position, transform.rotation);
+                    //}
+
+                    break;
+            }
+            //collider set
+            float pic_height, col_height, rad = 0.1f;
+            if (cos == 6)
+            {
+                pic_height = 0.5f; col_height = 0.5f;
+            }
+            else
+            {
+                pic_height = 3f; col_height = 2.5f;
+            }
+
+            c_BoxCollider2D.offset = new Vector2(0, (col_height - pic_height) / 2);
+            c_BoxCollider2D.size = new Vector2(0.8f, col_height - 2 * rad);
+            m_GroundCheckL.transform.localPosition = new Vector3(-0.4f, -pic_height / 2, 0);
+            m_GroundCheckR.transform.localPosition = new Vector3(0.4f, -pic_height / 2, 0);
 
         }
-    }
 
-    public int GetCostume()
-    {
-        return costume;
-    }
-    public bool GetGround()
-    {
-        return m_Grounded;
-    }
-    public void Backward(bool left)
-    {
-        if (left)
-            transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
-        //transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1/0.25f,transform.GetComponent<Rigidbody2D>().velocity.y);
-        //transform.position=new Vector3(transform.position.x - 1/60f/0.5f,transform.position.y,0);
-        else
-            transform.GetComponent<Rigidbody2D>().velocity = new Vector2(1 / 0.25f, transform.GetComponent<Rigidbody2D>().velocity.y);
-        //transform.position = new Vector3(transform.position.x + 1/60f/0.5f, transform.position.y, 0);
+        public void Shoot()
+        {
+            if (costume == 0)
+            {
+                m_Anim.SetBool("Attack", true);
+                counter_attack = 10;
 
+                for (int i = 0; i < 3; i++)
+                    if (!bullets[i].GetComponent<Bullet>().GetWorking())
+                    {
+                        bullets[i].GetComponent<Bullet>().SetWorking(true);
+                        bullets[i].position = new Vector3(transform.position.x + transform.localScale.x, transform.position.y, 0);
+                        bullets[i].GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * 10, 0);
+                        bullets[i].localScale = transform.localScale;
+                        break;
+                    }
+
+
+            }
+        }
+
+        public int GetCostume()
+        {
+            return costume;
+        }
+        public bool GetGround()
+        {
+            return m_Grounded;
+        }
+        public void Backward(bool left)
+        {
+            if (left)
+                transform.position = new Vector3(transform.position.x - 0.1f, transform.position.y, transform.position.z);
+            //transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-1/0.25f,transform.GetComponent<Rigidbody2D>().velocity.y);
+            //transform.position=new Vector3(transform.position.x - 1/60f/0.5f,transform.position.y,0);
+            else
+                transform.GetComponent<Rigidbody2D>().velocity = new Vector2(1 / 0.25f, transform.GetComponent<Rigidbody2D>().velocity.y);
+            //transform.position = new Vector3(transform.position.x + 1/60f/0.5f, transform.position.y, 0);
+
+        }
+        public int GetInvincible()
+        {
+            return invincible;
+        }
+        public void SetInvincible(int inv)
+        {
+            invincible = inv;
+        }
+        public bool GetCrouch()
+        {
+            return m_Crouch;
+        }
+        void OnGUI()
+        {
+            GUI.Label(new Rect(0, 300, 640, 360), "Physics Test:");
+            GUI.Label(new Rect(0, 320, 640, 360), m_Rigidbody2D.velocity.ToString());
+        }
     }
-    public int GetInvincible()
-    {
-        return invincible;
-    }
-    public void SetInvincible(int inv)
-    {
-        invincible = inv;
-    }
-    public bool GetCrouch()
-    {
-        return m_Crouch;
-    }
-}
 //}

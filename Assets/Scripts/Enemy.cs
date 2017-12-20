@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         if (GetComponent<Status>().GetDead())
         {
             Drop();
-            GameObject.Destroy(gameObject);
+            FallOut();
         }
 
     }
@@ -46,5 +46,10 @@ public class Enemy : MonoBehaviour
         // if (drop_item < 2)
         // Instantiate(drop[drop_item], transform.position, Quaternion.identity);
         ;
+    }
+    void FallOut()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(4, 4);
+        GetComponent<Rigidbody2D>().angularVelocity = 720;
     }
 }
