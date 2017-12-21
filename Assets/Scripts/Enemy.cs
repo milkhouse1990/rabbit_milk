@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Enemy : MonoBehaviour
 {
+    public Rect check;
     public GameObject[] drop;
     // Use this for initialization
     void Start()
@@ -22,6 +23,15 @@ public class Enemy : MonoBehaviour
             FallOut();
         }
 
+    }
+    public bool CheckIn(ColliderBox cb)
+    {
+        Rect4 player = new Rect4(cb.size).Local2World(cb.transform);
+        Rect4 npc = new Rect4(check).Local2World(transform);
+        if (player.right <= npc.left || player.left >= npc.left || player.down >= npc.up || player.up <= npc.down)
+            return false;
+        else
+            return true;
     }
     void OnTriggerEnter2D(Collider2D other)
     {

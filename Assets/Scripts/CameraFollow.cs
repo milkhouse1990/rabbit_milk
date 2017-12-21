@@ -22,6 +22,11 @@ public class Rect4
         up = room.y;
         down = room.y - room.height;
     }
+    public Rect4 Local2World(Transform transform)
+    {
+        Rect4 collider = new Rect4(transform.position.y + up, transform.position.y + down, transform.position.x + left, transform.position.x + right);
+        return collider;
+    }
 }
 public class CameraFollow : MonoBehaviour
 {
@@ -137,7 +142,7 @@ public class CameraFollow : MonoBehaviour
                                 b_through = through.Right;
                                 CurrentRoom = FindCurrentRoom();
                                 target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                                target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                                target.gameObject.GetComponent<Physics2DM>().velocity = Vector3.zero;
                             }
                             // walk through left
                             if (target.position.x < CurrentRoom.left)
@@ -145,7 +150,7 @@ public class CameraFollow : MonoBehaviour
                                 b_through = through.Left;
                                 CurrentRoom = FindCurrentRoom();
                                 target.gameObject.GetComponent<Platformer2DUserControl>().enabled = false;
-                                target.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, target.gameObject.GetComponent<Rigidbody2D>().velocity.y, 0);
+                                target.gameObject.GetComponent<Physics2DM>().velocity = Vector3.zero;
                             }
                         }
                         break;

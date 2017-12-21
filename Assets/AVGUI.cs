@@ -28,12 +28,12 @@ public class AVGUI : MonoBehaviour
     }
     public void Say(string speaker_name, string words)
     {
-        string IconName = null;
+        string IconName = "null";
         string framename = "dialogue";
         Color VoiceColor = Color.black;
         if (speaker_name == "牛奶酱")
         {
-            IconName = "icon_milk";
+            IconName = "milk";
             framename = "dialogue1";
             VoiceColor = Color.magenta;
         }
@@ -41,7 +41,7 @@ public class AVGUI : MonoBehaviour
         // icon
         if (IconName != null)
         {
-            icon.sprite = Resources.Load("UI\\" + IconName, typeof(Sprite)) as Sprite;
+            icon.sprite = Resources.Load("UI\\icon_" + IconName, typeof(Sprite)) as Sprite;
         }
         else
             icon.sprite = null;

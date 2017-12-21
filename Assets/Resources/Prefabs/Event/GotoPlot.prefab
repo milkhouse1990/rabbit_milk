@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4392196095969110}
   - component: {fileID: 61430883928084918}
-  - component: {fileID: 114828842690808942}
+  - component: {fileID: 114880088953861226}
   m_Layer: 0
   m_Name: GotoPlot
   m_TagString: Event
@@ -66,7 +66,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
---- !u!114 &114828842690808942
+--- !u!114 &114880088953861226
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1042781252082654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc63041f7062b5a469073b95af8accb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   plotno: 010

@@ -21,7 +21,7 @@ public class PlatformerCharacter2D : MonoBehaviour
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     private Animator m_Anim;            // Reference to the player's animator component.
-    private Physics2DM mp2;
+    public Physics2DM mp2;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     private BoxCollider2D c_BoxCollider2D;
@@ -91,7 +91,7 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         if (mp2.mGrounded)
             double_jump = false;
-        m_Anim.SetBool("Ground", m_Grounded);
+        m_Anim.SetBool("Ground", mp2.mGrounded);
 
         // Set the vertical animation
         m_Anim.SetFloat("vSpeed", mp2.velocity.y);
@@ -164,6 +164,7 @@ public class PlatformerCharacter2D : MonoBehaviour
             {
                 // Add a vertical force to the player.
                 mp2.mGrounded = false;
+                mp2.mRamp = false;
                 m_Anim.SetBool("Ground", false);
                 mp2.velocity = new Vector2(mp2.velocity.x, jump_velocity);
             }
@@ -236,8 +237,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 
         c_BoxCollider2D.offset = new Vector2(0, (col_height - pic_height) / 2);
         c_BoxCollider2D.size = new Vector2(0.8f, col_height - 2 * rad);
-        m_GroundCheckL.transform.localPosition = new Vector3(-0.4f, -pic_height / 2, 0);
-        m_GroundCheckR.transform.localPosition = new Vector3(0.4f, -pic_height / 2, 0);
+        // m_GroundCheckL.transform.localPosition = new Vector3(-0.4f, -pic_height / 2, 0);
+        // m_GroundCheckR.transform.localPosition = new Vector3(0.4f, -pic_height / 2, 0);
 
     }
 

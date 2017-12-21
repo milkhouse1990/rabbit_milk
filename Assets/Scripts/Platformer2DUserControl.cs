@@ -115,11 +115,15 @@ public class Platformer2DUserControl : MonoBehaviour
                 Time.timeScale = 1;
                 if (CrossPlatformInputManager.GetButtonDown("up"))
                 {
-                    if (m_waitnpc)
+                    Npc[] npcs = FindObjectsOfType<Npc>() as Npc[];
+                    foreach (Npc npc in npcs)
                     {
-                        string binid = "NPC" + npcplot;
-                        EnterAVGMode(binid);
-
+                        if (npc.CheckIn(GetComponent<ColliderBox>()))
+                        {
+                            string binid = "NPC" + npc.npcno;
+                            EnterAVGMode(binid);
+                            break;
+                        }
                     }
                 }
 
@@ -344,15 +348,14 @@ public class Platformer2DUserControl : MonoBehaviour
         GetComponent<AvgEngineInput>().enabled = true;
         enabled = false;
         //GetComponent<hp_gauge>().enabled = false;
-
-        m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        m_Character.mp2.velocity = new Vector2(0, 0);
         m_Character.Move(0, false, false, true);
     }
     public void MeetEnemy(GameObject teki)
     {
         if (m_Character.GetInvincible() == 0)
         {
-            m_Character.GetComponent<Rigidbody2D>().velocity = new Vector2(m_Character.GetComponent<Rigidbody2D>().velocity.x, 0);
+            m_Character.mp2.velocity = Vector3.zero;
             c_stun = (int)(60 * 0.25f);
             b_back_left = (teki.transform.position.x - transform.position.x) > 0 ? true : false;
             m_Status.GetDamage(teki.GetComponent<Status>());
