@@ -42,15 +42,16 @@ public class Platformer2DUserControl : MonoBehaviour
     //counter
     private int c_stun = 0;
     private bool b_back_left;
-
+    public GameObject act_menu;
     public GameObject pause_menu;
     private GameObject co_act_menu;
     private GameObject co_pause_menu;
 
     void Start()
     {
-        //co_act_menu = GameObject.Find("ACT_Canvas");
-        //co_act_menu.SetActive(true);
+        co_act_menu = Instantiate(act_menu);
+        co_act_menu.name = "player_hp_gauge";
+        co_act_menu.SetActive(true);
         co_pause_menu = Instantiate(pause_menu);
         co_pause_menu.SetActive(false);
     }

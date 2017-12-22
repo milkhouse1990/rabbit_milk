@@ -113,7 +113,7 @@ public class ScenarioEditor : Editor
     }
     public bool isCommand(string name)
     {
-        string[] commands = { "create", "downstairs", "EndingFastest", "charamove", "boss", "add", "plot", "gotoscene" };
+        string[] commands = { "create", "downstairs", "EndingFastest", "charamove", "boss", "add", "plot", "gotoscene", "vibration", "costume" };
         foreach (string npcname in commands)
             if (npcname == name)
                 return true;

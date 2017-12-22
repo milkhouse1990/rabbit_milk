@@ -48,6 +48,7 @@ public class AvgEngine : MonoBehaviour
     void Awake()
     {
         co_canvas = Instantiate(canvas);
+        co_canvas.name = "AVGCanvas";
         co_canvas.SetActive(false);
     }
 
@@ -135,6 +136,15 @@ public class AvgEngine : MonoBehaviour
                     //chaid2obj[chaid].image_index=chaidind2spr[chaid,real(para[2])];
                     //file_text_readln(file);
                     //}
+
+                    // costume cos
+                    // 牛奶酱换装cos
+                    case "costume":
+                        int cos;
+                        int.TryParse(para[1], out cos);
+                        GetComponent<PlatformerCharacter2D>().CostumeChange(cos);
+                        i++;
+                        break;
                     //charamove x
                     //主角走到(x, *)处
                     case "charamove":
@@ -192,7 +202,9 @@ public class AvgEngine : MonoBehaviour
                     //gotoscene scenename
                     //进入名为scenename的scene
                     case "gotoscene":
-                        SceneManager.LoadScene(para[1]);
+                        GameObject act_init = GameObject.Find("ACTInit");
+                        act_init.GetComponent<LvInitiate>().ReloadMap(para[1]);
+                        i++;
                         break;
 
 
@@ -237,10 +249,15 @@ public class AvgEngine : MonoBehaviour
                         Resume();
                     break;
                 case "vibration":
-                    Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 0.25f * Mathf.Sin(6 * 3.14f / FPS * (2 * FPS - alarm)), Camera.main.transform.position.z);
+                    float OriginCameraPositionY = Camera.main.transform.position.y;
+                    Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, OriginCameraPositionY + 0.25f * Mathf.Sin(6 * 3.14f / FPS * (2 * FPS - alarm)), Camera.main.transform.position.z);
                     break;
             }
         }
+        if (pause)
+            co_canvas.SetActive(true);
+        if (wait)
+            co_canvas.SetActive(false);
     }
 
     void FixedUpdate()

@@ -50,10 +50,11 @@ public class PlatformerCharacter2D : MonoBehaviour
     void Start()
     {
         OldPosition = transform.position;
-        CostumeChange(costume);
-        m_Anim.SetInteger("Costume", costume);
         for (int i = 0; i < 3; i++)
+        {
             bullets[i] = Instantiate(bullet, new Vector3(-99, -99, -99), Quaternion.identity);
+            bullets[i].name = "player_bullet";
+        }
 
     }
     private void Awake()
@@ -293,10 +294,6 @@ public class PlatformerCharacter2D : MonoBehaviour
     public bool GetCrouch()
     {
         return m_Crouch;
-    }
-    void OnGUI()
-    {
-        GUI.Label(new Rect(0, 300, 640, 360), "Physics Test:");
     }
 }
 //}

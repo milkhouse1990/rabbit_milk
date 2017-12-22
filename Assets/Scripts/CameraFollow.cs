@@ -162,7 +162,7 @@ public class CameraFollow : MonoBehaviour
     {
         return b_moving;
     }
-    Rect4 FindCurrentRoom()
+    public Rect4 FindCurrentRoom()
     {
         foreach (Rect room in Rooms)
         {

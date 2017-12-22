@@ -380,6 +380,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data_canvas: {fileID: 1990528157262472, guid: 2269530a7d8c1134d9c715fbe2da1a2e,
     type: 2}
+  DataBaseCanvas: {fileID: 1879876705249540, guid: 3fd4b2f5002dc3343b386ae8a15cb16c,
+    type: 2}
   list_tool: {fileID: 114609453533592492, guid: e411d30375d11d546ad204d1af55afd8,
     type: 2}
   list_pos:

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4006192484980804}
   - component: {fileID: 114198525986165164}
   - component: {fileID: 61993058011802062}
+  - component: {fileID: 114186542606791194}
   m_Layer: 0
   m_Name: GotoScene
   m_TagString: Event
@@ -66,6 +67,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
+--- !u!114 &114186542606791194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014857682835502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2710d71dc4c920f4da31f058f2fde66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plotno: Title
 --- !u!114 &114198525986165164
 MonoBehaviour:
   m_ObjectHideFlags: 1

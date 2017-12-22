@@ -147,12 +147,27 @@ public class GridEditor : Editor
                         }
                         if (go.transform.parent != null)
                             continue;
-                        LevelItem li = new LevelItem();
-                        li.tag = go.tag;
-                        li.name = go.name;
-                        li.x = go.transform.position.x;
-                        li.y = go.transform.position.y;
-                        levelinfo.items.Add(li);
+                        if (go.tag == "Event")
+                        {
+                            EventItem ei = new EventItem();
+                            ei.name = go.name;
+                            ei.x = go.transform.position.x;
+                            ei.y = go.transform.position.y;
+                            if (go.name == "GotoPlot")
+                                ei.arg = go.GetComponent<Plot>().plotno;
+                            else if (go.name == "GotoScene")
+                                ei.arg = go.GetComponent<GotoScene>().scenename;
+                            levelinfo.events.Add(ei);
+                        }
+                        else
+                        {
+                            LevelItem li = new LevelItem();
+                            li.tag = go.tag;
+                            li.name = go.name;
+                            li.x = go.transform.position.x;
+                            li.y = go.transform.position.y;
+                            levelinfo.items.Add(li);
+                        }
                     }
 
                     XmlSaver xs = new XmlSaver();

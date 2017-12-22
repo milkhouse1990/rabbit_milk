@@ -1,7 +1,7 @@
 New Game
 Load Data
 Library
-Extra Scene
+Options
 Quit
 
 从头开始游戏
@@ -10,6 +10,6 @@ Quit
 
 查看游戏的各种资料
 
-一点想法
+未使用
 
 退出游戏

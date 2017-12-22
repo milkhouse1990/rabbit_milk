@@ -1,5 +1,6 @@
+costume 5
 皇家妹抖 公主殿下驾到！
-create npc hime 10 9
+create npc hime 10 7
 downstairs
 公主殿下 感谢大家来到我的舞会。
 公主殿下 一直以来，有了大家的帮助，王国才能如此和平。

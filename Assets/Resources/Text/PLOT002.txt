@@ -1,1 +1,2 @@
+costume 0
 gotoscene 0Castle1Outside

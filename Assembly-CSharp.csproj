@@ -89,7 +89,6 @@
      <Compile Include="Assets\List.cs" />
      <Compile Include="Assets\ListTool.cs" />
      <Compile Include="Assets\LvInitiate.cs" />
-     <Compile Include="Assets\MakeBin.cs" />
      <Compile Include="Assets\MapMove.cs" />
      <Compile Include="Assets\Menu.cs" />
      <Compile Include="Assets\MilkDie.cs" />
@@ -167,6 +166,7 @@
      <None Include="Assets\Resources\Text\PLOT011.txt" />
      <None Include="Assets\Resources\Text\MENU0001.txt" />
      <None Include="Assets\Resources\Text\MENU0004.txt" />
+     <None Include="Assets\Resources\Text\NPC004.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

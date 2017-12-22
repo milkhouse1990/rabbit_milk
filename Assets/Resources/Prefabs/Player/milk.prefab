@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472702091474996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.56, y: 2.53, z: 0}
+  m_LocalPosition: {x: 1, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428265104886328}
@@ -271,6 +271,7 @@ MonoBehaviour:
   change_right: {fileID: 2800000, guid: 97ff8132557025f4ebbcd1121b25c396, type: 3}
   waitnpc: {fileID: 2800000, guid: df1635ab990dfce468d2b010ced7af3f, type: 3}
   warning: {fileID: 4290131265494466, guid: 150aa8599b4fe1d4881778e84e345010, type: 2}
+  act_menu: {fileID: 1587433960053726, guid: 403f2a6f8e08d824c8964e8bbcf99738, type: 2}
   pause_menu: {fileID: 1955572246279552, guid: 9b2680c130b3b994ba125fd8bc80c3e1, type: 2}
 --- !u!114 &114608835991581718
 MonoBehaviour:
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  mp2: {fileID: 0}
   costume: 0
 --- !u!212 &212366006548349122
 SpriteRenderer:

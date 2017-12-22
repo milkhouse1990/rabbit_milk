@@ -1,1 +1,1 @@
-create npc hime 10 4.5
+create npc hime 10 2.5
